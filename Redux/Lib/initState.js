@@ -1,0 +1,20 @@
+
+const initState = {
+  lang: 'ja',
+  userData: null,
+  userInfo: null,
+  connectionMethod: null,
+  metamaskRedux: {
+    network: 0,
+    accounts: [],
+    address: ''
+  },
+
+  internet: true,
+  balanceRedux: {
+    balanceETH: 0
+  },
+  bnbPriceRedux: 0,
+}
+
+export default initState
