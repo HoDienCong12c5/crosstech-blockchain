@@ -5,11 +5,13 @@ const ButtonBasic = ( {
   type = 1,
   children,
   isHover,
+  onClick,
   ...props
 } ) => {
   return (
     <Button
-    //   styles={styles['style-bt-antd']}
+      onClick={onClick}
+      //   styles={styles['style-bt-antd']}
       className={classNames(
         styles['style-bt-antd'],
         {'second-btn':type === 1},

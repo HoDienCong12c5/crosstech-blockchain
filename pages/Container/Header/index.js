@@ -1,25 +1,48 @@
-import React from 'react'
-import { ContainerHeader } from './styled'
+import ButtonBasic from '@/Components/ButtonBasic'
 import { Col, Row } from 'antd'
-import ButtonBasic from '@/Components/ButtonBasic/index';
+import Media from 'react-media'
 import styles from './Header.module.scss'
+import { ContainerHome } from './styled'
+import Metamask from '@/Modal/Metamask'
 const Header = () => {
-  return (
-    <ContainerHeader>
-      <Row justify={'space-between'}>
-        <Col span={4} style={{alignContent:'start'}}>
-          <fiv>logo</fiv>
+  const connectMeta = ()=>{
+    Metamask.connect()
+  }
+  const renderDesktop = ()=>{
+    return(
+      <Row justify={'space-between'} align={'middle'}>
+        <Col span={4} style={{textAlign:'start'}}>
+          <div>Logo</div>
         </Col>
-        <Col span={16}>
-          <fiv>logo</fiv>
+        <Col span={26}>
+          <div>Logo</div>
         </Col>
-        <Col span={4} style={{alignContent:'end'}}>
-          <ButtonBasic style={styles['btn-login']} >
+        <Col span={4} style={{textAlign:'end'}}>
+          <ButtonBasic
+            onClick={connectMeta}
+            className={styles['bnt-login']}
+          >
             Login
           </ButtonBasic>
         </Col>
       </Row>
-    </ContainerHeader>
+    )
+  }
+  const renderMobile = ()=>{
+    return( <></> )
+  }
+  return (
+    <ContainerHome>
+      <Media query='(min-width: 768px)'>
+        {( match ) => {
+          if ( match ) {
+            return renderDesktop()
+          }
+          return renderMobile()
+        }}
+
+      </Media>
+    </ContainerHome>
   )
 }
 

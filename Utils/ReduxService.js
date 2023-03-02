@@ -1,11 +1,11 @@
 import PageReduxAction from '@/Redux/Action/pageAction';
 import storeRedux from '@/Redux/Store/configureStore'
 
-const ReduxService={
+const ReduxService = {
   callDispatchAction:( action )=>{
     storeRedux.dispatch( action )
   },
-  setBnbBalance:( bnbBalance =100 )=>{
+  setBnbBalance:( bnbBalance = 100 )=>{
     ReduxService.callDispatchAction( PageReduxAction.setBalance( bnbBalance ) )
   },
   setBnbPrice:( price )=>{
