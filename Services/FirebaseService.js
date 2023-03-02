@@ -22,7 +22,7 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-const app= initializeApp( firebaseConfig );
+const app = initializeApp( firebaseConfig );
 
 // const app = initializeApp(firebaseConfig)
 export const fireStores = getFirestore( app )
@@ -38,7 +38,7 @@ const dbContact = collection( fireStores, 'contact' )
 
 const dbImgProduct = 'coffee'
 const dbImgAvatar = 'avatar'
-const dbImgOtherHome ='OtherBanner'
+const dbImgOtherHome = 'OtherBanner'
 const FirebaseService = {
   FireStore:{
     Product:functionStore( dbProduct ),
