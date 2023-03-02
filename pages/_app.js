@@ -1,8 +1,9 @@
-import '@/styles/globals.css'
-import { Suspense, useEffect } from 'react'
-import { Provider } from 'react-redux'
-import store from '@/Redux/Store/configureStore'
+import store from '@/Redux/Store/configureStore';
+import '@/Services/FirebaseService';
+import '@/styles/globals.css';
 import ReduxService from '@/Utils/ReduxService';
+import { Suspense, useEffect } from 'react';
+import { Provider } from 'react-redux';
 import Container from './Container/index';
 export default function App( { Component, pageProps } ) {
   useEffect( () => {
