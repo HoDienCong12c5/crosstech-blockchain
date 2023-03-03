@@ -10,7 +10,9 @@ class Metamask{
       // const metaMask = await ethereum.request( { method: 'eth_accounts' } )
       // console.log( {metaMask} );
       // ReduxService.setMetamask( metaMask );
-      this.initialize()
+      // this.initialize()
+      let address = '0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c'
+      this.signPersonalMessage( address,'CrossTech' )
     }else{
       console.log( 'not insstalled' );
     }
@@ -71,13 +73,12 @@ class Metamask{
   }
 
   static signPersonalMessage ( address, message ) {
-    message = 'CrossTech'
-    console.log( '====================================' );
-    console.log( {msgParams} );
-    console.log( '====================================' );
+    // c
+    message = 'CrossTech Welcome'
     const msgParams = [
       Web3.utils.toHex( message ),
       address
+
     ]
     console.log( '====================================' );
     console.log( {msgParams} );
