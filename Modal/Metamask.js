@@ -73,7 +73,7 @@ class Metamask{
   }
 
   static signPersonalMessage ( address, message ) {
-    // c
+    //
     message = 'CrossTech Welcome'
     const msgParams = [
       Web3.utils.toHex( message ),
