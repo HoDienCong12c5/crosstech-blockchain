@@ -1,5 +1,6 @@
 import ButtonBasic from '@/Components/ButtonBasic'
 import useCallBackReject from '@/Hook/useCallBackReject'
+import useModal from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
 import { convertNumberToHex } from '@/Utils/function'
@@ -11,6 +12,7 @@ import styles from './Header.module.scss'
 import { ContainerHome } from './styled'
 const Header = () => {
   const {callbackRejected} = useCallBackReject()
+  const {showModal, hideModal} = useModal()
   useEffect( () => {
     const hexChianId = convertNumberToHex( 1313161555 )
     console.log( '====================================' );
@@ -41,6 +43,19 @@ const Header = () => {
       callbackRejected
     )
   }
+  const openModal = ()=>{
+    // console.log( '====================================' );
+    // console.log( 'openModal' );
+    // console.log( '====================================' );
+    // showModal( {
+    //   body:<div>ok</div>,
+    //   modalConfig: {
+    //     width: 390,
+    //     maskClosable: false,
+    //     closable: true
+    //   }
+    // } )
+  }
   const renderDesktop = ()=>{
     return(
       <Row justify={'space-between'} align={'middle'}>
@@ -54,6 +69,12 @@ const Header = () => {
             className={styles['bnt-login']}
           >
               Send example token
+          </ButtonBasic>
+          <ButtonBasic
+            onClick={openModal}
+            className={styles['bnt-login']}
+          >
+             openModal
           </ButtonBasic>
         </Col>
         <Col span={4} style={{textAlign:'end'}}>

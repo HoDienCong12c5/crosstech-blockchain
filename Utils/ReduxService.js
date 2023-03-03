@@ -21,7 +21,13 @@ const ReduxService = {
   getConnectionMethod:()=>{
     const { connectionMethod } = storeRedux.getState()
     return connectionMethod
-  }
+  },
+  openModal:( data )=>{
+    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( data ) )
+  },
+  closeModal:()=>{
+    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( { show: false } ) )
+  },
 
 }
 export default ReduxService;

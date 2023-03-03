@@ -15,6 +15,9 @@ const initState = {
     balanceETH: 0
   },
   bnbPriceRedux: 0,
+  openModal:{
+    showModal:false
+  }
 }
 
 export default initState

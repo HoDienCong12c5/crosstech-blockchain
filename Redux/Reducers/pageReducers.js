@@ -30,4 +30,9 @@ export const bnbPriceRedux = createReducer( initState.bnbPriceRedux, {
     return action.payload
   }
 } )
+export const globalModal = createReducer( initState.openModal, {
+  [KEY_PAGE.MODAL_GLOBAL] ( state, action ) {
+    return action.payload
+  }
+} )
 

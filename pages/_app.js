@@ -1,3 +1,4 @@
+import MyModal from '@/Components/MyModal';
 import store from '@/Redux/Store/configureStore';
 import '@/Services/FirebaseService';
 import '@/styles/globals.css';
@@ -20,6 +21,7 @@ export default function App( { Component, pageProps } ) {
       <Suspense fallback={null}>
         <Container >
           <Component {...pageProps} />
+          <MyModal />
         </Container>
       </Suspense>
     </Provider>

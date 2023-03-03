@@ -31,4 +31,10 @@ export default class PageReduxAction {
       payload
     };
   }
+  static setGlobalModal ( payload ) {
+    return {
+      type: KEY_PAGE.MODAL_GLOBAL,
+      payload
+    };
+  }
 }
