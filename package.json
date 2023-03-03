@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@metamask/onboarding": "^1.0.1",
     "@react-three/drei": "8.20.2",
     "@react-three/fiber": "7.0.26",
+    "@walletconnect/utils": "^2.4.6",
     "antd": "^5.2.3",
     "aos": "^2.3.4",
     "classnames": "^2.3.2",
@@ -24,6 +26,7 @@
     "next-plugin-antd-less": "^1.8.0",
     "next-seo": "^5.15.0",
     "react": "18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-media": "^1.10.0",
     "react-redux": "^8.0.5",
