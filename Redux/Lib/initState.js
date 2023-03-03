@@ -5,7 +5,7 @@ const initState = {
   userInfo: null,
   connectionMethod: null,
   metamaskRedux: {
-    network: 0,
+    chainId: 0,
     accounts: [],
     address: ''
   },

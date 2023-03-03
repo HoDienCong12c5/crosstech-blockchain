@@ -25,4 +25,10 @@ export default class PageReduxAction {
       payload
     };
   }
+  static setConnectionMethod ( payload ) {
+    return {
+      type: KEY_PAGE.CONNECTION_METHOD,
+      payload
+    };
+  }
 }

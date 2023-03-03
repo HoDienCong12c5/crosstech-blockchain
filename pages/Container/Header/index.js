@@ -1,12 +1,45 @@
 import ButtonBasic from '@/Components/ButtonBasic'
+import useCallBackReject from '@/Hook/useCallBackReject'
+import useUserData from '@/Hook/useUserData'
+import Metamask from '@/Modal/Metamask'
+import { convertNumberToHex } from '@/Utils/function'
+import Web3Service from '@/Utils/web3'
 import { Col, Row } from 'antd'
+import { useEffect } from 'react'
 import Media from 'react-media'
 import styles from './Header.module.scss'
 import { ContainerHome } from './styled'
-import Metamask from '@/Modal/Metamask'
 const Header = () => {
-  const connectMeta = ()=>{
-    Metamask.connect()
+  const {callbackRejected} = useCallBackReject()
+  useEffect( () => {
+    const hexChianId = convertNumberToHex( 1313161555 )
+    console.log( '====================================' );
+    console.log( {hexChianId} );
+    console.log( '====================================' );
+  }, [] )
+  const {isSigned, userAddress } = useUserData()
+  const connectMeta = async ()=>{
+    Metamask.initialize()
+  }
+  const handleMyProfile = ()=>{
+
+  }
+  const sendToken = ()=>{
+    const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'
+    const value = 0.0001
+    const callback = ( callbackString )=>{
+      console.log( '====================================' );
+      console.log( {callbackString} );
+      console.log( '====================================' );
+    }
+    Web3Service.sendToken(
+      userAddress,
+      toAddress,
+      value,
+      ()=>callback( 'callbackBeforeDone' ),
+      callback,
+      callbackRejected
+    )
   }
   const renderDesktop = ()=>{
     return(
@@ -16,14 +49,31 @@ const Header = () => {
         </Col>
         <Col span={26}>
           <div>Logo</div>
-        </Col>
-        <Col span={4} style={{textAlign:'end'}}>
           <ButtonBasic
-            onClick={connectMeta}
+            onClick={sendToken}
             className={styles['bnt-login']}
           >
-            Login
+              Send example token
           </ButtonBasic>
+        </Col>
+        <Col span={4} style={{textAlign:'end'}}>
+          {
+            isSigned ? (
+              <ButtonBasic
+                onClick={handleMyProfile}
+                className={styles['bnt-login']}
+              >
+                {userAddress}
+              </ButtonBasic>
+            ) : (
+              <ButtonBasic
+                onClick={connectMeta}
+                className={styles['bnt-login']}
+              >
+              Login
+              </ButtonBasic>
+            )
+          }
         </Col>
       </Row>
     )

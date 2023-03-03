@@ -6,10 +6,12 @@ const ButtonBasic = ( {
   children,
   isHover,
   onClick,
+  disabled,
   ...props
 } ) => {
   return (
     <Button
+      disabled={disabled}
       onClick={onClick}
       //   styles={styles['style-bt-antd']}
       className={classNames(

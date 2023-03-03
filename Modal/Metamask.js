@@ -1,3 +1,5 @@
+import { KEY_PAGE } from '@/Redux/Lib/constants';
+import ReduxService from '@/Utils/ReduxService';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { isMobile } from 'react-device-detect';
 import Web3 from 'web3';
@@ -34,7 +36,7 @@ class Metamask{
         console.log( '====================================' );
         if ( accounts.length > 0 ) {
           this.onConnect( accounts )
-          this.signPersonalMessage( accounts[0] )
+
           // subscribe to events
           this.subscribeToEvents()
         } else {
@@ -59,30 +61,33 @@ class Metamask{
     }
   }
   static async onConnect ( accounts ) {
-    // const address = accounts[0]
-    // const callbackSignIn = () => {
-    //   Observer.emit( OBSERVER_KEY.ALREADY_SIGNED )
-    // }
-    // await this.getNetworkAndChainId()
-    // // update redux state
-    // await ReduxService.updateMetaMask( {
-    //   accounts,
-    //   address
-    // } )
-    // ReduxService.loginMetamask( callbackSignIn )
+    const address = accounts[0]
+    const chainId = await window.ethereum.request( {
+      method: 'eth_chainId'
+    } )
+    const dataMetaMask = {
+      chainId,
+      address:address,
+      accounts:[address]
+    }
+    const signature = await this.signPersonalMessage( accounts[0] )
+    console.log( '====================================' );
+    console.log( {signature} );
+    console.log( '====================================' );
+    if( signature && signature?.includes( '0x' ) ){
+      ReduxService.setMetamask( dataMetaMask )
+      ReduxService.setConnectionMethod( KEY_PAGE.META_MASK )
+    }
+
   }
 
   static signPersonalMessage ( address, message ) {
     //
-    message = 'CrossTech Welcome'
+    message = 'CrossTech Welcome to you'
     const msgParams = [
       Web3.utils.toHex( message ),
       address
-
     ]
-    console.log( '====================================' );
-    console.log( {msgParams} );
-    console.log( '====================================' );
     if ( window.ethereum ) {
       return new Promise( ( resolve, reject ) => {
         // Sign transaction

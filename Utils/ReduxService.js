@@ -1,5 +1,6 @@
 import PageReduxAction from '@/Redux/Action/pageAction';
-import storeRedux from '@/Redux/Store/configureStore'
+import { KEY_PAGE } from '@/Redux/Lib/constants';
+import storeRedux from '@/Redux/Store/configureStore';
 
 const ReduxService = {
   callDispatchAction:( action )=>{
@@ -13,6 +14,13 @@ const ReduxService = {
   },
   setMetamask:( metaMask )=>{
     ReduxService.callDispatchAction( PageReduxAction.setMetamask( metaMask ) )
+  },
+  setConnectionMethod:async ( method = KEY_PAGE.META_MASK )=>{
+    ReduxService.callDispatchAction( PageReduxAction.setConnectionMethod( method ) )
+  },
+  getConnectionMethod:()=>{
+    const { connectionMethod } = storeRedux.getState()
+    return connectionMethod
   }
 
 }

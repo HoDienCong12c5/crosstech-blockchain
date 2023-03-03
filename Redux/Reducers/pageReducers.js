@@ -19,6 +19,11 @@ export const balanceRedux = createReducer( initState.balanceRedux, {
     return action.payload
   }
 } )
+export const connectionMethod = createReducer( initState.connectionMethod, {
+  [KEY_PAGE.CONNECTION_METHOD] ( state, action ) {
+    return action.payload
+  }
+} )
 
 export const bnbPriceRedux = createReducer( initState.bnbPriceRedux, {
   [KEY_PAGE.SET_BNB_PRICE] ( state, action ) {

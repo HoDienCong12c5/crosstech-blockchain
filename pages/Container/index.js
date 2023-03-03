@@ -1,10 +1,14 @@
 import { Affix, Col, Layout, Row } from 'antd'
-import React from 'react'
+import Head from 'next/head'
+
 import Header from './Header'
 const { Content } = Layout
 const Container = ( {children} ) => {
   return (
     <Layout >
+      <Head >
+        <title>CrossTech blockchain</title>
+      </Head>
       <Affix className='affix-header' style={{ zIndex: 100 }}offsetTop={0}>
         <Header />
       </Affix>
@@ -17,6 +21,7 @@ const Container = ( {children} ) => {
         </Row>
       </Content>
     </Layout>
+
   )
 }
 
