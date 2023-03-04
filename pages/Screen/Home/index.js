@@ -7,6 +7,9 @@ import ButtonBasic from '@/Components/ButtonBasic';
 import IPFSService from '@/Services/IPFSService';
 import useGetNFT from '@/Hook/useGetNFT';
 import ItemNFT from '@/Components/ItemNFT';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 const menuHome = [
   {
     key:'qa_qc',
@@ -27,7 +30,120 @@ const menuHome = [
   }
 
 ]
+const dataFake = [
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+  {
+    time:'12/05/2000',
+    hash:'0xa99ea7dfb13cce5a604bf61ef2de521de279f5fc18d75e172e040de70c46c3dd ',
+    form:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    to:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    data:{
+      image:'https://ipfs.pantograph.app/ipfs/QmaKHqMGLJVrTnopyLbE2cuvs4erCdvtTjzPWZE18PXxjj?filename=Guardian_AQUA.png',
+      address:'0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+      nameUser:'Ho Dien Cong',
+      title:'Basic blockchain'
+    }
+  },
+
+]
 const HomeScreen = () => {
+  const router = useRouter()
+
   const [itemSelected, setItemSelected] = useState( 'qa_qc' )
   const {listNFTAll,loading} = useGetNFT()
   const onClickItemMenu = ( key )=>{
@@ -64,36 +180,38 @@ const HomeScreen = () => {
               return (
                 <ItemMenu
                   key={item}
+                  nft={item}
                   onClick={()=>onClickItemMenu( item.key )}
                   className={'hover hover__zoom'}
                   selected={itemSelected === item.key}
                 >
-                  {item.title}
+                  {item?.title}
                 </ItemMenu>
               )
             } )
           }
         </LeftHome>
         <RightHome >
-          <form onSubmit={loadFile}>
+          {/* <form onSubmit={loadFile}>
             <input type="file" name="file"/>
             <button type="submit">Upload file</button>
-          </form>
+          </form> */}
           <ContainerListNFTHome>
             {
-              !loading && listNFTAll.map( ( item,index )=>{
+              dataFake.map( ( item,index )=>{
                 return (
                   <ItemNFT key={item}
                     nft={item}
-                    onClick={()=>{alert( item?.hash )}}
+                    onClick={()=>{
+                      router.push( `/Screen/nft-detail/${item?.hash}` )
+                    }}
                   />
                 )
               } )
             }
           </ContainerListNFTHome>
-
-
         </RightHome>
+
 
       </ContentHome>
     )

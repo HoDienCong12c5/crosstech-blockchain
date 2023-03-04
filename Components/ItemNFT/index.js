@@ -7,7 +7,7 @@ const ContainerItemNFT = styled.div`
     justify-content: center:
     align-items: center; 
     max-width: 300px;
-    min-width: 200px;
+    min-width: ${props=>props.isMinWidth ? '200px' : 'auto'};
     position: relative;
     background: transparent;
     align-self: stretch;
@@ -17,26 +17,42 @@ const ContainerItemNFT = styled.div`
     box-sizing: border-box;
     border-image-slice: 1;
     border-radius: 16px;
+    border: 1px solid #2b5540;
+    padding: 5px 15px;
 `
 const Img = styled.img`
+    height: 100%;
+    width: fit-content;
+    max-height: 180px;
+
+`
+const ContainerImgNFT = styled.div`
+        padding: 5px;
     width: 100%;
+    margin: auto;
 `
 const ItemNFT = ( {
   nft,
   onClick
 } ) => {
+  console.log( {nft} );
   return (
     <ContainerItemNFT onClick={onClick}>
-      <Img src={nft?.data?.image}/>
-      <MediumText>
-        {nft?.data.nameUser}
-      </MediumText>
-      <NormalText>
-        {nft?.time}
-      </NormalText>
-      <NormalText>
-        {ellipsisAddress( nft?.hash,5,4 )}
-      </NormalText>
+      <ContainerImgNFT>
+        <Img src={nft?.data?.image}/>
+      </ContainerImgNFT>
+
+      <div>
+        <MediumText>
+          {nft?.data.nameUser}
+        </MediumText>
+        <NormalText>
+          {nft?.time}
+        </NormalText>
+        <NormalText>
+          {ellipsisAddress( nft?.hash,8,6 )}
+        </NormalText>
+      </div>
     </ContainerItemNFT>
   )
 }

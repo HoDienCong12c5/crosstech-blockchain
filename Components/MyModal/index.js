@@ -1,8 +1,20 @@
-import ReduxService from '@/Utils/ReduxService'
-import { Modal } from 'antd'
-import { useSelector } from 'react-redux'
-import './MyModal.module.scss'
-const MyModal = ( ) => {
+import { lazy, Suspense } from 'react'
+import {
+  useModal,
+  useHideModal
+} from '@/Hook/useModal'
+
+import { Modal, Spin } from 'antd'
+// import images from 'utils/images'
+
+const ModalWrapper = () => {
+  // Get modal params from redux store
+  const { modal } = useModal()
+  const hideModal = useHideModal()
+  // Import dynamic component according to component path param
+  const CustomComponent = lazy( () => import( `${modal.componentPath}` ) )
+  // const CustomComponent = lazy(() => import(`pages/sample1/components/SampleModalContent`))
+
   const defaultModalConfig = {
     wrapClassName: '',
     width: 500,
@@ -13,20 +25,29 @@ const MyModal = ( ) => {
     title: null,
     footer: null
   }
-  const globalModal = useSelector( state=>state.globalModal )
+
   return (
+
     <Modal
       {...defaultModalConfig}
-      {...defaultModalConfig}
-      {...globalModal?.modalConfig}
+      {...modal?.modalConfig}
       centered
-      open={globalModal?.showModal}
-      onCancel={ReduxService.closeModal()}
-    //   closeIcon={<img src={images.icClose} />}
+      open={modal?.show}
+      onCancel={hideModal}
+      // closeIcon={<img src={images.icClose} />}
     >
-      {globalModal?.body}
+      <Suspense fallback={<Spin />}>
+        {
+          modal?.componentPath
+            ? (
+              <CustomComponent {...modal.componentProps} />
+            )
+            : (
+              modal?.body
+            )
+        }
+      </Suspense>
     </Modal>
   )
 }
-
-export default MyModal
+export default ModalWrapper

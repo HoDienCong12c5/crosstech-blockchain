@@ -1,18 +1,19 @@
 import ButtonBasic from '@/Components/ButtonBasic'
 import useCallBackReject from '@/Hook/useCallBackReject'
-import useModal from '@/Hook/useModal'
+import useModal, { useWorkModal } from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
 import { convertNumberToHex, ellipsisAddress } from '@/Utils/function'
 import Web3Service from '@/Utils/web3'
 import { Col, Row } from 'antd'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Media from 'react-media'
 import styles from './Header.module.scss'
 import { ContainerHeader } from './styled'
 const Header = () => {
   const {callbackRejected} = useCallBackReject()
-  const {showModal, hideModal} = useModal()
+  const {showModal,hideModal} = useWorkModal()
   useEffect( () => {
     const hexChianId = convertNumberToHex( 1313161555 )
     console.log( '====================================' );
@@ -43,40 +44,49 @@ const Header = () => {
       callbackRejected
     )
   }
-  const openModal = ()=>{
-    // console.log( '====================================' );
-    // console.log( 'openModal' );
-    // console.log( '====================================' );
-    // showModal( {
-    //   body:<div>ok</div>,
-    //   modalConfig: {
-    //     width: 390,
-    //     maskClosable: false,
-    //     closable: true
-    //   }
-    // } )
+  const minNFT = ()=>{
+    showModal( {
+      body: (
+        <div >ok </div>
+      ),
+      modalConfig: {
+        className: 'styles.modalBox'
+      }
+    } )
+    // if( !isSigned ){
+    //   connectMeta()
+    // }else{
+
+    // }
   }
   const renderDesktop = ()=>{
     return(
       <Row justify={'center'} align={'middle'}>
         <Col span={4} style={{textAlign:'start'}}>
-          <div>Logo</div>
+          <Link href={'/'}>Logo</Link>
         </Col>
         <Col span={16}>
           <Row align={'middle'}>
-            <div>Logo</div>
             <ButtonBasic
-              onClick={sendToken}
-              className={styles['bnt-login']}
+              onClick={minNFT}
+              className={styles['btn-item-menu']}
             >
-              Send example token
+              Mint NFT
             </ButtonBasic>
-            <ButtonBasic
-              onClick={openModal}
-              className={styles['bnt-login']}
-            >
-             openModal
-            </ButtonBasic>
+            {
+              isSigned && (
+                <>
+
+                  <ButtonBasic
+                    onClick={sendToken}
+                    className={styles['btn-item-menu']}
+                  >
+                  My profile
+                  </ButtonBasic>
+                </>
+              )
+            }
+
           </Row>
 
         </Col>

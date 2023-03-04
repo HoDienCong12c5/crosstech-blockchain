@@ -16,7 +16,7 @@ const initState = {
   },
   bnbPriceRedux: 0,
   openModal:{
-    showModal:false
+    show:false
   }
 }
 

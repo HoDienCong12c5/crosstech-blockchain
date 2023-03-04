@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 export const TitleText = styled.div`
   font-size: ${( props ) => `${props.size ?? 24}px`};
-  color: ${( props ) => props.color ?? '#FFFFFF'};
+  color: ${( props ) => props.color ?? 'black'};
   font-weight: ${( props ) => props.fontWeight ?? 'bold'};
   text-transform: ${( props ) => ( props.textTransform ? 'uppercase' : 'none' )};
   @media screen and (max-width: 768px) {
@@ -10,7 +10,7 @@ export const TitleText = styled.div`
 `
 export const MediumText = styled.div`
   font-size: ${( props ) => `${props.size ?? 16}px`};
-  color: ${( props ) => props.color ?? '#FFFFFF'};
+  color: ${( props ) => props.color ?? 'black'};
   font-weight: ${( props ) => props.fontWeight ?? 300};
   text-transform: ${( props ) => ( props.textTransform ? 'uppercase' : 'none' )};
   @media screen and (max-width: 768px) {
@@ -20,7 +20,7 @@ export const MediumText = styled.div`
 `
 export const NormalText = styled.div`
   font-size: ${( props ) => `${props.size ?? 13}px`};
-  color: ${( props ) => props.color ?? '#FFFFFF'};
+  color: ${( props ) => props.color ?? 'black'};
   font-weight: ${( props ) => props.fontWeight ?? 300};
   text-transform: ${( props ) => ( props.textTransform ? 'uppercase' : 'none' )};
   @media screen and (max-width: 768px) {

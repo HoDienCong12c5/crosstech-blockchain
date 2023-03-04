@@ -22,8 +22,8 @@ const ReduxService = {
     const { connectionMethod } = storeRedux.getState()
     return connectionMethod
   },
-  openModal:( data )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( data ) )
+  openModal:( props, params )=>{
+    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( { ...props, ...params, show:true } ) )
   },
   closeModal:()=>{
     ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( { show: false } ) )

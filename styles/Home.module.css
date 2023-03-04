@@ -3,12 +3,9 @@
 
 }
 
-/* body {
-  background-color: #E7E9EB;
- 
- } */
+
 .ant-layout{
-  background-color: #E7E9EB ;
+  background: transparent !important ;
 }
 .description {
   display: inherit;

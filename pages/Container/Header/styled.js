@@ -5,9 +5,11 @@ export const ContainerHeader = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 60px;
-    /* background: red; */
+    height: 50px;
+    background: white;
     margin: auto;
+    border-bottom: 1px solid white;
+    box-shadow: rgb(0 0 0 / 10%) 0px 2px 10px;
 `;
 export const ItemHeader = styled.div`
 

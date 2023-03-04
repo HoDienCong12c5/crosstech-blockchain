@@ -1,12 +1,33 @@
 import ReduxService from '@/Utils/ReduxService'
 import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
+export const useModal = () => {
+  return {
+    modal: useSelector( state => state.globalModal, shallowEqual )
+  }
+}
+export const useWorkModal = props=>{
+  const dispatch = useDispatch()
+  const showModal = useCallback(
+    ( params = {} ) => {
+      ReduxService.openModal( props,params )
+    },
+    [props, dispatch]
+  )
+  const hideModal = useCallback( () => {
+    ReduxService.closeModal()
+  }, [dispatch] )
+  return {
+    showModal,
+    hideModal
+  }
+}
 export const useShowModal = props => {
   const dispatch = useDispatch()
   const showModal = useCallback(
     ( params = {} ) => {
-      ReduxService.openModal( { ...props, ...params } )
+      ReduxService.openModal( props,params )
     },
     [props, dispatch]
   )
@@ -14,14 +35,12 @@ export const useShowModal = props => {
   return showModal
 }
 
-const useModal = () => {
+export const useHideModal = () => {
   const dispatch = useDispatch()
   const hideModal = useCallback( () => {
     ReduxService.closeModal()
   }, [dispatch] )
-  return {
-    showModal:useShowModal,
-    hideModal
-  }
+
+  return hideModal
 }
-export default useModal
+

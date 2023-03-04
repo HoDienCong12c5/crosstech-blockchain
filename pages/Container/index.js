@@ -1,5 +1,7 @@
+import ModalBasic from '@/Components/Modal'
 import { Affix, Col, Layout, Row } from 'antd'
 import Head from 'next/head'
+import MyModal from '@/Components/MyModal';
 
 import Header from './Header'
 const { Content } = Layout
@@ -13,13 +15,15 @@ const Container = ( {children} ) => {
         <Header />
       </Affix>
 
-      <Content className='base-content'>
+      <Content className='base-content' style={{paddingTop:30}}>
         <Row type='flex' justify='center'>
           <Col span={24}>
             <div className='base-container'>{children}</div>
           </Col>
         </Row>
       </Content>
+      <MyModal />
+
     </Layout>
 
   )
