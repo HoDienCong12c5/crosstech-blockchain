@@ -86,5 +86,34 @@ export const showNotification = ( title = null, description = '', type = 'open',
   }
   notification[type]( params )
 }
+export const saveDataLocal = ( key, data ) => {
+  localStorage.setItem( key, JSON.stringify( data ) )
+}
+
+export const getDataLocal = ( key ) => {
+  if ( typeof window !== 'undefined' ) {
+    return JSON.parse( localStorage.getItem( key ) )
+  } else {
+    return false
+  }
+}
+export const obToString = ( key ) => {
+  if ( typeof window !== 'undefined' ) {
+    return JSON.parse( localStorage.getItem( key ) )
+  } else {
+    return false
+  }
+}
+export const ellipsisAddress = (
+  address,
+  prefixLength = 13,
+  suffixLength = 4
+) => {
+  return `${address.substr( 0, prefixLength )}...${address.substr(
+    address.length - suffixLength,
+    suffixLength
+  )}`
+}
+
 
 export default () => {}

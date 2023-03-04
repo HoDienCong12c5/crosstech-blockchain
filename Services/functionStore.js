@@ -1,15 +1,15 @@
 
 import {
-    addDoc, deleteDoc, doc, getDoc, getDocs, updateDoc
+  addDoc, deleteDoc, doc, getDoc, getDocs, updateDoc
 } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-const FirebaseFun = ( nameData, path='' )=>{
+const FirebaseFun = ( nameData, path = '' )=>{
   return {
     getAllData: async () => {
       const citySnapshot = await getDocs( nameData )
       return citySnapshot.docs.map( ( doc ) => {
-        let dataTemp=doc.data()
-        dataTemp.id=doc.id
+        let dataTemp = doc.data()
+        dataTemp.id = doc.id
         return dataTemp
       } )
     },

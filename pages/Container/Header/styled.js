@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export const ContainerHome = styled.div`
+export const ContainerHeader = styled.div`
     max-width: 1550px;
     padding: 0 50px;
     justify-content: center;
@@ -9,4 +9,7 @@ export const ContainerHome = styled.div`
     /* background: red; */
     margin: auto;
 `;
+export const ItemHeader = styled.div`
+
+`
 export default ()=>{};

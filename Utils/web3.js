@@ -94,9 +94,6 @@ class Web3Service{
   static async postBaseSendTxs ( from, arrSend, isNeedCovert = false ) {
     return new Promise( async ( resolve, reject ) => {
       let web3 = this.createWeb3Provider()
-      console.log( '====================================' );
-      console.log( {web3} );
-      console.log( '====================================' );
       web3.eth.getChainId( async ( err, network ) => {
         let chainId = '0x1'
         if ( !err ) {

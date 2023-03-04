@@ -1,0 +1,11 @@
+{
+    "presets": [
+        ["@babel/preset-react"],
+        ["next/babel"]
+    ],
+    "plugins": [
+        "@babel/plugin-transform-arrow-functions",
+        ["@babel/plugin-syntax-dynamic-import"],
+        ["styled-components", { "ssr": true, "displayName": true }]
+    ]
+  }

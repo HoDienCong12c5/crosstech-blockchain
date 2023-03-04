@@ -3,13 +3,13 @@ import useCallBackReject from '@/Hook/useCallBackReject'
 import useModal from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
-import { convertNumberToHex } from '@/Utils/function'
+import { convertNumberToHex, ellipsisAddress } from '@/Utils/function'
 import Web3Service from '@/Utils/web3'
 import { Col, Row } from 'antd'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Media from 'react-media'
 import styles from './Header.module.scss'
-import { ContainerHome } from './styled'
+import { ContainerHeader } from './styled'
 const Header = () => {
   const {callbackRejected} = useCallBackReject()
   const {showModal, hideModal} = useModal()
@@ -58,24 +58,27 @@ const Header = () => {
   }
   const renderDesktop = ()=>{
     return(
-      <Row justify={'space-between'} align={'middle'}>
+      <Row justify={'center'} align={'middle'}>
         <Col span={4} style={{textAlign:'start'}}>
           <div>Logo</div>
         </Col>
-        <Col span={26}>
-          <div>Logo</div>
-          <ButtonBasic
-            onClick={sendToken}
-            className={styles['bnt-login']}
-          >
+        <Col span={16}>
+          <Row align={'middle'}>
+            <div>Logo</div>
+            <ButtonBasic
+              onClick={sendToken}
+              className={styles['bnt-login']}
+            >
               Send example token
-          </ButtonBasic>
-          <ButtonBasic
-            onClick={openModal}
-            className={styles['bnt-login']}
-          >
+            </ButtonBasic>
+            <ButtonBasic
+              onClick={openModal}
+              className={styles['bnt-login']}
+            >
              openModal
-          </ButtonBasic>
+            </ButtonBasic>
+          </Row>
+
         </Col>
         <Col span={4} style={{textAlign:'end'}}>
           {
@@ -84,7 +87,7 @@ const Header = () => {
                 onClick={handleMyProfile}
                 className={styles['bnt-login']}
               >
-                {userAddress}
+                {ellipsisAddress( userAddress,5,4 )}
               </ButtonBasic>
             ) : (
               <ButtonBasic
@@ -103,7 +106,7 @@ const Header = () => {
     return( <></> )
   }
   return (
-    <ContainerHome>
+    <ContainerHeader>
       <Media query='(min-width: 768px)'>
         {( match ) => {
           if ( match ) {
@@ -113,7 +116,7 @@ const Header = () => {
         }}
 
       </Media>
-    </ContainerHome>
+    </ContainerHeader>
   )
 }
 

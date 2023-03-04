@@ -2,6 +2,7 @@ import MyModal from '@/Components/MyModal';
 import store from '@/Redux/Store/configureStore';
 import '@/Services/FirebaseService';
 import '@/styles/globals.css';
+import '@/styles/styleBasic.scss';
 import ReduxService from '@/Utils/ReduxService';
 import { Suspense, useEffect } from 'react';
 import { Provider } from 'react-redux';
@@ -21,7 +22,7 @@ export default function App( { Component, pageProps } ) {
       <Suspense fallback={null}>
         <Container >
           <Component {...pageProps} />
-          <MyModal />
+          {/* <MyModal /> */}
         </Container>
       </Suspense>
     </Provider>
