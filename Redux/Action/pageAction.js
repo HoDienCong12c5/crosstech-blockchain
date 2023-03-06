@@ -1,37 +1,37 @@
 import { KEY_PAGE } from '../Lib/constants';
 
 export default class PageReduxAction {
-  static setInternet ( payload ) {
+  static setInternet(payload) {
     return {
       type: KEY_PAGE.SET_INTERNET,
       payload
     }
   }
-  static setMetamask ( payload ) {
+  static setMetamask(payload) {
     return {
       type: KEY_PAGE.SET_METAMASK_INFO,
       payload
     }
   }
-  static setBalance ( payload ) {
+  static setBalance(payload) {
     return {
       type: KEY_PAGE.SET_BALANCE,
       payload
     };
   }
-  static setBnbPrice ( payload ) {
+  static setBnbPrice(payload) {
     return {
       type: KEY_PAGE.SET_BNB_PRICE,
       payload
     };
   }
-  static setConnectionMethod ( payload ) {
+  static setConnectionMethod(payload) {
     return {
       type: KEY_PAGE.CONNECTION_METHOD,
       payload
     };
   }
-  static setGlobalModal ( payload ) {
+  static setGlobalModal(payload) {
     return {
       type: KEY_PAGE.MODAL_GLOBAL,
       payload

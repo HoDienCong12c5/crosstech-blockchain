@@ -1,5 +1,4 @@
 import ButtonBasic from '@/Components/ButtonBasic';
-import { Row } from 'antd';
 import styled from 'styled-components';
 
 export const ContainerHome = styled.div`
@@ -7,6 +6,7 @@ export const ContainerHome = styled.div`
   max-width: 1550px;
   justify-content: center;
   padding: 0px 50px;
+  margin: auto;
 `;
 
 export const ContentHome = styled.div`
@@ -66,17 +66,17 @@ export const ContainerListNFTHome = styled.div`
     grid-gap: 16px;
   }
 `;
-export const ItemMenu = styled( ButtonBasic )`
+export const ItemMenu = styled(ButtonBasic)`
   border: 0px;
   background-color: transparent;
   border-color: transparent;
   box-shadow: 0px;
   text-align: start;
   color: black !important;
-  font-weight: ${( props ) => ( props.selected ? 'bold' : 'normal' )};
+  font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
   &:hover {
     cursor: pointer;
   }
 `;
 
-export default () => {};
+export default () => { };

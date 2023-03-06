@@ -1,78 +1,78 @@
+import { modalConfig } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
+import ModalTx from '@/Components/ModalTx'
 import useCallBackReject from '@/Hook/useCallBackReject'
-import useModal, { useWorkModal } from '@/Hook/useModal'
+import { useWorkModal } from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
-import { convertNumberToHex, ellipsisAddress } from '@/Utils/function'
+import { ellipsisAddress } from '@/Utils/function'
 import Web3Service from '@/Utils/web3'
 import { Col, Row } from 'antd'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Media from 'react-media'
+import { useSelector } from 'react-redux'
 import styles from './Header.module.scss'
 import { ContainerHeader } from './styled'
-import ModalTx from '@/Components/ModalTx'
-import { modalConfig } from '@/common/constant'
-import { useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
 const Header = () => {
   const router = useRouter()
-  const {callbackRejected} = useCallBackReject()
-  const {showModal,hideModal} = useWorkModal()
-  const {isSigned, userAddress } = useUserData()
-  const modal = useSelector( state => state.globalModal )
-  useEffect( () => {
-    if( modal?.show && isSigned ){
+  const { callbackRejected } = useCallBackReject()
+  const { showModal, hideModal } = useWorkModal()
+  const { isSigned, userAddress } = useUserData()
+  const modal = useSelector(state => state.globalModal)
+  useEffect(() => {
+    if (modal?.show && isSigned) {
       hideModal()
     }
-  }, [modal,isSigned] )
-  const connectMeta = async ()=>{
+  }, [modal, isSigned])
+  const connectMeta = async () => {
     modalConfig.keyboard = false
     // modalConfig.closable = false
     modalConfig.maskClosable = false
-    showModal( {
+    showModal({
       body: (
         <ModalTx
           title={'Waiting for confirm '}
           des={'Waiting for your confirm sign in'}
         />
       ),
-      modalConfig:modalConfig
-    } )
+      modalConfig: modalConfig
+    })
     Metamask.initialize()
 
   }
-  const handleMyProfile = ()=>{
+  const handleMyProfile = () => {
 
   }
-  const sendToken = ()=>{
+  const sendToken = () => {
     const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'
     const value = 0.0001
-    const callback = ( callbackString )=>{
-      console.log( '====================================' );
-      console.log( {callbackString} );
-      console.log( '====================================' );
+    const callback = (callbackString) => {
+      console.log('====================================');
+      console.log({ callbackString });
+      console.log('====================================');
     }
     Web3Service.sendToken(
       userAddress,
       toAddress,
       value,
-      ()=>callback( 'callbackBeforeDone' ),
+      () => callback('callbackBeforeDone'),
       callback,
       callbackRejected
     )
   }
-  const minNFT = ()=>{
-    if( isSigned ){
-      router.push( '/Screen/MintNFT' )
-    }else{
+  const minNFT = () => {
+    if (isSigned) {
+      router.push('/Screen/MintNFT')
+    } else {
       connectMeta()
     }
   }
-  const renderDesktop = ()=>{
-    return(
+  const renderDesktop = () => {
+    return (
       <Row justify={'center'} align={'middle'}>
-        <Col span={4} style={{textAlign:'start'}}>
+        <Col span={4} style={{ textAlign: 'start' }}>
           <Link href={'/'}>Logo</Link>
         </Col>
         <Col span={16}>
@@ -91,7 +91,7 @@ const Header = () => {
                     onClick={sendToken}
                     className={styles['btn-item-menu']}
                   >
-                  My profile
+                    My profile
                   </ButtonBasic>
                 </>
               )
@@ -100,22 +100,22 @@ const Header = () => {
           </Row>
 
         </Col>
-        <Col span={4} style={{textAlign:'end'}}>
+        <Col span={4} style={{ textAlign: 'end' }}>
           {
             isSigned ? (
               <ButtonBasic
                 onClick={handleMyProfile}
                 className={styles['bnt-login']}
               >
-                {ellipsisAddress( userAddress,5,4 )}
+                {ellipsisAddress(userAddress, 5, 4)}
               </ButtonBasic>
             ) : (
               <ButtonBasic
-                style={{background: '#f5f5f5', borderRadius: 0, border: '1px solid; black'}}
+                style={{ background: '#f5f5f5', borderRadius: 0, border: '1px solid; black' }}
                 onClick={connectMeta}
                 className={styles['bnt-login']}
               >
-              Login
+                Login
               </ButtonBasic>
             )
           }
@@ -123,14 +123,14 @@ const Header = () => {
       </Row>
     )
   }
-  const renderMobile = ()=>{
-    return( <></> )
+  const renderMobile = () => {
+    return (<></>)
   }
   return (
     <ContainerHeader>
       <Media query='(min-width: 768px)'>
-        {( match ) => {
-          if ( match ) {
+        {(match) => {
+          if (match) {
             return renderDesktop()
           }
           return renderMobile()

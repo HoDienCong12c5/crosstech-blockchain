@@ -4,13 +4,13 @@
 
 
 // const withFonts = require( 'next-fonts' )
-const withPlugins = require( 'next-compose-plugins' )
-const optimizedImages = require( 'next-optimized-images' )
-const withAntdLess = require( 'next-plugin-antd-less' )
-const path = require( 'path' );
+const withPlugins = require('next-compose-plugins')
+const optimizedImages = require('next-optimized-images')
+const withAntdLess = require('next-plugin-antd-less')
+const path = require('path');
 
 const nextConfig = {
-  webpack ( config ) {
+  webpack(config) {
     // Fixes npm packages that depend on `fs` module
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -24,7 +24,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  async rewrites () {
+  async rewrites() {
     return [
       {
         source: '/',
@@ -33,16 +33,16 @@ const nextConfig = {
     ]
   }
 }
-module.exports = withPlugins( [
+module.exports = withPlugins([
   [optimizedImages, {
     handleImages: ['jpeg', 'png', 'gif', 'svg', 'ico']
   }],
   // withFonts
-], nextConfig )
+], nextConfig)
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join( __dirname, 'styles' )],
+    includePaths: [path.join(__dirname, 'styles')],
   }
 };
 module.exports = {
@@ -50,4 +50,9 @@ module.exports = {
     ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   ],
 };
+module.exports = {
+  experimental: {
+    forceSwcTransforms: true,
+  },
+}
 module.exports = nextConfig

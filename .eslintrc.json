@@ -19,7 +19,7 @@
     "space-in-brackets": ["off", "always"],
     "no-unused-vars": "warn",
     "semi": "off",
-    "space-in-parens": ["error", "always"],
+    "space-in-parens": ["error", "never"],
     "no-trailing-spaces": "error",
     "react/prop-types": 0,
     "react/react-in-jsx-scope": "off",
