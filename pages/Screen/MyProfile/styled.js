@@ -1,54 +1,28 @@
-import { Col, Form, Row } from 'antd';
-import styled, { css } from 'styled-components';
-export const ContainerMintNFT = styled.div`
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+import styled from 'styled-components';
+export const ContainerMyProfile = styled.div`
+  display: flex;
+  width:100%;
+`;
+export const LeftMyProfile = styled.div`
+  max-width: 400px;
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+  padding: 0px 10px;
   background: white;
-  border-radius: 16px;
-  border: 1px solid black;
-`;
-export const PreImg = styled.img`
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  width: auto;
-  width: max-content;
-  margin: auto;
-`;
-export const RowCustom = styled(Row)`
-  /* padding: 0px 20px 20px 30px; */
-  /* border-bottom: ${(props) => props.isEnd ?? '1px solid black'};  */
-`;
-export const ItemForm = styled(Form.Item)`
-  ${(props) =>
-        props.isEnd
-            ? css`
-          border-top: 1px solid black;
-        `
-            : props.isStart
-                ? css`
-          padding-top: 10px;
-        `
-                : css`
-          padding-top: 10px;
-          border-top: 1px solid black;
-        `}
-`;
-export const ColCustom = styled(Col)`
-  /* padding: 0px 20px 20px 30px; */
-  padding-right: 25px;
+  border-radius: 14px;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 `;
 
-export const ContainerImgMintNFT = styled.div`
-  width: 550px;
-  height: 400px;
-  margin: auto;
-  padding-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+export const RightMyProfile = styled.div`
+  background: white;
+  width: calc(80% - 15px);
+  margin-left: 15px;
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 `;
 
 export default () => { };

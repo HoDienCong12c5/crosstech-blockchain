@@ -135,6 +135,10 @@ export const validateAddress = (strAddress) => {
 
   return reg.test(strAddress)
 }
+export const viewExternal = (url) => {
+  window.open(url, '_blank')
+}
+
 
 
 export default () => { }

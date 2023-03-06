@@ -1,14 +1,10 @@
-import React, { useState } from 'react'
-import { RightHome,ContainerHome, ContentHome, ItemMenu, LeftHome, ContainerListNFTHome } from './styled'
-import Media from 'react-media'
-import { Row, Upload } from 'antd'
-import { create as ipfsHttpClient } from 'ipfs-http-client';
-import ButtonBasic from '@/Components/ButtonBasic';
-import IPFSService from '@/Services/IPFSService';
-import useGetNFT from '@/Hook/useGetNFT';
 import ItemNFT from '@/Components/ItemNFT';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import useGetNFT from '@/Hook/useGetNFT';
+import IPFSService from '@/Services/IPFSService';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Media from 'react-media';
+import { ContainerHome, ContainerListNFTHome, ContentHome, ItemMenu, LeftHome, RightHome } from './styled';
 
 const menuHome = [
   {
@@ -144,11 +140,11 @@ const dataFake = [
 const HomeScreen = () => {
   const router = useRouter()
 
-  const [itemSelected, setItemSelected] = useState( 'qa_qc' )
+  const [itemSelected, setItemSelected] = useState('qa_qc')
   const {listNFTAll,loading} = useGetNFT()
-  const onClickItemMenu = ( key )=>{
-    setItemSelected( key )
-    switch ( key ) {
+  const onClickItemMenu = (key)=>{
+    setItemSelected(key)
+    switch (key) {
     case 'qa_qc':
 
       break;
@@ -158,17 +154,17 @@ const HomeScreen = () => {
     }
   }
 
-  const loadFile = async( event )=>{
+  const loadFile = async(event)=>{
     event.preventDefault();
     const form = event.target;
-    const files = ( form[0] ).files;
-    if ( !files || files.length === 0 ) {
-      return alert( 'No files selected' );
+    const files = (form[0]).files;
+    if (!files || files.length === 0) {
+      return alert('No files selected');
     }
     const file = files[0];
-    console.log( {file} );
-    const path = await IPFSService.uploadFile( file )
-    console.log( {path} )
+    console.log({file});
+    const path = await IPFSService.uploadFile(file)
+    console.log({path})
 
   }
   const renderDesktop = ()=>{
@@ -177,19 +173,19 @@ const HomeScreen = () => {
         <LeftHome >
           <ul></ul>
           {
-            menuHome.map( ( item,index )=>{
+            menuHome.map((item,index)=>{
               return (
                 <ItemMenu
                   key={item}
                   nft={item}
-                  onClick={()=>onClickItemMenu( item.key )}
+                  onClick={()=>onClickItemMenu(item.key)}
                   className={'hover hover__zoom'}
                   selected={itemSelected === item.key}
                 >
                   {item?.title}
                 </ItemMenu>
               )
-            } )
+            })
           }
         </LeftHome>
         <RightHome >
@@ -199,16 +195,16 @@ const HomeScreen = () => {
           </form> */}
           <ContainerListNFTHome>
             {
-              dataFake.map( ( item,index )=>{
+              dataFake.map((item,index)=>{
                 return (
                   <ItemNFT key={item}
                     nft={item}
                     onClick={()=>{
-                      router.push( `/Screen/nft-detail/${item?.hash}` )
+                      router.push(`/Screen/nft-detail/${item?.hash}`)
                     }}
                   />
                 )
-              } )
+              })
             }
           </ContainerListNFTHome>
         </RightHome>
@@ -218,13 +214,13 @@ const HomeScreen = () => {
     )
   }
   const renderMobile = ()=>{
-    return( <></> )
+    return(<></>)
   }
   return (
     <ContainerHome>
       <Media query='(min-width: 768px)'>
-        {( match ) => {
-          if ( match ) {
+        {(match) => {
+          if (match) {
             return renderDesktop()
           }
           return renderMobile()

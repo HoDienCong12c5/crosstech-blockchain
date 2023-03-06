@@ -1,13 +1,11 @@
-import React from 'react'
-import styles from './ItemNFT.module.scss'
+import { ellipsisAddress, viewExternal } from '@/Utils/function';
 import styled from 'styled-components';
 import { MediumText, NormalText } from '../TextSize';
-import { ellipsisAddress } from '@/Utils/function';
 const ContainerItemNFT = styled.div`
-    justify-content: center:
+    justify-content: center;
     align-items: center; 
     max-width: 300px;
-    min-width: ${props=>props.isMinWidth ? '200px' : 'auto'};
+    min-width: ${props => props.isMinWidth ? '200px' : 'auto'};
     position: relative;
     background: transparent;
     align-self: stretch;
@@ -27,19 +25,24 @@ const Img = styled.img`
 
 `
 const ContainerImgNFT = styled.div`
-        padding: 5px;
+     padding: 5px;
     width: 100%;
     margin: auto;
 `
-const ItemNFT = ( {
+const HashNFT = styled(NormalText)`
+  :hover{
+    font-weight: bold;
+    color:#2b5540;
+  }
+`
+const ItemNFT = ({
   nft,
   onClick
-} ) => {
-  console.log( {nft} );
+}) => {
   return (
-    <ContainerItemNFT onClick={onClick}>
-      <ContainerImgNFT>
-        <Img src={nft?.data?.image}/>
+    <ContainerItemNFT>
+      <ContainerImgNFT onClick={onClick}>
+        <Img src={nft?.data?.image} />
       </ContainerImgNFT>
 
       <div>
@@ -49,9 +52,12 @@ const ItemNFT = ( {
         <NormalText>
           {nft?.time}
         </NormalText>
-        <NormalText>
-          {ellipsisAddress( nft?.hash,8,6 )}
-        </NormalText>
+        <HashNFT onClick={() => viewExternal(`https://testnet.bscscan.com/tx/${nft?.hash}`)}>
+          <a>
+            {ellipsisAddress(nft?.hash, 8, 6)}
+
+          </a>
+        </HashNFT>
       </div>
     </ContainerItemNFT>
   )
