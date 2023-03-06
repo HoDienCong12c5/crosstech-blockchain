@@ -166,6 +166,7 @@ const HomeScreen = () => {
       return alert( 'No files selected' );
     }
     const file = files[0];
+    console.log( {file} );
     const path = await IPFSService.uploadFile( file )
     console.log( {path} )
 

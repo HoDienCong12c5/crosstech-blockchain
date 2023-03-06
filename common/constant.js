@@ -65,4 +65,18 @@ export const CONNECTION_METHOD = {
   WALLET_CONNECT: 'WALLET_CONNECT',
   PANTOGRAPH: 'PANTOGRAPH'
 }
+export const modalConfig = {
+  wrapClassName: '',
+  width: 500,
+  //click over modal to close
+  maskClosable: true,
+  isDisableIcon: false,
+  //show icon close modal
+  closable: true,
+  maskStyle: {},
+  title: null,
+  footer: null,
+  //click esc modal to close
+  keyboard:true
+}
 export default ()=>{}

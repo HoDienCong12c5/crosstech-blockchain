@@ -45,4 +45,9 @@ module.exports = {
     includePaths: [path.join( __dirname, 'styles' )],
   }
 };
+module.exports = {
+  plugins: [
+    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+  ],
+};
 module.exports = nextConfig

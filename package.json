@@ -15,6 +15,7 @@
     "@react-three/fiber": "7.0.26",
     "@walletconnect/utils": "^2.4.6",
     "antd": "^5.2.3",
+    "antd-img-crop": "^4.8.0",
     "aos": "^2.3.4",
     "bigdecimal": "^0.6.1",
     "classnames": "^2.3.2",

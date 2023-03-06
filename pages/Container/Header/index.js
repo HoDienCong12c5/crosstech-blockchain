@@ -11,18 +11,36 @@ import { useEffect, useState } from 'react'
 import Media from 'react-media'
 import styles from './Header.module.scss'
 import { ContainerHeader } from './styled'
+import ModalTx from '@/Components/ModalTx'
+import { modalConfig } from '@/common/constant'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 const Header = () => {
+  const router = useRouter()
   const {callbackRejected} = useCallBackReject()
   const {showModal,hideModal} = useWorkModal()
-  useEffect( () => {
-    const hexChianId = convertNumberToHex( 1313161555 )
-    console.log( '====================================' );
-    console.log( {hexChianId} );
-    console.log( '====================================' );
-  }, [] )
   const {isSigned, userAddress } = useUserData()
+  const modal = useSelector( state => state.globalModal )
+  useEffect( () => {
+    if( modal?.show && isSigned ){
+      hideModal()
+    }
+  }, [modal,isSigned] )
   const connectMeta = async ()=>{
+    modalConfig.keyboard = false
+    // modalConfig.closable = false
+    modalConfig.maskClosable = false
+    showModal( {
+      body: (
+        <ModalTx
+          title={'Waiting for confirm '}
+          des={'Waiting for your confirm sign in'}
+        />
+      ),
+      modalConfig:modalConfig
+    } )
     Metamask.initialize()
+
   }
   const handleMyProfile = ()=>{
 
@@ -45,19 +63,11 @@ const Header = () => {
     )
   }
   const minNFT = ()=>{
-    showModal( {
-      body: (
-        <div >ok </div>
-      ),
-      modalConfig: {
-        className: 'styles.modalBox'
-      }
-    } )
-    // if( !isSigned ){
-    //   connectMeta()
-    // }else{
-
-    // }
+    if( isSigned ){
+      router.push( '/Screen/MintNFT' )
+    }else{
+      connectMeta()
+    }
   }
   const renderDesktop = ()=>{
     return(
@@ -101,6 +111,7 @@ const Header = () => {
               </ButtonBasic>
             ) : (
               <ButtonBasic
+                style={{background: '#f5f5f5', borderRadius: 0, border: '1px solid; black'}}
                 onClick={connectMeta}
                 className={styles['bnt-login']}
               >
