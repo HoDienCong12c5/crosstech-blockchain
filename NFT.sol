@@ -41,3 +41,55 @@ contract MyERC721 is ERC721Full, Counters {
     _transfer(msg.sender, _to, _tokenId);
   }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyNFT is ERC721, Ownable {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+
+    mapping (uint256 => string) private _tokenImageUrls;
+    mapping (address => bool) private _minters;
+
+    constructor() ERC721("MyNFT", "NFT") {}
+
+    function mint(address recipient, string memory imageUrl) public returns (uint256) {
+        require(_minters[msg.sender], "Minting not permitted");
+        _tokenIds.increment();
+        uint256 newTokenId = _tokenIds.current();
+        _mint(recipient, newTokenId);
+        _tokenImageUrls[newTokenId] = imageUrl;
+        return newTokenId;
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId) public override {
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Transfer not authorized");
+        super.transferFrom(from, to, tokenId);
+    }
+
+    function setImageUrl(uint256 tokenId, string memory imageUrl) public {
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Image update not authorized");
+        _tokenImageUrls[tokenId] = imageUrl;
+    }
+
+    function getImageUrl(uint256 tokenId) public view returns (string memory) {
+        return _tokenImageUrls[tokenId];
+    }
+
+    function addMinter(address account) public onlyOwner {
+        _minters[account] = true;
+    }
+
+    function removeMinter(address account) public onlyOwner {
+        _minters[account] = false;
+    }
+
+    function sendNFT(address recipient, uint256 tokenId) public {
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Send not authorized");
+        transferFrom(msg.sender, recipient, tokenId);
+    }
+}
