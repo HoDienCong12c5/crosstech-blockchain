@@ -24,5 +24,13 @@ export const RightMyProfile = styled.div`
   padding: 15px;
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 `;
+export const ContainerInfor = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+`;
+
 
 export default () => { };

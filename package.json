@@ -24,6 +24,7 @@
     "firebase": "9.8.4",
     "hex2dec": "^1.1.2",
     "ipfs-http-client": "^60.0.0",
+    "moment": "^2.29.4",
     "next": "13.2.1",
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",

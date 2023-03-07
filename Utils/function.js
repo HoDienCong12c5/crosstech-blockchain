@@ -1,7 +1,7 @@
 import { notification } from 'antd'
 import bigdecimal from 'bigdecimal'
+import moment from 'moment'
 import Web3 from 'web3'
-
 export const scientificToDecimal = (num) => {
   const sign = Math.sign(num)
   // if the number is in scientific notation remove it
@@ -139,6 +139,22 @@ export const viewExternal = (url) => {
   window.open(url, '_blank')
 }
 
-
+export const convertDateFormat = (strTimestamp) => {
+  // const lang = ReduxService.getCurrentLang()
+  let timeStamp
+  timeStamp = moment(strTimestamp).format('DD MMM YYYY')
+  // switch (lang) {
+  // case 'ja':
+  //   timeStamp = moment(strTimestamp).format('YYYY年MM月DD日')
+  //   break
+  // case 'cn':
+  //   timeStamp = moment(strTimestamp).format('YYYY年MM月DD日')
+  //   break
+  // default:
+  //   timeStamp = moment(strTimestamp).format('DD MMM YYYY')
+  //   break
+  // }
+  return timeStamp
+}
 
 export default () => { }

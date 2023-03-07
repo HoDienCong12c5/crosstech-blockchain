@@ -1,32 +1,26 @@
 import FirebaseService from '@/Services/FirebaseService';
-import React,{useState,useEffect} from 'react'
+import { useEffect, useState } from 'react';
 
-const useGetNFT = ( query = '',page = 1 ) => {
-  const [listNFT, setListNFT] = useState( [] )
-  const [loading, setLoading] = useState( true )
-  useEffect( () => {
-    const getData = async()=>{
+const useGetNFT = (query = '', page = 1) => {
+  const [listNFT, setListNFT] = useState([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const getData = async () => {
       let arr = []
       const data = await FirebaseService.storeCrossTech.getAllData()
-      if( data?.length > 0 ){
-        data?.map( item=>{
-          let dataItem = {
-            data:JSON.parse( item?.data ),
-            from:item?.from,
-            to: item?.to,
-            hash: item?.hash,
-            time: item?.time
-          }
-          arr.push( dataItem )
-        } )
+      if (data?.length > 0) {
+        data?.map(item => {
+          arr.push(item)
+        })
       }
-      setListNFT( data )
-      setLoading( false )
+      setListNFT(data)
+      setLoading(false)
     }
     query && page && getData()
-  }, [query,query] );
-  return{
-    listNFTAll:listNFT,
+    getData()
+  }, [query, query]);
+  return {
+    listNFTAll: listNFT,
     loading
   }
 }

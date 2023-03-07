@@ -45,7 +45,7 @@ const ItemNFT = ({
         <Img src={nft?.data?.image} />
       </ContainerImgNFT>
 
-      <div>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 3 }}>
         <MediumText>
           {nft?.data.nameUser}
         </MediumText>
