@@ -3,30 +3,33 @@ import { KEY_PAGE } from '@/Redux/Lib/constants';
 import storeRedux from '@/Redux/Store/configureStore';
 
 const ReduxService = {
-  callDispatchAction:( action )=>{
-    storeRedux.dispatch( action )
+  callDispatchAction: (action) => {
+    storeRedux.dispatch(action)
   },
-  setBnbBalance:( bnbBalance = 100 )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setBalance( bnbBalance ) )
+  setBnbBalance: (bnbBalance = 100) => {
+    ReduxService.callDispatchAction(PageReduxAction.setBalance(bnbBalance))
   },
-  setBnbPrice:( price )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setBnbPrice( price ) )
+  setIsSign: (isSign = false) => {
+    ReduxService.callDispatchAction(PageReduxAction.setIsSign(isSign))
   },
-  setMetamask:( metaMask )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setMetamask( metaMask ) )
+  setBnbPrice: (price) => {
+    ReduxService.callDispatchAction(PageReduxAction.setBnbPrice(price))
   },
-  setConnectionMethod:async ( method = KEY_PAGE.META_MASK )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setConnectionMethod( method ) )
+  setMetamask: (metaMask) => {
+    ReduxService.callDispatchAction(PageReduxAction.setMetamask(metaMask))
   },
-  getConnectionMethod:()=>{
+  setConnectionMethod: async (method = KEY_PAGE.META_MASK) => {
+    ReduxService.callDispatchAction(PageReduxAction.setConnectionMethod(method))
+  },
+  getConnectionMethod: () => {
     const { connectionMethod } = storeRedux.getState()
     return connectionMethod
   },
-  openModal:( props, params )=>{
-    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( { ...props, ...params, show:true } ) )
+  openModal: (props, params) => {
+    ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ ...props, ...params, show: true }))
   },
-  closeModal:()=>{
-    ReduxService.callDispatchAction( PageReduxAction.setGlobalModal( { show: false } ) )
+  closeModal: () => {
+    ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ show: false }))
   },
 
 }

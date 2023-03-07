@@ -8,7 +8,10 @@ import { Form, Upload } from 'antd'
 import { useState } from 'react'
 import { ColCustom, ContainerImgMintNFT, ContainerMintNFT, ItemForm, PreImg, RowCustom } from './styled'
 const MintNFT = (props) => {
-  const { userAddress } = useUserData()
+  const { userAddress, isSigned } = useUserData()
+  console.log('====================================');
+  console.log({ isSigned });
+  console.log('====================================');
   const [formData, setFormData] = useState({
     titleCoursers: '',
     nameStudent: '',

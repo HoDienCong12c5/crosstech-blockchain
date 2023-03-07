@@ -37,4 +37,10 @@ export default class PageReduxAction {
       payload
     };
   }
+  static setIsSign(payload) {
+    return {
+      type: KEY_PAGE.SET_SIGN,
+      payload
+    };
+  }
 }

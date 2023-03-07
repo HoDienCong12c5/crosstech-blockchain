@@ -43,7 +43,7 @@ const Header = () => {
 
   }
   const handleMyProfile = () => {
-
+    router.push('/Screen/MyProfile')
   }
   const sendToken = () => {
     const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'

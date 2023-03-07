@@ -9,14 +9,14 @@ const initState = {
     accounts: [],
     address: ''
   },
-
+  isSign: false,
   internet: true,
   balanceRedux: {
     balanceETH: 0
   },
   bnbPriceRedux: 0,
-  openModal:{
-    show:false
+  openModal: {
+    show: false
   }
 }
 

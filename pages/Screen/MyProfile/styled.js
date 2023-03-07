@@ -4,6 +4,7 @@ export const ContainerMyProfile = styled.div`
   width:100%;
 `;
 export const LeftMyProfile = styled.div`
+  padding: 10px ;
   max-width: 400px;
   display: flex;
   width: 20%;

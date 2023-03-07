@@ -36,3 +36,9 @@ export const globalModal = createReducer(initState.openModal, {
   }
 })
 
+export const isSigned = createReducer(initState.isSign, {
+  [KEY_PAGE.SET_SIGN](state, action) {
+    return action.payload
+  }
+})
+
