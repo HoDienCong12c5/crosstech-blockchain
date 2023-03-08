@@ -57,6 +57,9 @@ const FirebaseFun = (nameData, path = '') => {
     getDataByContract: async (contract) => {
       return getDataByQuery(nameData, 'contract', contract, '==')
     },
+    getDataByHash: async (hash) => {
+      return getDataByQuery(nameData, 'hash', hash, '==')
+    },
     addData: async (data) => {
       const add = await addDoc(nameData, data)
       if (add) {

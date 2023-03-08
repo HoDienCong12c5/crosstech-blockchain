@@ -19,7 +19,7 @@ export const LeftMyProfile = styled.div`
 
 export const RightMyProfile = styled.div`
   background: white;
-  width: calc(80% - 15px);
+  width: 100%;
   margin-left: 15px;
   border-radius: 14px;
   padding: 15px;

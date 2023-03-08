@@ -1,3 +1,4 @@
+import { saveDataLocal } from '@/Utils/function';
 import { KEY_PAGE } from '../Lib/constants';
 
 export default class PageReduxAction {
@@ -8,6 +9,7 @@ export default class PageReduxAction {
     }
   }
   static setMetamask(payload) {
+    saveDataLocal(KEY_PAGE.SET_METAMASK_INFO, payload)
     return {
       type: KEY_PAGE.SET_METAMASK_INFO,
       payload
@@ -26,6 +28,7 @@ export default class PageReduxAction {
     };
   }
   static setConnectionMethod(payload) {
+    saveDataLocal(KEY_PAGE.CONNECTION_METHOD, payload)
     return {
       type: KEY_PAGE.CONNECTION_METHOD,
       payload

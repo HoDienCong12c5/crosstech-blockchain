@@ -1,6 +1,5 @@
 .hover {
   cursor: pointer;
-
   &__zoom {
     &:hover {
       transform: scale(1.03);
@@ -9,6 +8,13 @@
       -ms-transform: scale(1.03);
       -o-transform: scale(1.03);
     }
+  }
+  &__text-decoration{
+    &:hover {
+      text-decoration:underline;
+      color:#1677ff;
+    }
+   
   }
 
 }
@@ -24,7 +30,7 @@
   margin: auto;
   justify-self: center;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   text-align: center;
   padding: 0px 50px;
   // margin-top: 40px;

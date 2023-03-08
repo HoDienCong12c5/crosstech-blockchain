@@ -114,7 +114,7 @@ const HomeScreen = () => {
                   <ItemNFT key={item}
                     nft={item}
                     onClick={() => {
-                      router.push(`/Screen/nft-detail/${item?.id}`)
+                      router.push(`/Screen/nft-detail/${item?.hash}`)
                     }}
                   />
                 )

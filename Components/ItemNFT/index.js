@@ -28,6 +28,7 @@ const ContainerImgNFT = styled.div`
      padding: 5px;
     width: 100%;
     margin: auto;
+    text-align: center;
 `
 const HashNFT = styled(NormalText)`
   :hover{

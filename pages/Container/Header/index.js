@@ -6,7 +6,6 @@ import { useWorkModal } from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
 import { ellipsisAddress } from '@/Utils/function'
-import Web3Service from '@/Utils/web3'
 import { Col, Row } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,6 +20,7 @@ const Header = () => {
   const { showModal, hideModal } = useWorkModal()
   const { isSigned, userAddress } = useUserData()
   const modal = useSelector(state => state.globalModal)
+
   useEffect(() => {
     if (modal?.show && isSigned) {
       hideModal()
@@ -46,21 +46,22 @@ const Header = () => {
     router.push('/Screen/MyProfile')
   }
   const sendToken = () => {
-    const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'
-    const value = 0.0001
-    const callback = (callbackString) => {
-      console.log('====================================');
-      console.log({ callbackString });
-      console.log('====================================');
-    }
-    Web3Service.sendToken(
-      userAddress,
-      toAddress,
-      value,
-      () => callback('callbackBeforeDone'),
-      callback,
-      callbackRejected
-    )
+    router.push('/Screen/MyProfile')
+    // const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'
+    // const value = 0.0001
+    // const callback = (callbackString) => {
+    //   console.log('====================================');
+    //   console.log({ callbackString });
+    //   console.log('====================================');
+    // }
+    // Web3Service.sendToken(
+    //   userAddress,
+    //   toAddress,
+    //   value,
+    //   () => callback('callbackBeforeDone'),
+    //   callback,
+    //   callbackRejected
+    // )
   }
   const minNFT = () => {
     if (isSigned) {

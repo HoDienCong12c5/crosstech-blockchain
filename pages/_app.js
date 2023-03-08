@@ -1,3 +1,7 @@
+import PageReduxAction from '@/Redux/Action/pageAction';
+import { KEY_PAGE } from '@/Redux/Lib/constants';
+import initState from '@/Redux/Lib/initState';
+import { checkLocalStoreToRedux } from '@/Redux/Reducers';
 import store from '@/Redux/Store/configureStore';
 import '@/Services/FirebaseService';
 import '@/styles/globals.css';
@@ -13,6 +17,19 @@ export default function App({ Component, pageProps }) {
     ReduxService.setBnbBalance()
   }, []);
   useEffect(() => {
+    const getDataLocal = async () => {
+      const storageRedux = [
+        { key: KEY_PAGE.SET_METAMASK_INFO, action: PageReduxAction.setMetamask, init: initState.metamaskRedux },
+        { key: KEY_PAGE.CONNECTION_METHOD, action: PageReduxAction.setConnectionMethod, init: initState.connectionMethod },
+      ]
+      const promiseArr = storageRedux.map((item) => {
+        checkLocalStoreToRedux(store, item.key, item.action, item.init)
+      })
+      await Promise.all(promiseArr)
+    }
+    getDataLocal()
+  }, []);
+  useEffect(() => {
     const interval = setInterval(() => {
 
     }, 1000)
@@ -21,12 +38,9 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store} >
       <Suspense fallback={null}>
-        <Suspense fallback={null}>
-          <Container >
-            <Component {...pageProps} />
-
-          </Container>
-        </Suspense>
+        <Container >
+          <Component {...pageProps} />
+        </Container>
       </Suspense>
     </Provider>
   )

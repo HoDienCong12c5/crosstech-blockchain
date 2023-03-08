@@ -77,6 +77,21 @@ export const modalConfig = {
   title: null,
   footer: null,
   //click esc modal to close
-  keyboard:true
+  keyboard: true
 }
-export default ()=>{}
+export const dataFireBase = {
+  'time': 0,
+  'hash': '0',
+  'to': '0',
+  'from': '0',
+  'title': '0',
+  'contract': '0',
+  'data': {
+    'image': '0',
+    'address': '0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c',
+    'nameUser': '0',
+    'title': '0'
+  },
+  'id': '0'
+}
+export default () => { }

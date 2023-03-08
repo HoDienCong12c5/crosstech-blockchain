@@ -1,5 +1,6 @@
+import { MediumText } from '@/Components/TextSize';
 import { Col, Row } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 export const ContainerNFTDetail = styled(Row)`
    width: 100%;
     justify-content: center;
@@ -12,7 +13,7 @@ export const LeftNFTDetail = styled(Col)`
 export const LeftNFTContainerImg = styled.div`
    width: 90%;
    margin: auto;
-   margin-top: 10px;
+   margin: 10px;
 `;
 export const RightNFTDetail = styled(LeftNFTDetail)`
     align-self: start;
@@ -21,6 +22,14 @@ export const RightNFTDetail = styled(LeftNFTDetail)`
     display: flex;
     flex-direction: column;
     gap:5px;
+`;
+export const TextMedium = styled(MediumText)`
+  ${props => props.isContent && css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `}
+ 
 `;
 
 export default () => { };
