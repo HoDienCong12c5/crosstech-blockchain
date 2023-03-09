@@ -23,19 +23,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const fireStores = getFirestore(app)
-
-const FirebaseService = ()=>{
-  const fireStores = getFirestore(app)
-  const fireStorages = getStorage(app)
-  const dbCrossTech = collection(fireStores, 'Cross-Tech')
-  const dbImgAvatar = 'avatar'
-  return {
-    storeCrossTech: functionStore(dbCrossTech),
-    FireStorages: {
-      avatar: functionStore(fireStorages, dbImgAvatar)
-    }
+const fireStorages = getStorage(app)
+const dbCrossTech = collection(fireStores, 'Cross-Tech')
+const dbImgAvatar = 'avatar'
+const FirebaseService = {
+  storeCrossTech: functionStore(dbCrossTech),
+  FireStorages: {
+    avatar: functionStore(fireStorages, dbImgAvatar)
   }
-
 }
 
 export default FirebaseService
