@@ -1,4 +1,4 @@
-var events = require( 'events' )
+var events = require('events')
 var eventEmitter = new events.EventEmitter()
 
 class Observer {
@@ -6,20 +6,20 @@ class Observer {
     this.listObserver = []
   }
 
-  on ( key, func ) {
-    eventEmitter.on( key, func )
+  on (key, func) {
+    eventEmitter.on(key, func)
   }
 
-  emit ( key, object ) {
-    eventEmitter.emit( key, object )
+  emit (key, object) {
+    eventEmitter.emit(key, object)
   }
 
-  removeListener ( key, func ) {
-    eventEmitter.removeListener( key, func )
+  removeListener (key, func) {
+    eventEmitter.removeListener(key, func)
   }
 }
 
 const instance = new Observer()
-Object.freeze( instance )
+Object.freeze(instance)
 
 export default instance
