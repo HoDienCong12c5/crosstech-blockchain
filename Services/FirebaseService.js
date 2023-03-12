@@ -31,6 +31,9 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APPID,
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 };
+console.log('====================================');
+console.log({firebaseConfig});
+console.log('====================================');
 // const firebaseConfig = {
 //   apiKey: 'AIzaSyCXFxZWd18pNxsgbQaVUcL575HIcXez5Fo',
 //   authDomain: 'bth4-d5049.firebaseapp.com',
