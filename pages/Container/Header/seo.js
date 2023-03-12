@@ -1,4 +1,4 @@
-import { DefaultSeo, NextSeo } from 'next-seo';
+// import { DefaultSeo, NextSeo } from '';
 import Head from 'next/head'
 import React from 'react'
 const SEO_param = {
@@ -27,13 +27,13 @@ const SEO_param = {
 const SEO = () => {
   return (
     <>
-      <DefaultSeo {...SEO_param} />
+      {/* <DefaultSeo {...SEO_param} /> */}
       <Head>
         <meta charSet="utf-8" />
         <title>Cross - Tech</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no' />
         <link rel="icon" href="https://skywalker.infura-ipfs.io/ipfs/QmTZBqX5FbMPQEC6AaTmhaqDSPv3gpp5hb3XzZN7piA534" />
-        <meta name="description" content="Eatnsmile"/>
+        <meta name="description" content="Cross - Tech"/>
 
 
         <meta itemprop="name" content="Cross - Tech"/>
