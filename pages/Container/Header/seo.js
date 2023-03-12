@@ -31,7 +31,7 @@ const SEO = () => {
     </Head>
   )
 }
-export async function getServerSideProps ({ params, res }) {
+export async function getInitialProps ({ params, res }) {
   return {}
 }
 export default SEO
