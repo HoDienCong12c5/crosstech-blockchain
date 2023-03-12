@@ -11,6 +11,7 @@ import ReduxService from '@/Utils/ReduxService';
 import { Suspense, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import Container from './Container/index';
+import ReduxConnectIntl from '@/static/asset/lang'
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -38,9 +39,12 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store} >
       <Suspense fallback={null}>
-        <Container >
-          <Component {...pageProps} />
-        </Container>
+        <ReduxConnectIntl>
+          <Container >
+            <Component {...pageProps} />
+          </Container>
+        </ReduxConnectIntl>
+
       </Suspense>
     </Provider>
   )

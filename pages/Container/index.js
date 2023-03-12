@@ -1,7 +1,6 @@
 import MyModal from '@/Components/MyModal';
 import { Affix, Col, Layout, Row } from 'antd';
 import Head from 'next/head';
-
 import Header from './Header';
 const { Content } = Layout
 const Container = ({ children }) => {

@@ -1,43 +1,51 @@
-import { modalConfig } from '@/common/constant'
+import { GlobalModal, modalConfig } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
 import MyInput from '@/Components/MyInput'
 import useUserData from '@/Hook/useUserData'
 import FirebaseService from '@/Services/FirebaseService'
 import IPFSService from '@/Services/IPFSService'
-import { validateAddress } from '@/Utils/function'
+import { getBase64Img, validateAddress } from '@/Utils/function'
 import Web3Service from '@/Utils/web3'
 import { Form, Upload } from 'antd'
 import { useState } from 'react'
-import { ColCustom, ContainerImgMintNFT, ContainerMintNFT, ItemForm, PreImg, RowCustom } from './styled'
-const MintNFT = (props) => {
-  const { userAddress, isSigned } = useUserData()
-  console.log('====================================');
-  console.log({ isSigned });
-  console.log('====================================');
+import {useWorkModal}from'@/Hook/useModal'
+import { ColCustom, ContainerImgMintNFT, ContainerMintNFT, ItemForm, PreImg, RowCustom, SelectCoursers, SelectOption } from './styled'
+import useCallBackReject from '@/Hook/useCallBackReject'
+import ModalTx from '@/Components/ModalTx'
+import { useSelector } from 'react-redux'
+const listCoursers = [
+  {
+    title:'Basic Blackchain',
+    key:'basic_blockchain'
+  },
+  {
+    title:'Basic React',
+    key:'basic_react'
+  }
+]
+const MintNFT = () => {
+  const [form] = Form.useForm()
+  const { userAddress } = useUserData()
+  const {showModal} = useWorkModal()
+  const {callbackRejected} = useCallBackReject()
+  const message = useSelector(state => state.locale.messages)
+
+  const [courser, setCourser] = useState('basic_blockchain');
   const [formData, setFormData] = useState({
-    titleCoursers: '',
-    nameStudent: '',
-    addressStudent: ''
+    addressStudent: '',
+    nameStudent: ''
   })
   const [nftPreview, setNftPreview] = useState({
     images: '',
     pathIPFS: ''
   })
-  const [form] = Form.useForm()
+
   const checkAddress = (rule, address) => {
-    if (!validateAddress(address)) {
+    if (!validateAddress(address) || address === userAddress) {
       return Promise.reject('error address')
     }
   }
-  const getBase64Img = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  const insertFirebase = async (hash,pathIPFS) => {
-    const noneUser = await Web3Service.getNonce(userAddress)
+  const insertFirebase = async (hash,nonce,pathIPFS) => {
     const dataTx = {
       nameStudent: formData.nameStudent,
       image: pathIPFS
@@ -48,32 +56,65 @@ const MintNFT = (props) => {
       to: formData.addressStudent,
       data: JSON.stringify(dataTx),
       hash: hash,
-      title: 'Khóa học blockchain',
-      tokenId:noneUser
+      title: courser,
+      tokenId:nonce
     }
     FirebaseService.storeCrossTech.addData(data)
   }
-  const handleSubmitMint = async () => {
-    const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
-    console.log({ path });
-    setNftPreview({ ...nftPreview, pathIPFS: path });
-
-  }
-  const mintNFT = async()=>{
-    let modalParam = modalConfig
+  const mintNFT = async(pathIPFS)=>{
+    let noneUser = await Web3Service.getNonce(userAddress)
+    noneUser = noneUser + 1
+    showModal({
+      body:<ModalTx
+        title={message.confirm.mintNFT.confirm}
+        des={message.confirm.mintNFT.confirm_des}
+      />,
+      modalConfig:modalConfig
+    })
     const callbackBeforeDone = ()=>{
-      modalParam.closable = false
-      modalParam.isDisableIcon = false
-      modalParam.keyboard = false
-      // modalParam.maskClosable
+      let styleModal = modalConfig
+      styleModal.clickESCClose = false
+      styleModal.showIconClose = false
+      styleModal.clickOverClose = false
+      showModal({
+        body:<ModalTx
+          title={message.confirm.mintNFT.start}
+          des={message.confirm.mintNFT.start_des}
+        />,
+        modalConfig:styleModal
+      })
     }
-    const callbackAfterDone = ()=>{
-
+    const callbackAfterDone = (hash)=>{
+      showModal({
+        body:<ModalTx
+          title={message.confirm.mintNFT.success}
+          des={message.confirm.mintNFT.success_des}
+        />,
+        modalConfig:modalConfig
+      })
+      insertFirebase(hash,noneUser,pathIPFS)
     }
+    await Web3Service.mintNFT(
+      userAddress,
+      'ox... contract',
+      noneUser,
+      callbackBeforeDone,
+      callbackAfterDone,
+      callbackRejected
+    )
+  }
+  const handleSubmitMint = async () => {
+    // const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
+    // console.log({ path });
+    // await mintNFT(path)
+    alert('succse')
   }
   const handlePreview = async (file) => {
     const f = await getBase64Img(file)
     setNftPreview({ pathIPFS: file, images: f });
+  }
+  const changeCourser = (courser)=>{
+    setCourser(courser)
   }
 
   return (
@@ -88,11 +129,40 @@ const MintNFT = (props) => {
             accept='.png,.jpg,.jpeg,.gif,.svg'
             beforeUpload={handlePreview}
           // onChange={handleChangeImg}
-          >Add new image</Upload>
-
+          >{message.mintNFT.addNewImg}
+          </Upload>
         </ContainerImgMintNFT>
+
+        <ItemForm
+          onFinish={handleSubmitMint}
+          onFinishFailed={()=>alert('error')}
+          name={'ratio'}
+          rules={[{ validator: () => { } }]}
+        >
+          <RowCustom >
+            <ColCustom span={10}>
+              {message.mintNFT.coursers}
+            </ColCustom>
+            <ColCustom span={14}>
+              <SelectCoursers
+                onChange={(value) => changeCourser(value)}
+                // suffixIcon={<img src={images.icArrowBold} />}
+                // dropdownClassName='filter-select-dropdown'
+                defaultValue={courser}
+                value={courser}
+              >
+                {listCoursers.map((item)=>(
+                  <SelectOption key={item} value={item.key}>
+                    {item.title}
+                  </SelectOption>
+                ))}
+
+              </SelectCoursers>
+            </ColCustom>
+          </RowCustom>
+        </ItemForm>
+
         <Form
-          // style={styles['body-form']}
           form={form}
           initialValues={formData}
           onValuesChange={(changedValues, allValue) =>
@@ -100,25 +170,20 @@ const MintNFT = (props) => {
           }
         >
           <ItemForm
-            // style={styles['ant-form-item']}
-            name={'ratio'}
-            rules={[{ validator: () => { } }]}
+            style={{ width: '100%' }}
+            name={'addressStudent'}
+            rules={[{ validator: checkAddress }]}
           >
-            <RowCustom >
+            <RowCustom>
               <ColCustom span={10}>
-                Coursers
+                {message.textPopular.address}
               </ColCustom>
               <ColCustom span={14}>
                 <MyInput
                   className='input'
                   autoComplete='off'
                   iconRight={<div style={{ color: 'white' }}>%</div>}
-                  placeholder={'Coursers'}
-                  onKeyPress={(event) => {
-                    if (event.target.value.length >= 3 && event.target.value >= 100) {
-                      event.preventDefault()
-                    }
-                  }}
+                  placeholder={message.textPopular.address}
                 />
               </ColCustom>
             </RowCustom>
@@ -126,12 +191,11 @@ const MintNFT = (props) => {
 
           <ItemForm
             style={{ width: '100%' }}
-            name={'ratio'}
-            rules={[{ validator: checkAddress }]}
+            name={'nameStudent'}
           >
             <RowCustom>
               <ColCustom span={10}>
-                Address
+                {message.mintNFT.student}
               </ColCustom>
               <ColCustom span={14}>
                 <MyInput
@@ -139,49 +203,25 @@ const MintNFT = (props) => {
                   autoComplete='off'
                   iconRight={<div style={{ color: 'white' }}>%</div>}
                   placeholder={'Coursers'}
-                  onKeyPress={(event) => {
-                    if (event.target.value.length >= 3 && event.target.value >= 100) {
-                      event.preventDefault()
-                    }
-                  }}
-                />
-              </ColCustom>
-            </RowCustom>
-          </ItemForm>
-
-          <ItemForm
-            style={{ width: '100%' }}
-            name={'ratio'}
-            rules={[{ validator: checkAddress }]}
-          >
-            <RowCustom>
-              <ColCustom span={10}>
-                Student
-              </ColCustom>
-              <ColCustom span={14}>
-                <MyInput
-                  className='input'
-                  autoComplete='off'
-                  iconRight={<div style={{ color: 'white' }}>%</div>}
-                  placeholder={'Coursers'}
-                  onKeyPress={(event) => {
-                    if (event.target.value.length >= 3 && event.target.value >= 100) {
-                      event.preventDefault()
-                    }
-                  }}
+                  onKeyPress={(event) => {}}
                 />
               </ColCustom>
             </RowCustom>
 
 
           </ItemForm>
+          <ItemForm>
+            <ButtonBasic
+              htmlType="submit"
+              // onClick={handleSubmitMint}
+              className={'mt-20 mb-20'}>
+              {message.mintNFT.mintNFT}
+            </ButtonBasic>
+          </ItemForm>
+
         </Form>
         <div style={{ width: '100%', borderBottom: '1px solid black' }} />
-        <ButtonBasic
-          onClick={handleSubmitMint}
-          className={'mt-20 mb-20'}>
-          Mint NFT
-        </ButtonBasic>
+
       </ContainerMintNFT>
 
 

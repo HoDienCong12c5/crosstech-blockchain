@@ -8,6 +8,14 @@ export default class PageReduxAction {
       payload
     }
   }
+  static setLocale (payload) {
+    saveDataLocal(KEY_PAGE.SET_LOCALE, payload)
+    return {
+      type: KEY_PAGE.SET_LOCALE,
+      payload
+    }
+  }
+
   static setMetamask(payload) {
     saveDataLocal(KEY_PAGE.SET_METAMASK_INFO, payload)
     return {

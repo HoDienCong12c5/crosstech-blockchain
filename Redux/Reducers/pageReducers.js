@@ -1,7 +1,31 @@
 import { KEY_PAGE } from '../Lib/constants'
 import initState from '../Lib/initState'
 import createReducer from '../Lib/reducerConfig'
+import MessageEN from '@/static/asset/lang/en.json'
+const localeEN = {
+  lang: 'en',
+  messages: MessageEN
+}
 
+export const locale = createReducer(localeEN, {
+  [KEY_PAGE.SET_LOCALE] (state, action) {
+    return localeEN
+    // switch (action.payload) {
+    // case 'en':
+    //   return localeEN
+    // case 'ja':
+    //   return localeJA
+    // case 'cn':
+    //   return localeCN
+    // case 'vn':
+    //   return localeVN
+    // case 'ko':
+    //   return localeKO
+    // default:
+    //   return localeEN
+    // }
+  }
+})
 export const internetRedux = createReducer(initState.internet, {
   [KEY_PAGE.SET_INTERNET](state, action) {
     return action.payload

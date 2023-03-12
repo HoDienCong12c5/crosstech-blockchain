@@ -69,15 +69,19 @@ export const modalConfig = {
   wrapClassName: '',
   width: 500,
   //click over modal to close
-  maskClosable: true,
+  clickOverClose:true,
   isDisableIcon: false,
   //show icon close modal
-  closable: true,
+  showIconClose:true,
   maskStyle: {},
   title: null,
   footer: null,
   //click esc modal to close
-  keyboard: true
+  clickESCClose:true,
+}
+export const GlobalModal = {
+  body: <></>,
+  modalConfig:modalConfig
 }
 export const dataFireBase = {
   'time': 0,

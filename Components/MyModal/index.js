@@ -12,7 +12,7 @@ const ModalWrapper = () => {
   const { modal } = useModal()
   const hideModal = useHideModal()
   // Import dynamic component according to component path param
-  const CustomComponent = lazy( () => import( `${modal.componentPath}` ) )
+  const CustomComponent = lazy(() => import(`${modal.componentPath}`))
   // const CustomComponent = lazy(() => import(`pages/sample1/components/SampleModalContent`))
 
   const defaultModalConfig = {
@@ -31,6 +31,9 @@ const ModalWrapper = () => {
     <Modal
       {...defaultModalConfig}
       {...modal?.modalConfig}
+      maskClosable={modal?.modalConfig?.clickOverClose}
+      closable={modal?.modalConfig?.showIconClose}
+      keyboard={modal?.modalConfig?.clickESCClose}
       centered
       open={modal?.show}
       onCancel={hideModal}

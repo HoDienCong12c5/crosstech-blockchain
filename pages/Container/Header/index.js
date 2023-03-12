@@ -20,7 +20,7 @@ const Header = () => {
   const { showModal, hideModal } = useWorkModal()
   const { isSigned, userAddress } = useUserData()
   const modal = useSelector(state => state.globalModal)
-
+  const message = useSelector(state => state.locale.messages)
   useEffect(() => {
     if (modal?.show && isSigned) {
       hideModal()
@@ -30,15 +30,15 @@ const Header = () => {
     modalConfig.keyboard = false
     // modalConfig.closable = false
     modalConfig.maskClosable = false
-    showModal({
-      body: (
-        <ModalTx
-          title={'Waiting for confirm '}
-          des={'Waiting for your confirm sign in'}
-        />
-      ),
-      modalConfig: modalConfig
-    })
+    // showModal({
+    //   body: (
+    //     <ModalTx
+    //       title={message.confirm}
+    //       des={'Waiting for your confirm sign in'}
+    //     />
+    //   ),
+    //   modalConfig: modalConfig
+    // })
     Metamask.initialize()
 
   }
@@ -82,7 +82,7 @@ const Header = () => {
               onClick={minNFT}
               className={styles['btn-item-menu']}
             >
-              Mint NFT
+              {message.mintNFT.mintNFT}
             </ButtonBasic>
             {
               isSigned && (
@@ -92,7 +92,7 @@ const Header = () => {
                     onClick={sendToken}
                     className={styles['btn-item-menu']}
                   >
-                    My profile
+                    {message.myProfile.myProfile}
                   </ButtonBasic>
                 </>
               )
@@ -116,7 +116,7 @@ const Header = () => {
                 onClick={connectMeta}
                 className={styles['bnt-login']}
               >
-                Login
+                {message.common.login}
               </ButtonBasic>
             )
           }

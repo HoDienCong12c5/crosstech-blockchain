@@ -1,4 +1,4 @@
-import { Col, Form, Row } from 'antd';
+import { Col, Form, Row, Select } from 'antd';
 import styled, { css } from 'styled-components';
 export const ContainerMintNFT = styled.div`
     width: 100%;
@@ -16,11 +16,11 @@ export const PreImg = styled.img`
     width: max-content;
     margin: auto;
 `
-export const RowCustom = styled( Row )`
+export const RowCustom = styled(Row)`
     /* padding: 0px 20px 20px 30px; */
     /* border-bottom: ${props=>props.isEnd ?? '1px solid black'};  */
 `
-export const ItemForm = styled( Form.Item )`
+export const ItemForm = styled(Form.Item)`
     ${props=>props.isEnd
     ? css`
      border-top: 1px solid black;
@@ -36,7 +36,7 @@ export const ItemForm = styled( Form.Item )`
 }
    
 `
-export const ColCustom = styled( Col )`
+export const ColCustom = styled(Col)`
     /* padding: 0px 20px 20px 30px; */
     padding-right:25px; 
 `
@@ -51,5 +51,8 @@ export const ContainerImgMintNFT = styled.div`
     align-content: center;
     flex-direction: column;
 `
-
+export const SelectCoursers = styled(Select)`
+   min-width: 200px;
+`
+export const SelectOption = styled(Select.Option)``
 export default () => {};
