@@ -1,3 +1,4 @@
+import { URI_NFT } from '@/common/constant';
 import { KEY_PAGE } from '@/Redux/Lib/constants';
 import converter from 'hex2dec';
 import Web3 from 'web3';
@@ -6,105 +7,105 @@ import ReduxService from './ReduxService';
 class Web3Service{
   static createWeb3Provider (){
     let web3 = new Web3()
-    if( ReduxService.getConnectionMethod() === KEY_PAGE.META_MASK ){
-      web3.setProvider( window.ethereum )
-      console.log( '====================================' );
-      console.log( ' KEY_PAGE.META_MASK ',window.ethereum );
-      console.log( {window:window.ethereum} );
-      console.log( '====================================' );
+    if(ReduxService.getConnectionMethod() === KEY_PAGE.META_MASK){
+      web3.setProvider(window.ethereum)
+      console.log('====================================');
+      console.log(' KEY_PAGE.META_MASK ',window.ethereum);
+      console.log({window:window.ethereum});
+      console.log('====================================');
     }
     return web3
   }
-  static async onSignMessage ( address, nonce ) {
+  static async onSignMessage (address, nonce) {
     let currentWeb3 = null
     currentWeb3 = this.createWeb3Provider()
-    return new Promise( ( resolve, reject ) => {
+    return new Promise((resolve, reject) => {
       try {
-        let noneFormat = currentWeb3.utils.fromUtf8( nonce )
+        let noneFormat = currentWeb3.utils.fromUtf8(nonce)
         currentWeb3.eth.personal.sign(
           noneFormat,
           address,
-          ( err, signature ) => {
-            if ( err ) return reject( err )
-            return resolve( { address, signature } )
+          (err, signature) => {
+            if (err) return reject(err)
+            return resolve({ address, signature })
           }
         )
-      } catch ( e ) {
-        console.log( 'Sign message error', e )
+      } catch (e) {
+        console.log('Sign message error', e)
         return resolve()
       }
-    } )
+    })
   }
   static async getNetwork () {
-    return new Promise( async ( resolve, reject ) => {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
       web3.eth
         .getChainId()
-        .then( ( network ) => {
-          resolve( network )
-        } )
-        .catch( ( error ) => {
-          reject( error )
-        } )
-    } )
+        .then((network) => {
+          resolve(network)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   }
   static async enableMetaMask () {
-    return new Promise( async ( resolve, reject ) => {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
       web3.currentProvider
         .enable()
-        .then( ( accounts ) => {
-          resolve( accounts )
-        } )
-        .catch( ( error ) => {
-          reject( error )
-        } )
-    } )
+        .then((accounts) => {
+          resolve(accounts)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   }
   static async getAccounts () {
-    return new Promise( async ( resolve, reject ) => {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
       web3.eth
         .getAccounts()
-        .then( ( accounts ) => {
-          resolve( accounts )
-        } )
-        .catch( ( error ) => {
-          reject( error )
-        } )
-    } )
+        .then((accounts) => {
+          resolve(accounts)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   }
-  static callGetDataWeb3 ( contract, method, param ) {
+  static callGetDataWeb3 (contract, method, param) {
     // method.encodeABI
-    const dataTx = contract.methods[method]( ...param ).encodeABI()
+    const dataTx = contract.methods[method](...param).encodeABI()
     return dataTx
   }
-  static async estimateGas ( rawTransaction ) {
-    return new Promise( async ( resolve, reject ) => {
+  static async estimateGas (rawTransaction) {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
-      web3.eth.estimateGas( rawTransaction, ( err, res ) => {
-        if ( err ) {
-          reject( err )
+      web3.eth.estimateGas(rawTransaction, (err, res) => {
+        if (err) {
+          reject(err)
         } else {
-          resolve( res )
+          resolve(res)
         }
-      } )
-    } )
+      })
+    })
   }
-  static async postBaseSendTxs ( from, arrSend, isNeedCovert = false ) {
-    return new Promise( async ( resolve, reject ) => {
+  static async postBaseSendTxs (from, arrSend, isNeedCovert = false) {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
-      web3.eth.getChainId( async ( err, network ) => {
+      web3.eth.getChainId(async (err, network) => {
         let chainId = '0x1'
-        if ( !err ) {
+        if (!err) {
           chainId = '0x' + network
         }
 
         const isTestnet = chainId === '0x4'
-        const nonce = await this.getNonce( from )
+        const nonce = await this.getNonce(from)
 
-        const promise = arrSend.map( async ( item, index ) => {
-          return new Promise( async ( resolve, reject ) => {
+        const promise = arrSend.map(async (item, index) => {
+          return new Promise(async (resolve, reject) => {
             const {
               to,
               data,
@@ -121,7 +122,7 @@ class Web3Service{
             } = item
             const newGasPrice = parseFloat(
               gasPrice
-                ? convertBalanceToWei( gasPrice, 9 )
+                ? convertBalanceToWei(gasPrice, 9)
                 : await this.getGasPrice()
             )
             let rawTransaction = {
@@ -132,96 +133,96 @@ class Web3Service{
               data
             }
 
-            if ( !isTestnet ) {
+            if (!isTestnet) {
               rawTransaction.chainId = chainId
             }
 
-            if ( percent ) {
+            if (percent) {
               rawTransaction.gasPrice = newGasPrice * percent
             }
 
-            if ( value ) {
+            if (value) {
               rawTransaction.value = converter.decToHex(
-                isNeedCovert ? convertBalanceToWei( value ) : `${value}`
+                isNeedCovert ? convertBalanceToWei(value) : `${value}`
               )
             }
-            this.estimateGas( rawTransaction )
-              .then( async ( gas ) => {
+            this.estimateGas(rawTransaction)
+              .then(async (gas) => {
                 const gasFinal =
                   converter.decToHex(
-                    roundingNumber( gas * extraRateGas, 0 ).toString()
+                    roundingNumber(gas * extraRateGas, 0).toString()
                   ) || gas
                 rawTransaction.gas = gasFinal
                 rawTransaction.gasLimit = 300000
                 web3.eth
-                  .sendTransaction( rawTransaction )
-                  .on( 'transactionHash', function ( hash ) {
+                  .sendTransaction(rawTransaction)
+                  .on('transactionHash', function (hash) {
                   // call before call next callBackData
-                    if ( callBeforeFunc && hash ) {
-                      callBeforeFunc && callBeforeFunc( hash )
+                    if (callBeforeFunc && hash) {
+                      callBeforeFunc && callBeforeFunc(hash)
                     }
-                    resolve( hash )
-                  } )
-                  .on( 'receipt', function ( receipt ) {
-                    if ( callbackData ) {
-                      setTimeout( () => {
-                        Web3Service.postBaseSendTxs( from, callbackData )
-                      }, 500 )
+                    resolve(hash)
+                  })
+                  .on('receipt', function (receipt) {
+                    if (callbackData) {
+                      setTimeout(() => {
+                        Web3Service.postBaseSendTxs(from, callbackData)
+                      }, 500)
                     }
 
-                    if ( callbackFunc ) {
-                      callbackFunc( receipt.transactionHash )
+                    if (callbackFunc) {
+                      callbackFunc(receipt.transactionHash)
                     }
-                  } )
-                  .on( 'error', function ( error ) {
+                  })
+                  .on('error', function (error) {
                     console.error()
-                    if ( isCallBackErr ) {
-                      callbackErrFunc( error )
+                    if (isCallBackErr) {
+                      callbackErrFunc(error)
                     }
-                    reject( error )
-                  } )
-              } )
-              .catch( ( err ) => {
-                console.log( 'estimateGas - error' )
-                if ( isCallBackErr ) {
-                  callbackErrFunc( err )
+                    reject(error)
+                  })
+              })
+              .catch((err) => {
+                console.log('estimateGas - error')
+                if (isCallBackErr) {
+                  callbackErrFunc(err)
                 }
-                reject( err )
-              } )
-          } )
-        } )
-        Promise.all( promise )
-          .then( ( result ) => {
-            resolve( result )
-          } )
-          .catch( ( err ) => {
-            console.log( 'postBaseSendTxs - error: ', err )
-            reject( err )
-          } )
-      } )
-    } )
+                reject(err)
+              })
+          })
+        })
+        Promise.all(promise)
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((err) => {
+            console.log('postBaseSendTxs - error: ', err)
+            reject(err)
+          })
+      })
+    })
   }
   static async getGasPrice () {
-    return new Promise( async ( resolve, reject ) => {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
-      web3.eth.getGasPrice( ( err, res ) => {
-        if ( err ) {
-          resolve( 0 )
+      web3.eth.getGasPrice((err, res) => {
+        if (err) {
+          resolve(0)
         }
-        resolve( res )
-      } )
-    } )
+        resolve(res)
+      })
+    })
   }
-  static async getNonce ( address ) {
-    return new Promise( async ( resolve, reject ) => {
+  static async getNonce (address) {
+    return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
-      web3.eth.getTransactionCount( address, ( err, res ) => {
-        if ( err ) {
-          resolve( 0 )
+      web3.eth.getTransactionCount(address, (err, res) => {
+        if (err) {
+          resolve(0)
         }
-        resolve( res )
-      } )
-    } )
+        resolve(res)
+      })
+    })
   }
 
   static async sendToken (
@@ -240,17 +241,60 @@ class Web3Service{
       callbackFunc: callbackAfterDone,
       callbackErrFunc: callbackRejected
     }
-    return new Promise( async ( resolve, reject ) => {
-      this.postBaseSendTxs( from, [data], true )
-        .then( ( res ) => {
-          resolve( res[0] )
-        } )
-        .catch( ( err ) => {
-          callbackRejected( err )
-          console.log( 'error: ', err )
-          reject( err )
-        } )
-    } )
+    return new Promise(async (resolve, reject) => {
+      this.postBaseSendTxs(from, [data], true)
+        .then((res) => {
+          resolve(res[0])
+        })
+        .catch((err) => {
+          callbackRejected(err)
+          console.log('error: ', err)
+          reject(err)
+        })
+    })
+
+  }
+  static async mintNFT (
+    from,
+    contractAddress,
+    callbackBeforeDone,
+    callbackAfterDone,
+    callbackRejected
+  ){
+
+
+    return new Promise(async (resolve, reject) => {
+      const minABI = [{}]
+      const web3 = this.createWeb3Provider()
+      const noneUser = await this.getNonce(from)
+      const baseURI = `${URI_NFT}/${noneUser}`
+
+      const contract = new web3.eth.Contract(minABI, contractAddress)
+      const dataTx = this.callGetDataWeb3(contract, 'mint', [
+        from,
+        noneUser,
+        baseURI
+      ])
+
+      const data = {
+        from: from,
+        to: contractAddress,
+        value: 0,
+        data:dataTx,
+        callBeforeFunc: callbackBeforeDone,
+        callbackFunc: callbackAfterDone,
+        callbackErrFunc: callbackRejected
+      }
+      this.postBaseSendTxs(from, [data], true)
+        .then((res) => {
+          resolve(res[0])
+        })
+        .catch((err) => {
+          callbackRejected(err)
+          console.log('error: ', err)
+          reject(err)
+        })
+    })
 
   }
 

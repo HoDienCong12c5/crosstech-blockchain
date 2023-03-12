@@ -94,4 +94,5 @@ export const dataFireBase = {
   },
   'id': '0'
 }
+export const URI_NFT = process.env.NEXT_PUBLIC_URI_NFT
 export default () => { }

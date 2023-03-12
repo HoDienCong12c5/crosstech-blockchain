@@ -1,9 +1,11 @@
+import { modalConfig } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
 import MyInput from '@/Components/MyInput'
 import useUserData from '@/Hook/useUserData'
 import FirebaseService from '@/Services/FirebaseService'
 import IPFSService from '@/Services/IPFSService'
 import { validateAddress } from '@/Utils/function'
+import Web3Service from '@/Utils/web3'
 import { Form, Upload } from 'antd'
 import { useState } from 'react'
 import { ColCustom, ContainerImgMintNFT, ContainerMintNFT, ItemForm, PreImg, RowCustom } from './styled'
@@ -34,10 +36,11 @@ const MintNFT = (props) => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
-  const insertFirebase = (hash) => {
+  const insertFirebase = async (hash,pathIPFS) => {
+    const noneUser = await Web3Service.getNonce(userAddress)
     const dataTx = {
       nameStudent: formData.nameStudent,
-      image: nftPreview.pathIPFS
+      image: pathIPFS
     }
     let data = {
       time: new Date.now(),
@@ -45,7 +48,8 @@ const MintNFT = (props) => {
       to: formData.addressStudent,
       data: JSON.stringify(dataTx),
       hash: hash,
-      title: 'Khóa học blockchain'
+      title: 'Khóa học blockchain',
+      tokenId:noneUser
     }
     FirebaseService.storeCrossTech.addData(data)
   }
@@ -53,11 +57,25 @@ const MintNFT = (props) => {
     const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
     console.log({ path });
     setNftPreview({ ...nftPreview, pathIPFS: path });
+
+  }
+  const mintNFT = async()=>{
+    let modalParam = modalConfig
+    const callbackBeforeDone = ()=>{
+      modalParam.closable = false
+      modalParam.isDisableIcon = false
+      modalParam.keyboard = false
+      // modalParam.maskClosable
+    }
+    const callbackAfterDone = ()=>{
+
+    }
   }
   const handlePreview = async (file) => {
-    const f = await getBase64Img(file);
+    const f = await getBase64Img(file)
     setNftPreview({ pathIPFS: file, images: f });
   }
+
   return (
     <div className='container-basic'>
       <ContainerMintNFT>
