@@ -104,10 +104,9 @@ const MintNFT = () => {
     )
   }
   const handleSubmitMint = async () => {
-    // const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
-    // console.log({ path });
-    // await mintNFT(path)
-    alert('succse')
+    const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
+    console.log({ path });
+    await mintNFT(path)
   }
   const handlePreview = async (file) => {
     const f = await getBase64Img(file)
@@ -116,7 +115,9 @@ const MintNFT = () => {
   const changeCourser = (courser)=>{
     setCourser(courser)
   }
-
+  console.log('====================================');
+  console.log({formData});
+  console.log('====================================');
   return (
     <div className='container-basic'>
       <ContainerMintNFT>
@@ -207,20 +208,15 @@ const MintNFT = () => {
                 />
               </ColCustom>
             </RowCustom>
-
-
           </ItemForm>
-          <ItemForm>
-            <ButtonBasic
-              htmlType="submit"
-              // onClick={handleSubmitMint}
-              className={'mt-20 mb-20'}>
-              {message.mintNFT.mintNFT}
-            </ButtonBasic>
-          </ItemForm>
-
         </Form>
         <div style={{ width: '100%', borderBottom: '1px solid black' }} />
+        <ButtonBasic
+          disabled={userAddress && !formData.nameStudent || userAddress && !formData.addressStudent}
+          onClick={handleSubmitMint}
+          className={'mt-20 mb-20'}>
+          {message.mintNFT.mintNFT}
+        </ButtonBasic>
 
       </ContainerMintNFT>
 
