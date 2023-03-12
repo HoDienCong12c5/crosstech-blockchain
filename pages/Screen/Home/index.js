@@ -42,10 +42,16 @@ const HomeScreen = () => {
     }
   }
   useEffect(() => {
+    console.log('====================================');
+    console.log({process:process.env});
+    console.log('====================================');
     if (listNFTAll.length > 0) {
       setListAllNFTs([...listNFTAll, ...listNFTAll, ...listNFTAll])
     }
   }, [listNFTAll])
+  console.log('====================================');
+  console.log({process:process.env});
+  console.log('====================================');
   const renderDesktop = () => {
     return (
       <ContentHome>

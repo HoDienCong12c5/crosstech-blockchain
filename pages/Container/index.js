@@ -1,8 +1,8 @@
 import MyModal from '@/Components/MyModal';
 import { Affix, Col, Layout, Row } from 'antd';
-import Head from 'next/head';
 import Header from './Header';
 import SEO from './Header/seo';
+import '@/Services/FirebaseService';
 const { Content } = Layout
 const Container = ({ children }) => {
   return (

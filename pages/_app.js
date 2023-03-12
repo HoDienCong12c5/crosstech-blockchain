@@ -3,7 +3,6 @@ import { KEY_PAGE } from '@/Redux/Lib/constants';
 import initState from '@/Redux/Lib/initState';
 import { checkLocalStoreToRedux } from '@/Redux/Reducers';
 import store from '@/Redux/Store/configureStore';
-import '@/Services/FirebaseService';
 import '@/styles/globals.css';
 import '@/styles/helper.scss';
 import '@/styles/styleBasic.scss';
