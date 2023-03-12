@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
-  collection, getFirestore
+  collection, getFirestore,
+  setLogLevel
 } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import functionStore from './functionStore';
@@ -22,8 +23,10 @@ const firebaseConfig = {
 }
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+setLogLevel('debug')
 export const fireStores = getFirestore(app)
 const fireStorages = getStorage(app)
+
 const dbCrossTech = collection(fireStores, 'Cross-Tech')
 const dbImgAvatar = 'avatar'
 const FirebaseService = {
@@ -31,5 +34,7 @@ const FirebaseService = {
   FireStorages: {
     avatar: functionStore(fireStorages, dbImgAvatar)
   }
+
 }
+
 export default FirebaseService
