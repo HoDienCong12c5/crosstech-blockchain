@@ -9,14 +9,12 @@
       -o-transform: scale(1.03);
     }
   }
-  &__text-decoration{
+  &__text-decoration {
     &:hover {
-      text-decoration:underline;
-      color:#1677ff;
+      text-decoration: underline;
+      color: #1677ff;
     }
-   
   }
-
 }
 
 .menu-left {
@@ -52,7 +50,6 @@ input#ratio {
 
 .input {
   border: 1px solid #2b5540 !important;
-
 }
 
 .ant-notification {
@@ -101,7 +98,7 @@ input#ratio {
     }
   }
 }
-.list-nft{
+.list-nft {
   display: grid;
   width: calc(100% - 80px);
   flex-flow: row wrap;
