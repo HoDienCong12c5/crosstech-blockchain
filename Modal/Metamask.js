@@ -45,25 +45,37 @@ class Metamask {
       console.log('initialize', error)
     }
   }
+  static changeAc = (acc)=>{
+    console.log('====================================');
+    console.log({acc});
+    console.log('====================================');
+  }
   static subscribeToEvents() {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-      window.ethereum.on('chainChanged', this.killSession())
-      window.ethereum.on('networkChanged', this.killSession())
-      window.ethereum.on('accountsChanged', this.killSession())
+      ethereum.on('accountsChanged', this.changeAc())
+
+      ethereum.on('chainChanged', this.killSession())
+      ethereum.on('networkChanged', this.killSession())
     }
   }
   static resetApp () {
+    console.log('====================================');
+    console.log('reset');
+    console.log('====================================');
     // update redux state
     ReduxService.resetUser()
-    Observer.emit(OBSERVER_KEY.CHANGED_ACCOUNT)
+    // Observer.emit(OBSERVER_KEY.CHANGED_ACCOUNT)
     removeDataLocal('wallet_connect_session')
   }
 
   static killSession = () => {
-    if (onboarding) {
-      onboarding.killSession()
-    }
     this.resetApp()
+    console.log('====================================');
+    console.log({onboarding});
+    console.log('====================================');
+    if (onboarding) {
+      // onboarding?.stopOnboarding()
+    }
   }
   static async onConnect(accounts) {
     const address = accounts[0]

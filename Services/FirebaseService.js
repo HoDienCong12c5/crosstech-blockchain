@@ -23,7 +23,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-setLogLevel('debug')
+// setLogLevel('debug')
 export const fireStores = getFirestore(app)
 const fireStorages = getStorage(app)
 

@@ -9,10 +9,6 @@ class Web3Service{
     let web3 = new Web3()
     if(ReduxService.getConnectionMethod() === KEY_PAGE.META_MASK){
       web3.setProvider(window.ethereum)
-      console.log('====================================');
-      console.log(' KEY_PAGE.META_MASK ',window.ethereum);
-      console.log({window:window.ethereum});
-      console.log('====================================');
     }
     return web3
   }
