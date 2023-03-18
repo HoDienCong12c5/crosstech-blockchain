@@ -32,24 +32,23 @@ const SEO = () => {
         <meta charSet="utf-8" />
         <title>Cross - Tech</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no' />
-        <link rel="icon" href="https://skywalker.infura-ipfs.io/ipfs/QmTZBqX5FbMPQEC6AaTmhaqDSPv3gpp5hb3XzZN7piA534" />
         <meta name="description" content="Cross - Tech"/>
 
 
         <meta itemprop="name" content="Cross - Tech"/>
         <meta itemprop="description" content="Cross - Tech"/>
-        <meta itemprop="image" content="https://skywalker.infura-ipfs.io/ipfs/QmTZBqX5FbMPQEC6AaTmhaqDSPv3gpp5hb3XzZN7piA534"/>
+        <meta itemprop="image" content="https://skywalker.infura-ipfs.io/ipfs/QmfSbEq4qrQn53YydFj59Saiz9issKWFuxEJS4hDTCnNzh"/>
 
         <meta property="og:url" content="http://dev-star-token-client.w3w.app"/>
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Cross - Tech"/>
         <meta property="og:description" content="Cross - Tech"/>
-        <meta property="og:image" content="https://skywalker.infura-ipfs.io/ipfs/QmTZBqX5FbMPQEC6AaTmhaqDSPv3gpp5hb3XzZN7piA534"/>
+        <meta property="og:image" content="https://skywalker.infura-ipfs.io/ipfs/QmfSbEq4qrQn53YydFj59Saiz9issKWFuxEJS4hDTCnNzh"/>
 
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:title" content="Cross - Tech"/>
         <meta name="twitter:description" content="Cross - Tech"/>
-        <meta name="twitter:image" content="https://skywalker.infura-ipfs.io/ipfs/QmTZBqX5FbMPQEC6AaTmhaqDSPv3gpp5hb3XzZN7piA534" />
+        <meta name="twitter:image" content="https://skywalker.infura-ipfs.io/ipfs/QmfSbEq4qrQn53YydFj59Saiz9issKWFuxEJS4hDTCnNzh" />
 
       </Head>
     </>

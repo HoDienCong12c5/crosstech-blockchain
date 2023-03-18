@@ -82,13 +82,14 @@ const MintNFT = () => {
     FirebaseService.storeCrossTech.addData(data)
   }
   const mintNFT = async(pathIPFS)=>{
+    let styleModal = modalConfig
     // const contractAddress = '0xAe8841da103dA4830582c8857DDCCf306005DE93' --bsc test net
     const contractAddress = '0xf795e0863F565557d738230031AE114138BEDAdD'
 
     const noneUser = await Web3Service.getNonce(userAddress)
 
     const callbackBeforeDone = ()=>{
-      let styleModal = modalConfig
+
       styleModal.clickESCClose = false
       styleModal.showIconClose = false
       styleModal.clickOverClose = false
@@ -101,22 +102,20 @@ const MintNFT = () => {
       })
     }
     const callbackAfterDone = (hash)=>{
-      insertFirebase(hash,noneUser,pathIPFS).then(()=>{
-        let styleModal = modalConfig
-        styleModal.clickESCClose = true
-        styleModal.showIconClose = true
-        styleModal.clickOverClose = true
-        showModal({
-          body:<ModalTx
-            title={message.confirm.mintNFT.success}
-            des={message.confirm.mintNFT.success_des}
-          />,
-          modalConfig:modalConfig
-        })
+
+      styleModal.clickESCClose = true
+      styleModal.showIconClose = true
+      styleModal.clickOverClose = true
+      showModal({
+        body:<ModalTx
+          title={message.confirm.mintNFT.success}
+          des={message.confirm.mintNFT.success_des}
+        />,
+        modalConfig:modalConfig
       })
 
     }
-    await Web3Service.mintNFT(
+    const txHash = await Web3Service.mintNFT(
       formData.addressStudent,
       userAddress,
       contractAddress,
@@ -125,6 +124,10 @@ const MintNFT = () => {
       callbackAfterDone,
       callbackRejected
     )
+
+    if(txHash.startsWith('0x')){
+      insertFirebase(txHash,noneUser,pathIPFS)
+    }
   }
   const handleSubmitMint = async () => {
     if(addressContract !== ''){
