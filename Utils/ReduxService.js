@@ -1,7 +1,8 @@
 import PageReduxAction from '@/Redux/Action/pageAction';
 import { KEY_PAGE } from '@/Redux/Lib/constants';
 import storeRedux from '@/Redux/Store/configureStore';
-
+import initState from'@/Redux/Lib/initState'
+import { removeDataLocal } from './function';
 const ReduxService = {
   callDispatchAction: (action) => {
     storeRedux.dispatch(action)
@@ -27,6 +28,31 @@ const ReduxService = {
   },
   openModal: (props, params) => {
     ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ ...props, ...params, show: true }))
+  },
+  resetUser:async () => {
+    Promise.all[
+      removeDataLocal(KEY_PAGE.SET_METAMASK_INFO),
+      ReduxService.setMetamask(initState.metamaskRedux),
+      ReduxService.setConnectionMethod(null),
+      ReduxService.setIsSign(false)
+    ]
+  },
+  checkReset:async () => {
+    const { metamaskRedux } = storeRedux.getState()
+    let accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts'
+    })
+    if(metamaskRedux?.address){
+      if(metamaskRedux?.address !== accounts[0]){
+        Promise.all[
+          removeDataLocal(KEY_PAGE.SET_METAMASK_INFO),
+          ReduxService.setMetamask(initState.metamaskRedux),
+          ReduxService.setConnectionMethod(null),
+          ReduxService.setIsSign(false)
+        ]
+
+      }
+    }
   },
   closeModal: () => {
     ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ show: false }))

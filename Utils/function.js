@@ -1,3 +1,4 @@
+import { URL_NFT } from '@/common/constant'
 import { notification } from 'antd'
 import bigdecimal from 'bigdecimal'
 import moment from 'moment'
@@ -97,6 +98,10 @@ export const getDataLocal = (key) => {
     return false
   }
 }
+export const removeDataLocal = (key) => {
+  // eslint-disable-next-line no-undef
+  localStorage.removeItem(key)
+}
 export const obToString = (key) => {
   if (typeof window !== 'undefined') {
     return JSON.parse(localStorage.getItem(key))
@@ -163,6 +168,14 @@ export const getBase64Img = (file) =>{
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
+}
+export const detectImageUrl = (url) => {
+  if (!url || url === '') return ''
+  if (url?.startsWith('https:')) {
+    return url
+  } else {
+    return `${URL_NFT}/${url}`
+  }
 }
 
 export default () => { }

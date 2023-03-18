@@ -52,7 +52,7 @@ const FirebaseFun = (nameData, path = '') => {
       return formatData(data)
     },
     getDataByAddress: async (address) => {
-      return getDataByQuery(nameData, 'to', address, '==')
+      return getDataByQuery(nameData, 'to', address.toLowerCase(), '==')
     },
     getDataByContract: async (contract) => {
       return getDataByQuery(nameData, 'contract', contract, '==')

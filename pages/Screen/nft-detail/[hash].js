@@ -1,7 +1,7 @@
 import ImageLazy from '@/Components/ImageLazy';
 import { TitleText } from '@/Components/TextSize';
 import FirebaseService from '@/Services/FirebaseService';
-import { convertDateFormat } from '@/Utils/function';
+import { convertDateFormat, detectImageUrl, viewExternal } from '@/Utils/function';
 import { Row } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
@@ -46,8 +46,8 @@ const NFTDetail = ({ hash }) => {
               <LeftNFTDetail span={10} >
                 <LeftNFTContainerImg>
                   <ImageLazy
-                    src={nftDetail.data.image}
-                    alt={nftDetail.data.image}
+                    src={detectImageUrl(nftDetail.data.image)}
+                    alt={detectImageUrl(nftDetail.data.image)}
                     width={'90%'}
                   />
                 </LeftNFTContainerImg>
@@ -58,7 +58,7 @@ const NFTDetail = ({ hash }) => {
                 </TitleText>
                 {
                   renderContent(
-                    'Kho hoc :',
+                    'Khoa hoc :',
                     nftDetail.title,
                     null,
                     false
@@ -66,14 +66,21 @@ const NFTDetail = ({ hash }) => {
                 }
                 {
                   renderContent(
-                    'Contract:',
-                    nftDetail.data.address
+                    'Token ID:',
+                    nftDetail.tokenId
+                  )
+                }
+                {
+                  renderContent(
+                    'Name student:',
+                    nftDetail.to
                   )
                 }
                 {
                   renderContent(
                     'Hash Tx:',
-                    nftDetail.hash
+                    nftDetail.hash,
+                    () => viewExternal(`https://testnet.bscscan.com/tx/${nftDetail.hash}`)
                   )
                 }
                 {

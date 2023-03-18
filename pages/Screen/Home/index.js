@@ -1,5 +1,7 @@
 import ItemNFT from '@/Components/ItemNFT';
 import useGetNFT from '@/Hook/useGetNFT';
+import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { Dropdown, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Media from 'react-media';
@@ -25,6 +27,7 @@ const menuHome = [
   }
 
 ]
+
 const HomeScreen = () => {
   const router = useRouter()
   const [itemSelected, setItemSelected] = useState('qa_qc')
@@ -42,16 +45,10 @@ const HomeScreen = () => {
     }
   }
   useEffect(() => {
-    console.log('====================================');
-    console.log({process:process.env});
-    console.log('====================================');
     if (listNFTAll.length > 0) {
-      setListAllNFTs([...listNFTAll, ...listNFTAll, ...listNFTAll])
+      setListAllNFTs(listNFTAll)
     }
   }, [listNFTAll])
-  console.log('====================================');
-  console.log({process:process.env});
-  console.log('====================================');
   const renderDesktop = () => {
     return (
       <ContentHome>
@@ -93,8 +90,6 @@ const HomeScreen = () => {
             }
           </ContainerListNFTHome>
         </RightHome>
-
-
       </ContentHome>
     )
   }

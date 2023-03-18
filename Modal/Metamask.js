@@ -3,16 +3,14 @@ import ReduxService from '@/Utils/ReduxService';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { isMobile } from 'react-device-detect';
 import Web3 from 'web3';
-
+import Observer from '@/Utils/Observer'
+import { removeDataLocal } from '@/Utils/function';
+import { OBSERVER_KEY } from '@/common/constant';
 const { ethereum } = typeof window !== 'undefined' ? window : {};
 let onboarding
 class Metamask {
   static async connect() {
     if (typeof window.ethereum !== 'undefined') {
-      // const metaMask = await ethereum.request( { method: 'eth_accounts' } )
-      // console.log( {metaMask} );
-      // ReduxService.setMetamask( metaMask );
-      // this.initialize()
       let address = '0xbB47BDD15Aee646b66c03b8cCd1AD1C2AfE5d72c'
       this.signPersonalMessage(address, 'CrossTech')
     } else {
@@ -31,9 +29,6 @@ class Metamask {
         let accounts = await window.ethereum.request({
           method: 'eth_requestAccounts'
         })
-        console.log('====================================');
-        console.log({ accounts });
-        console.log('====================================');
         if (accounts.length > 0) {
           this.onConnect(accounts)
 
@@ -47,18 +42,28 @@ class Metamask {
         }
       }
     } catch (error) {
-      console.log('====================================');
-      console.log({ onboarding });
-      console.log('====================================');
       console.log('initialize', error)
     }
   }
   static subscribeToEvents() {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-      // window.ethereum.on( 'chainChanged', this.handleNewChain )
-      // window.ethereum.on( 'networkChanged', this.handleNewNetwork )
-      // window.ethereum.on( 'accountsChanged', this.handleNewAccounts )
+      window.ethereum.on('chainChanged', this.killSession())
+      window.ethereum.on('networkChanged', this.killSession())
+      window.ethereum.on('accountsChanged', this.killSession())
     }
+  }
+  static resetApp () {
+    // update redux state
+    ReduxService.resetUser()
+    Observer.emit(OBSERVER_KEY.CHANGED_ACCOUNT)
+    removeDataLocal('wallet_connect_session')
+  }
+
+  static killSession = () => {
+    if (onboarding) {
+      onboarding.killSession()
+    }
+    this.resetApp()
   }
   static async onConnect(accounts) {
     const address = accounts[0]
@@ -71,9 +76,6 @@ class Metamask {
       accounts: [address]
     }
     const signature = await this.signPersonalMessage(accounts[0])
-    console.log('====================================');
-    console.log({ signature });
-    console.log('====================================');
     if (signature && signature?.includes('0x')) {
       ReduxService.setMetamask(dataMetaMask)
       ReduxService.setConnectionMethod(KEY_PAGE.META_MASK)

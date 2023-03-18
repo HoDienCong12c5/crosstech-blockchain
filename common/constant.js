@@ -83,6 +83,10 @@ export const GlobalModal = {
   body: <></>,
   modalConfig:modalConfig
 }
+export const OBSERVER_KEY = {
+  CHANGED_ACCOUNT:'CHANGED_ACCOUNT',
+  LOGIN:'LOGIN'
+}
 export const dataFireBase = {
   'time': 0,
   'hash': '0',
@@ -98,5 +102,10 @@ export const dataFireBase = {
   },
   'id': '0'
 }
+export const PAGE__SIGN = [
+  '/Screen/MyProfile',
+]
 export const URI_NFT = process.env.NEXT_PUBLIC_URI_NFT
+export const URL_NFT = process.env.NEXT_PUBLIC_IPFS
+
 export default () => { }

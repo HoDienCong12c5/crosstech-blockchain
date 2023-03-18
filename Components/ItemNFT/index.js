@@ -1,4 +1,5 @@
-import { ellipsisAddress, viewExternal } from '@/Utils/function';
+import { URI_NFT, URL_NFT } from '@/common/constant';
+import { convertDateFormat, detectImageUrl, ellipsisAddress, viewExternal } from '@/Utils/function';
 import styled from 'styled-components';
 import { MediumText, NormalText } from '../TextSize';
 const ContainerItemNFT = styled.div`
@@ -19,9 +20,7 @@ const ContainerItemNFT = styled.div`
     padding: 5px 15px;
 `
 const Img = styled.img`
-    height: 100%;
-    width: fit-content;
-    max-height: 180px;
+    width: 100%;
 
 `
 const ContainerImgNFT = styled.div`
@@ -43,22 +42,26 @@ const ItemNFT = ({
   return (
     <ContainerItemNFT>
       <ContainerImgNFT onClick={onClick}>
-        <Img src={nft?.data?.image} />
+        <Img src={detectImageUrl(nft?.data?.image)} />
       </ContainerImgNFT>
 
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <MediumText>
-          {nft?.data.nameUser}
+        <MediumText textTransform>
+          {nft?.data.nameStudent}
         </MediumText>
-        <NormalText>
-          {nft?.time}
-        </NormalText>
+        <MediumText>
+          {`Token ID : ${nft?.tokenId}`}
+        </MediumText>
         <HashNFT onClick={() => viewExternal(`https://testnet.bscscan.com/tx/${nft?.hash}`)}>
           <a>
             {ellipsisAddress(nft?.hash, 8, 6)}
 
           </a>
         </HashNFT>
+        <NormalText>
+          {convertDateFormat(nft?.time)}
+        </NormalText>
+
       </div>
     </ContainerItemNFT>
   )

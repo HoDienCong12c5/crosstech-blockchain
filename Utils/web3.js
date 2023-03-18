@@ -255,6 +255,7 @@ class Web3Service{
 
   }
   static async mintNFT (
+    to,
     from,
     contractAddress,
     nonceUser,
@@ -263,16 +264,31 @@ class Web3Service{
     callbackRejected
   ){
 
-
+    console.log('====================================');
+    console.log({ to,
+      from,
+      contractAddress,
+      nonceUser,});
+    console.log('====================================');
     return new Promise(async (resolve, reject) => {
-      const minABI = [{}]
+      const minABI = [{
+        inputs: [
+          { internalType: 'address', name: 'to', type: 'address' },
+          { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+          { internalType: 'string', name: 'uri', type: 'string' },
+        ],
+        name: 'mint',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      }]
       const web3 = this.createWeb3Provider()
-      const baseURI = `${URI_NFT}/${nonceUser}`
+      const baseURI = `${URI_NFT}${nonceUser}`
 
       const contract = new web3.eth.Contract(minABI, contractAddress)
       const dataTx = this.callGetDataWeb3(contract, 'mint', [
-        from,
-        noneUser,
+        to,
+        nonceUser,
         baseURI
       ])
 
@@ -287,6 +303,9 @@ class Web3Service{
       }
       this.postBaseSendTxs(from, [data], true)
         .then((res) => {
+          console.log('====================================');
+          console.log({res});
+          console.log('====================================');
           resolve(res[0])
         })
         .catch((err) => {

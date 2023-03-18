@@ -1,14 +1,14 @@
 import { Button } from 'antd'
 import classNames from 'classnames'
 import styles from './Button.module.scss'
-const ButtonBasic = ( {
+const ButtonBasic = ({
   type = 1,
   children,
   isHover,
   onClick,
   disabled,
   ...props
-} ) => {
+}) => {
   return (
     <Button
       disabled={disabled}

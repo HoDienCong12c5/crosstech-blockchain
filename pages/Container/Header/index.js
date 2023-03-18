@@ -1,4 +1,4 @@
-import { modalConfig } from '@/common/constant'
+import { modalConfig, PAGE__SIGN } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
 import ModalTx from '@/Components/ModalTx'
 import useCallBackReject from '@/Hook/useCallBackReject'
@@ -6,7 +6,9 @@ import { useWorkModal } from '@/Hook/useModal'
 import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
 import { ellipsisAddress } from '@/Utils/function'
-import { Col, Row } from 'antd'
+import ReduxService from '@/Utils/ReduxService'
+import { DownOutlined } from '@ant-design/icons'
+import { Col, Dropdown, Row, Space } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -16,52 +18,29 @@ import styles from './Header.module.scss'
 import { ContainerHeader } from './styled'
 const Header = () => {
   const router = useRouter()
-  const { callbackRejected } = useCallBackReject()
-  const { showModal, hideModal } = useWorkModal()
   const { isSigned, userAddress } = useUserData()
   const modal = useSelector(state => state.globalModal)
   const message = useSelector(state => state.locale.messages)
   useEffect(() => {
-    if (modal?.show && isSigned) {
-      hideModal()
+    ReduxService.checkReset()
+  }, [])
+  useEffect(() => {
+    if(!isSigned){
+      ReduxService.checkReset()
+      if(PAGE__SIGN.includes(router.asPath)){
+        ReduxService.resetUser()
+      }
     }
-  }, [modal, isSigned])
-  const connectMeta = async () => {
-    modalConfig.keyboard = false
-    // modalConfig.closable = false
-    modalConfig.maskClosable = false
-    // showModal({
-    //   body: (
-    //     <ModalTx
-    //       title={message.confirm}
-    //       des={'Waiting for your confirm sign in'}
-    //     />
-    //   ),
-    //   modalConfig: modalConfig
-    // })
-    Metamask.initialize()
+  }, [router,isSigned])
 
+  const connectMeta = async () => {
+    Metamask.initialize()
   }
   const handleMyProfile = () => {
     router.push('/Screen/MyProfile')
   }
   const sendToken = () => {
     router.push('/Screen/MyProfile')
-    // const toAddress = '0xf7E5bbF190206510a7ceA58b22354351A4E8E6dB'
-    // const value = 0.0001
-    // const callback = (callbackString) => {
-    //   console.log('====================================');
-    //   console.log({ callbackString });
-    //   console.log('====================================');
-    // }
-    // Web3Service.sendToken(
-    //   userAddress,
-    //   toAddress,
-    //   value,
-    //   () => callback('callbackBeforeDone'),
-    //   callback,
-    //   callbackRejected
-    // )
   }
   const minNFT = () => {
     if (isSigned) {
@@ -70,9 +49,23 @@ const Header = () => {
       connectMeta()
     }
   }
+  const handleSignOut = async () => {
+    ReduxService.resetUser()
+  }
+
   const renderDesktop = () => {
+    const items = [
+      {
+        key: '1',
+        label: (
+          <div onClick={handleSignOut}>
+            {message.textPopular.logOut}
+          </div>
+        )
+      }
+    ]
     return (
-      <Row justify={'center'} align={'middle'}>
+      <Row justify={'center'} align={'middle'} style={{height:'100%'}}>
         <Col span={4} style={{ textAlign: 'start' }}>
           <Link href={'/'}>Logo</Link>
         </Col>
@@ -86,15 +79,12 @@ const Header = () => {
             </ButtonBasic>
             {
               isSigned && (
-                <>
-
-                  <ButtonBasic
-                    onClick={sendToken}
-                    className={styles['btn-item-menu']}
-                  >
-                    {message.myProfile.myProfile}
-                  </ButtonBasic>
-                </>
+                <ButtonBasic
+                  onClick={sendToken}
+                  className={styles['btn-item-menu']}
+                >
+                  {message.myProfile.myProfile}
+                </ButtonBasic>
               )
             }
 
@@ -104,12 +94,18 @@ const Header = () => {
         <Col span={4} style={{ textAlign: 'end' }}>
           {
             isSigned ? (
-              <ButtonBasic
-                onClick={handleMyProfile}
-                className={styles['bnt-login']}
+              <Dropdown
+                menu={{items,}}
+                trigger={['click']}
+                className={'hover'}
               >
-                {ellipsisAddress(userAddress, 5, 4)}
-              </ButtonBasic>
+                <ButtonBasic className={styles['bnt-login']} style={{ background: '#f5f5f5', borderRadius: 0, border: '1px solid; black' }}>
+                  <Space>
+                    {ellipsisAddress(userAddress, 5, 4)}
+                    <DownOutlined />
+                  </Space>
+                </ButtonBasic>
+              </Dropdown>
             ) : (
               <ButtonBasic
                 style={{ background: '#f5f5f5', borderRadius: 0, border: '1px solid; black' }}
