@@ -73,6 +73,12 @@ const NFTDetail = ({ hash }) => {
                 {
                   renderContent(
                     'Name student:',
+                    nftDetail.data.nameStudent
+                  )
+                }
+                {
+                  renderContent(
+                    'Address student:',
                     nftDetail.to
                   )
                 }
