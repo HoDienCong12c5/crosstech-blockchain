@@ -5,8 +5,12 @@ const FirebaseFun = (nameData, path = '') => {
   const formatData = (data) => {
     let dataTemp = data.data()
     dataTemp.id = data.id
-    dataTemp.time = Number(dataTemp.time)
-    dataTemp.data = JSON.parse(dataTemp.data)
+    if(dataTemp.time){
+      dataTemp.time = Number(dataTemp.time)
+    }
+    if(dataTemp.data){
+      dataTemp.data = JSON.parse(dataTemp.data)
+    }
     return dataTemp
   }
   const getDataByQuery = async (nameData, key, value, match = '==') => {

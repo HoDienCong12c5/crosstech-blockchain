@@ -119,7 +119,7 @@ const MintNFT = () => {
       formData.addressStudent,
       userAddress,
       contractAddress,
-      noneUser,
+    noneUser,
       callbackBeforeDone,
       callbackAfterDone,
       callbackRejected

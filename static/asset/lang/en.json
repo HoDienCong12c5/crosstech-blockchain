@@ -19,6 +19,9 @@
   "myProfile":{
     "myProfile":" My profile"
   },
+  "footer":{
+    "aboutContact":"About Contract"
+  },
   "confirm":{
     "mintNFT":{
       "confirm":"Confirm mint NFT",

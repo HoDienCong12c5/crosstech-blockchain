@@ -28,9 +28,11 @@ export const fireStores = getFirestore(app)
 const fireStorages = getStorage(app)
 
 const dbCrossTech = collection(fireStores, 'Cross-Tech')
+const dbContact = collection(fireStores, 'contact')
 const dbImgAvatar = 'avatar'
 const FirebaseService = {
   storeCrossTech: functionStore(dbCrossTech),
+  storeContact: functionStore(dbContact),
   FireStorages: {
     avatar: functionStore(fireStorages, dbImgAvatar)
   }
