@@ -1,4 +1,4 @@
-import { URI_NFT } from '@/common/constant';
+import { URI_NFT, URI_NFT_CHAIN } from '@/common/constant';
 import { KEY_PAGE } from '@/Redux/Lib/constants';
 import converter from 'hex2dec';
 import Web3 from 'web3';
@@ -255,6 +255,7 @@ class Web3Service{
     from,
     contractAddress,
     nonceUser,
+    chainId,
     callbackBeforeDone,
     callbackAfterDone,
     callbackRejected
@@ -279,7 +280,8 @@ class Web3Service{
         type: 'function',
       }]
       const web3 = this.createWeb3Provider()
-      const baseURI = `${URI_NFT}${nonceUser}`
+      const chainId = await this.getNetwork()
+      const baseURI = `${URI_NFT_CHAIN}/${chainId}/${nonceUser}`
 
       const contract = new web3.eth.Contract(minABI, contractAddress)
       const dataTx = this.callGetDataWeb3(contract, 'mint', [

@@ -9,7 +9,8 @@
     "hash":"Hash",
     "time":"time",
     "logOut":"Log out",
-    "tokenId":"Token ID"
+    "tokenId":"Token ID",
+    "nameChain":"Chain"
   },
   "mintNFT":{
     "addNewImg":"Add new image",
@@ -19,6 +20,9 @@
   },
   "myProfile":{
     "myProfile":" My profile"
+  },
+  "footer":{
+    "aboutContact":"About Contract"
   },
   "confirm":{
     "mintNFT":{

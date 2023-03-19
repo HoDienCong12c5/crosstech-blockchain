@@ -3,6 +3,7 @@ import { Affix, Col, Layout, Row } from 'antd';
 import Header from './Header';
 import SEO from './Header/seo';
 import '@/Services/FirebaseService';
+import Footer from './Footer';
 const { Content } = Layout
 const Container = ({ children }) => {
   return (
@@ -19,6 +20,7 @@ const Container = ({ children }) => {
           </Col>
         </Row>
       </Content>
+      {/* <Footer /> */}
       <MyModal />
 
     </Layout>

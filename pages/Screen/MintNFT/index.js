@@ -70,6 +70,7 @@ const MintNFT = () => {
       nameStudent: formData.nameStudent.toLowerCase(),
       image: pathIPFS
     }
+    const chainId = await Web3Service.getNetwork()
     let data = {
       time: Date.now(),
       form: userAddress,
@@ -77,19 +78,15 @@ const MintNFT = () => {
       data: JSON.stringify(dataTx),
       hash: hash,
       title: courser,
-      tokenId:nonce.toString()
+      tokenId:nonce.toString(),
+      chainId:chainId.toString()
     }
     FirebaseService.storeCrossTech.addData(data)
   }
   const mintNFT = async(pathIPFS)=>{
     let styleModal = modalConfig
-    // const contractAddress = '0xAe8841da103dA4830582c8857DDCCf306005DE93' --bsc test net
-    const contractAddress = '0xf795e0863F565557d738230031AE114138BEDAdD'
-
     const noneUser = await Web3Service.getNonce(userAddress)
-
     const callbackBeforeDone = ()=>{
-
       styleModal.clickESCClose = false
       styleModal.showIconClose = false
       styleModal.clickOverClose = false
@@ -148,6 +145,7 @@ const MintNFT = () => {
     }else{
       showModal({
         body:<ModalTx
+          disableLoading
           title={'CHAIN not support'}
           des={'Web support chainId 97 (BNB testnet) and chainId 5 (goerli-ETH testnet)'}
         />,
@@ -156,6 +154,19 @@ const MintNFT = () => {
     }
 
   }
+  useEffect(() => {
+    setTimeout(() => {
+      showModal({
+        body:<ModalTx
+          disableLoading
+          title={'CHAIN not support'}
+          des={'Web support chainId 97 (BNB testnet) and chainId 5 (goerli-ETH testnet)'}
+        />,
+        modalConfig:modalConfig
+      })
+    }, 3000)
+
+  }, []);
   const handlePreview = async (file) => {
     const f = await getBase64Img(file)
     setNftPreview({ pathIPFS: file, images: f });
@@ -163,9 +174,6 @@ const MintNFT = () => {
   const changeCourser = (courser)=>{
     setCourser(courser)
   }
-  console.log('====================================');
-  console.log({formData});
-  console.log('====================================');
   return (
     <div className='container-basic'>
       <ContainerMintNFT>

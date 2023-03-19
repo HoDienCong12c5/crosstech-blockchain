@@ -1,5 +1,6 @@
-import { URI_NFT, URL_NFT } from '@/common/constant';
+import { BSC_RPC, URI_NFT, URL_NFT } from '@/common/constant';
 import { convertDateFormat, detectImageUrl, ellipsisAddress, viewExternal } from '@/Utils/function';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { MediumText, NormalText } from '../TextSize';
@@ -41,7 +42,14 @@ const ItemNFT = ({
   onClick
 }) => {
   const messages = useSelector(state => state.locale.messages)
-
+  const getNameChain = useCallback((item)=>{
+    if(item?.chainId){
+      if(BSC_RPC[Number(item?.chainId)]){
+        return BSC_RPC[Number(item?.chainId)].nativeCurrency.symbol
+      }
+      return 'BNB'
+    }
+  },[])
   return (
     <ContainerItemNFT>
       <ContainerImgNFT onClick={onClick}>
@@ -53,12 +61,14 @@ const ItemNFT = ({
           {nft?.data.nameStudent}
         </MediumText>
         <MediumText>
+          {`${messages.textPopular.nameChain} : ${getNameChain(nft)}`}
+        </MediumText>
+        <MediumText>
           {`${messages.textPopular.tokenId} : ${nft?.tokenId}`}
         </MediumText>
         <HashNFT onClick={() => viewExternal(`https://testnet.bscscan.com/tx/${nft?.hash}`)}>
           <a>
-            {ellipsisAddress(nft?.hash, 8, 6)}
-
+            {`Tx: ${ellipsisAddress(nft?.hash, 8, 6)}`}
           </a>
         </HashNFT>
         <NormalText>

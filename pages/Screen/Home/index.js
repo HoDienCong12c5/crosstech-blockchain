@@ -5,6 +5,7 @@ import { Dropdown, Space } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Media from 'react-media';
+import Loading from '@/Components/Loading'
 import { ContainerHome, ContainerListNFTHome, ContentHome, ItemMenu, LeftHome, RightHome } from './styled';
 
 const menuHome = [
@@ -71,22 +72,22 @@ const HomeScreen = () => {
           }
         </LeftHome>
         <RightHome >
-          {/* <form onSubmit={loadFile}>
-            <input type="file" name="file"/>
-            <button type="submit">Upload file</button>
-          </form> */}
           <ContainerListNFTHome>
             {
-              listAllNFTs.length > 0 && listAllNFTs.map((item) => {
-                return (
-                  <ItemNFT key={item}
-                    nft={item}
-                    onClick={() => {
-                      router.push(`/Screen/nft-detail/${item?.hash}`)
-                    }}
-                  />
-                )
-              })
+              listAllNFTs.length > 0 ? (
+                listAllNFTs.map((item) => {
+                  return (
+                    <ItemNFT key={item}
+                      nft={item}
+                      onClick={() => {
+                        router.push(`/Screen/nft-detail/${item?.hash}`)
+                      }}
+                    />
+                  )
+                })
+              ) : (
+                <Loading />
+              )
             }
           </ContainerListNFTHome>
         </RightHome>

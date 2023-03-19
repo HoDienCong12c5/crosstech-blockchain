@@ -6,7 +6,6 @@ export const ContainerHeader = styled.div`
     align-items: center;
     width: 100%;
     height: 50px;
-   
     margin: auto;
     border-bottom: 1px solid white;
 `;

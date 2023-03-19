@@ -3,8 +3,11 @@ import { Col, Row } from 'antd';
 import styled, { css } from 'styled-components';
 export const ContainerNFTDetail = styled(Row)`
    width: 100%;
+   min-height: 500px;
+    align-items: flex-start;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    position: relative;
 `;
 export const LeftNFTDetail = styled(Col)`
     border-radius: 16px; 

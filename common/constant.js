@@ -118,6 +118,7 @@ export const PAGE__SIGN = [
 ]
 
 export const URI_NFT = process.env.NEXT_PUBLIC_URI_NFT
+export const URI_NFT_CHAIN = process.env.NEXT_PUBLIC_URI_NFT_CHAIN
 export const URL_NFT = process.env.NEXT_PUBLIC_IPFS
 
 export default () => { }

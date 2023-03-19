@@ -6,7 +6,7 @@ import { Row } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { ContainerNFTDetail, LeftNFTContainerImg, LeftNFTDetail, RightNFTDetail, TextMedium } from './styled';
-
+import Loading from '@/Components/Loading'
 const NFTDetail = ({ hash }) => {
   const [nftDetail, setNftDetail] = useState(null)
   useEffect(() => {
@@ -101,7 +101,7 @@ const NFTDetail = ({ hash }) => {
               </RightNFTDetail>
             </>
           ) : (
-            <></>
+            <Loading />
           )
         }
 
