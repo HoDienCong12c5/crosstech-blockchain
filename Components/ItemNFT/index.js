@@ -1,5 +1,6 @@
 import { URI_NFT, URL_NFT } from '@/common/constant';
 import { convertDateFormat, detectImageUrl, ellipsisAddress, viewExternal } from '@/Utils/function';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { MediumText, NormalText } from '../TextSize';
 const ContainerItemNFT = styled.div`
@@ -39,6 +40,8 @@ const ItemNFT = ({
   nft,
   onClick
 }) => {
+  const messages = useSelector(state => state.locale.messages)
+
   return (
     <ContainerItemNFT>
       <ContainerImgNFT onClick={onClick}>
@@ -50,7 +53,7 @@ const ItemNFT = ({
           {nft?.data.nameStudent}
         </MediumText>
         <MediumText>
-          {`Token ID : ${nft?.tokenId}`}
+          {`${messages.textPopular.tokenId} : ${nft?.tokenId}`}
         </MediumText>
         <HashNFT onClick={() => viewExternal(`https://testnet.bscscan.com/tx/${nft?.hash}`)}>
           <a>

@@ -20,6 +20,17 @@ export const BSC_RPC = {
       decimals: 18
     },
     blockExplorerUrls: ['https://testnet.bscscan.com']
+  },
+  5:{
+    rpcUrls: ['https://rpc.ankr.com/eth_goerli'],
+    chainId: '0x5',
+    chainName: 'Ethereum (Goerli) Testnet',
+    nativeCurrency: {
+      name: 'Ethereum (Goerli) ',
+      symbol: 'ETH_T',
+      decimals: 18
+    },
+    blockExplorerUrls: ['https://goerli.etherscan.io/']
   }
 }
 export const ETH_RPC = {
@@ -105,6 +116,7 @@ export const dataFireBase = {
 export const PAGE__SIGN = [
   '/Screen/MyProfile',
 ]
+
 export const URI_NFT = process.env.NEXT_PUBLIC_URI_NFT
 export const URL_NFT = process.env.NEXT_PUBLIC_IPFS
 
