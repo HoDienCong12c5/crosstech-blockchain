@@ -7,10 +7,16 @@ export const ContainerHome = styled.div`
   justify-content: center;
   padding: 0px 50px;
   margin: auto;
+  @media screen and (max-width: 768px){
+    padding: 0px 20px;
+  }
 `;
 
 export const ContentHome = styled.div`
   display: flex;
+  @media screen and (max-width: 768px){
+    flex-flow: column;
+  }
 `;
 export const LeftHome = styled.div`
   max-width: 400px;

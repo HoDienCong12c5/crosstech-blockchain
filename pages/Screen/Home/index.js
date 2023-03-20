@@ -95,7 +95,26 @@ const HomeScreen = () => {
     )
   }
   const renderMobile = () => {
-    return (<></>)
+    return (
+      <ContainerListNFTHome>
+        {
+          listAllNFTs.length > 0 ? (
+            listAllNFTs.map((item) => {
+              return (
+                <ItemNFT key={item}
+                  nft={item}
+                  onClick={() => {
+                    router.push(`/Screen/nft-detail/${item?.hash}`)
+                  }}
+                />
+              )
+            })
+          ) : (
+            <Loading />
+          )
+        }
+      </ContainerListNFTHome>
+    )
   }
   return (
     <ContainerHome>

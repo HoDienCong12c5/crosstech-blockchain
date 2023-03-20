@@ -14,5 +14,6 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": ["Luot"],
+  "emmet.triggerExpansionOnTab": true,
   "java.configuration.updateBuildConfiguration": "automatic" // Khi nào đổi focus thì tự save
 }
