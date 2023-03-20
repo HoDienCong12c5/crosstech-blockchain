@@ -115,7 +115,7 @@ const MintNFT = () => {
     const txHash = await Web3Service.mintNFT(
       formData.addressStudent,
       userAddress,
-      contractAddress,
+      addressContract,
       noneUser,
       callbackBeforeDone,
       callbackAfterDone,
@@ -152,21 +152,8 @@ const MintNFT = () => {
         modalConfig:modalConfig
       })
     }
-
   }
-  useEffect(() => {
-    setTimeout(() => {
-      showModal({
-        body:<ModalTx
-          disableLoading
-          title={'CHAIN not support'}
-          des={'Web support chainId 97 (BNB testnet) and chainId 5 (goerli-ETH testnet)'}
-        />,
-        modalConfig:modalConfig
-      })
-    }, 3000)
 
-  }, []);
   const handlePreview = async (file) => {
     const f = await getBase64Img(file)
     setNftPreview({ pathIPFS: file, images: f });
