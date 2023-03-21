@@ -147,8 +147,8 @@ const BannerLP = (props) => {
     </Media>
   )
 }
-export async function getStaticProps() {
-  return {}
+export async function getStaticProps(context) {
+  return {props:{}}
 }
 
 export default BannerLP
