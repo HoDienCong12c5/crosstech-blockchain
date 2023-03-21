@@ -5,7 +5,7 @@ import Media from 'react-media'
 import { BtnBuyNow, ContainerBanner, ContainerBannerMobileLP, ContainerIntroDuce, ContainerLogo, DesBannerLP, DesContentIntroduce, IconIntroduce, ImgLogo, RowLPTop, TitleBannerLP, TitleContentIntroduce } from '../../styled'
 import { Col } from 'antd'
 
-const BannerLP = () => {
+const BannerLP = (props) => {
   const renderDesktop = () => {
     return(
       <RowLPTop>
@@ -147,8 +147,8 @@ const BannerLP = () => {
     </Media>
   )
 }
-export async function getStaticProps({ params}) {
-  return {params}
+export async function getStaticProps() {
+  return {}
 }
 
 export default BannerLP
