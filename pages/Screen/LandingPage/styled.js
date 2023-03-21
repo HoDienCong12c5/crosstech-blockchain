@@ -36,7 +36,7 @@ export const ContainerLogo = styled.div`
   margin: auto;
 `;
 export const ImgLogo = styled(Img)`
-  width: 100% !important;
+  width: 95% !important;
   height: auto !important;
   img {
     border-radius: 50% !important;

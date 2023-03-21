@@ -5,6 +5,8 @@ import SEOLP from './Seo'
 import Img, { images } from '@/common/images'
 import { Col } from 'antd'
 import styles from './LP.module.scss'
+import BannerLP from './Components/Banner'
+import Head from 'next/head'
 const LandingPage = () => {
 
 
@@ -13,148 +15,52 @@ const LandingPage = () => {
   }
   const renderDesktop = () => {
     return(
-      <RowLPTop>
-        <ContainerBanner span={8} isLeft gap={30}>
-          <TitleBannerLP>
-            MLem Coffee sắc hương tây nguyên
-          </TitleBannerLP>
-          <DesBannerLP>
-          MLem Coffee sắc hương tây nguyên
-          </DesBannerLP>
-          <BtnBuyNow>
-            Buy Coffee
-          </BtnBuyNow>
-        </ContainerBanner>
-
-        <ContainerBanner span={10}>
-          <ContainerLogo>
-            <ImgLogo
-              className={styles['img-logo-banner']}
-              fullSize
-              src={images.landingPage.logo}
-              alt={images.landingPage.logo}
-            />
-          </ContainerLogo>
-        </ContainerBanner>
-
-        <ContainerBanner span={6} isRight gap={30}>
-          <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconElement} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Nguồn gốc
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                100% được trồng từ Tây Nguyên
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-          <ContainerIntroDuce >
-            <IconIntroduce src={Img.home.iconOrigin} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Địa chỉ
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                Thôn Thanh giáo, Huyện Đức Cơ, Tình Gia Lai
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-          <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconSmell} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Hương vị
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                Đậm sắc tây nguyên, thơm ngon pha chút vị chua đặc trưng
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-        </ContainerBanner>
-      </RowLPTop>
+      <>
+      </>
     )
   }
 
   const renderMobile = () => {
     return (
-      <ContainerBannerMobileLP >
-        <ContainerBanner gap={30}>
-          <TitleBannerLP>
-            MLem Coffee sắc hương tây nguyên
-          </TitleBannerLP>
-          <DesBannerLP>
-          MLem Coffee sắc hương tây nguyên
-          </DesBannerLP>
-          <BtnBuyNow>
-            Buy Coffee
-          </BtnBuyNow>
-        </ContainerBanner>
-
-        <ContainerBanner style={{width:'100%'}} >
-          <ContainerLogo>
-            <ImgLogo
-              className={styles['img-logo-banner']}
-              fullSize
-              src={images.landingPage.logo}
-              alt={images.landingPage.logo}
-            />
-          </ContainerLogo>
-        </ContainerBanner>
-
-        <ContainerBanner isRight gap={30}>
-          <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconElement} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Nguồn gốc
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                100% được trồng từ Tây Nguyên
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-          <ContainerIntroDuce >
-            <IconIntroduce src={Img.home.iconOrigin} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Địa chỉ
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                Thôn Thanh giáo, Huyện Đức Cơ, Tình Gia Lai
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-          <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconSmell} />
-            <Col style={{flex:1}} >
-              <TitleContentIntroduce>
-                  Hương vị
-              </TitleContentIntroduce>
-              <DesContentIntroduce>
-                Đậm sắc tây nguyên, thơm ngon pha chút vị chua đặc trưng
-              </DesContentIntroduce>
-            </Col>
-          </ContainerIntroDuce>
-        </ContainerBanner>
-      </ContainerBannerMobileLP>
+      <></>
     )
   }
 
 
   return (
-    <ContainerLP className='container-basic'>
-      <SEOLP />
-      <Media query='(min-width: 768px)'>
-        {(match) => {
-          if (match) {
-            return renderDesktop()
-          }
-          return renderMobile()
-        }}
+    <>
+      <Head >
+        {/* <!-- Google Tag Manager --> */}
+        <script dangerouslySetInnerHTML={{
+          __html:`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-WRGMC62');`
+        }}/>
+        {/* <!-- End Google Tag Manager --> */}
+      </Head>
+      {/* <!-- Google Tag Manager (noscript) --> */}
+      <noscript dangerouslySetInnerHTML={{
+        __html:`<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRGMC62"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+      }}/>
+      {/* <!-- End Google Tag Manager (noscript) --> */}
+      <ContainerLP className='container-basic'>
+        <SEOLP />
+        <BannerLP />
 
-      </Media>
-    </ContainerLP>
+        <Media query='(min-width: 768px)'>
+          {(match) => {
+            if (match) {
+              return renderDesktop()
+            }
+            return renderMobile()
+          }}
+
+        </Media>
+      </ContainerLP>
+    </>
   )
 }
 
