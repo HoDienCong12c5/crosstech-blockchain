@@ -7,8 +7,7 @@ import Footer from './Footer';
 const { Content } = Layout
 const Container = ({ children }) => {
   return (
-    <Layout >
-      <SEO />
+    <Layout style={{background:'transparent'}} >
       <Affix className='affix-header' style={{ zIndex: 100 }} offsetTop={0}>
         <Header />
       </Affix>

@@ -113,7 +113,7 @@ export const dataFireBase = {
   },
   'id': '0'
 }
-export const PAGE__SIGN = [
+export const PAGE_SIGN = [
   '/Screen/MyProfile',
 ]
 

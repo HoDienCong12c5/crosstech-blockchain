@@ -17,6 +17,14 @@ const Img = {
     iconTitok: require('static/asset/image/Footer/iconTiktok.png'),
     iconZalo : require('static/asset/image/Footer/iconZalo.png'),
     iconGPS: require('static/asset/image/Footer/iconGPS.png')
+  },
+  landingPage:{
+    logo: require('static/asset/image/LandingPage/Logo.jpg')
+  }
+}
+export const images = {
+  landingPage:{
+    logo: require('static/asset/image/LandingPage/Logo.jpg')
   }
 }
 export default Img

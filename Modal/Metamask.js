@@ -30,10 +30,17 @@ class Metamask {
           method: 'eth_requestAccounts'
         })
         if (accounts.length > 0) {
-          this.onConnect(accounts)
 
+          this.onConnect(accounts)
+          window.ethereum.on('chainChanged', (chainId) => {
+            // Handle the new chain.
+            // Correctly handling chain changes can be complicated.
+            // We recommend reloading the page unless you have good reason not to.
+            window.location.reload();
+          });
           // subscribe to events
           this.subscribeToEvents()
+
         } else {
           let accounts = await this.enableMetaMask()
           this.onConnect(accounts)
@@ -52,10 +59,9 @@ class Metamask {
   }
   static subscribeToEvents() {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-      ethereum.on('accountsChanged', this.changeAc())
-
-      ethereum.on('chainChanged', this.killSession())
-      ethereum.on('networkChanged', this.killSession())
+      window.ethereum.on('accountsChanged', this.changeAc())
+      window.ethereum.on('chainChanged', this.changeAc())
+      window.ethereum.on('networkChanged', this.changeAc())
     }
   }
   static resetApp () {

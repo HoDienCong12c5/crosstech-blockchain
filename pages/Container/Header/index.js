@@ -1,4 +1,4 @@
-import { modalConfig, PAGE__SIGN } from '@/common/constant'
+import { modalConfig, PAGE_SIGN } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
 import ModalTx from '@/Components/ModalTx'
 import useCallBackReject from '@/Hook/useCallBackReject'
@@ -27,7 +27,7 @@ const Header = () => {
   useEffect(() => {
     if(!isSigned){
       ReduxService.checkReset()
-      if(PAGE__SIGN.includes(router.asPath)){
+      if(PAGE_SIGN.includes(router.asPath)){
         ReduxService.resetUser()
       }
     }

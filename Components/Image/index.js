@@ -12,6 +12,7 @@ const ImageBase = ({
   width = 50,
   height = 50,
   fullSize = false,
+  className = '',
   ...props
 }) => {
   return (
@@ -22,6 +23,7 @@ const ImageBase = ({
       }}
     >
       <ImgCustom
+        className={className}
         // loader={imgLoading}
         src={src}
         alt={alt}

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Media from 'react-media';
 import Loading from '@/Components/Loading'
 import { ContainerHome, ContainerListNFTHome, ContentHome, ItemMenu, LeftHome, RightHome } from './styled';
+import SEO from '@/pages/Container/Header/seo';
 
 const menuHome = [
   {
@@ -118,6 +119,7 @@ const HomeScreen = () => {
   }
   return (
     <ContainerHome>
+      <SEO />
       <Media query='(min-width: 768px)'>
         {(match) => {
           if (match) {
