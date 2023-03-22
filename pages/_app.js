@@ -11,8 +11,14 @@ import { Suspense, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import Container from './Container/index';
 import ReduxConnectIntl from '@/static/asset/lang'
-import { ThemeProvider } from 'styled-components'
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
+import React from 'react';
 export default function App({ Component, pageProps }) {
+  const [queryClient] = React.useState(() => new QueryClient())
   useEffect(() => {
     ReduxService.setBnbBalance()
   }, []);
@@ -36,16 +42,18 @@ export default function App({ Component, pageProps }) {
     return () => { clearInterval(interval) }
   }, []);
   return (
-    <Provider store={store} >
-      <Suspense fallback={null}>
-        <ReduxConnectIntl>
-          <Container >
-            <Component {...pageProps} />
-          </Container>
-        </ReduxConnectIntl>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Provider store={store} >
+          <ReduxConnectIntl>
+            <Container >
+              <Component {...pageProps} />
+            </Container>
+          </ReduxConnectIntl>
+        </Provider>
+      </Hydrate>
+    </QueryClientProvider>
 
-      </Suspense>
-    </Provider>
 
   )
   // return <Component {...pageProps} />
