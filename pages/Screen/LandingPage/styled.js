@@ -3,6 +3,7 @@ import ButtonBasic from '@/Components/ButtonBasic';
 import { MediumText, NormalText } from '@/Components/TextSize';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
+import ImageLazy from '@/Components/ImageLazy';
 
 export const ContainerLP = styled.div``;
 export const RowLPTop = styled(Row)`
@@ -15,6 +16,8 @@ export const ContainerBanner = styled(Col)`
   /* gap:10px; */
   gap: ${(props) => props.gap ?? 10}px;
   padding-right: 10px;
+  align-items: ${(props) =>
+    props.isLeft ? 'start' : props.isRight ? 'end' : 'center'};
   text-align: ${(props) =>
     props.isLeft ? 'start' : props.isRight ? 'end' : 'center'};
 `;
@@ -54,7 +57,7 @@ export const ContainerIntroDuce = styled(Row)`
   gap: 5px;
   max-width: 90%;
 `;
-export const IconIntroduce = styled(Img)`
+export const IconIntroduce = styled(ImageLazy)`
   height: 50px;
   width: 50px;
 `;
@@ -80,4 +83,4 @@ export const ContainerFooterLP = styled.div`
     flex-flow: column;
   }
 `;
-export default () => {};
+export default () => { };

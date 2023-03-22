@@ -6,12 +6,8 @@ import { BtnBuyNow, ContainerBanner, ContainerBannerMobileLP, ContainerIntroDuce
 import { Col } from 'antd'
 import ImageLazy from '@/Components/ImageLazy'
 
-const BannerLP = (props) => {
-  console.log('====================================');
-  console.log({
-    log:images.landingPage.logo
-  });
-  console.log('====================================');
+const BannerLP = () => {
+
   const renderDesktop = () => {
     return(
       <RowLPTop>
@@ -40,7 +36,7 @@ const BannerLP = (props) => {
 
         <ContainerBanner span={6} isRight gap={30}>
           <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconElement} />
+            <IconIntroduce src={images.home.iconElement} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Nguồn gốc
@@ -51,7 +47,7 @@ const BannerLP = (props) => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce >
-            <IconIntroduce src={Img.home.iconOrigin} />
+            <IconIntroduce src={images.home.iconOrigin} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Địa chỉ
@@ -62,7 +58,7 @@ const BannerLP = (props) => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconSmell} />
+            <IconIntroduce src={images.home.iconSmell} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Hương vị
@@ -104,7 +100,7 @@ const BannerLP = (props) => {
 
         <ContainerBanner isRight gap={30}>
           <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconElement} />
+            <IconIntroduce src={images.home.iconElement} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Nguồn gốc
@@ -115,7 +111,7 @@ const BannerLP = (props) => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce >
-            <IconIntroduce src={Img.home.iconOrigin} />
+            <IconIntroduce src={images.home.iconOrigin} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Địa chỉ
@@ -126,7 +122,7 @@ const BannerLP = (props) => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce>
-            <IconIntroduce src={Img.home.iconSmell} />
+            <IconIntroduce src={images.home.iconSmell} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Hương vị

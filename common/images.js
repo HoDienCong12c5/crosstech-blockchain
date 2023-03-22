@@ -25,6 +25,12 @@ const Img = {
 export const images = {
   landingPage:{
     logo: '/static/asset/image/LandingPage/Logo.jpg'
+  },
+  home:{
+    logo: '/static/asset/image/Home/logo.jpg',
+    iconElement: '/static/asset/image/Home/iconElement.png',
+    iconOrigin:'/static/asset/image/Home/iconOrigin.png',
+    iconSmell:'/static/asset/image/Home/smell.png'
   }
 }
 export default Img

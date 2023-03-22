@@ -24,7 +24,7 @@ const ImageBase = ({
     >
       <ImgCustom
         className={className}
-        // loader={imgLoading}
+        loading="lazy"
         src={src}
         alt={alt}
         quality={quality}
