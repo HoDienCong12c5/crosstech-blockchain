@@ -17,15 +17,8 @@ import {
   QueryClientProvider
 } from '@tanstack/react-query'
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import ThemSC from '@/Components/ThemsSC';
 
-
-const themeStyle = {
-  colors: {
-    primary: '#111',
-    secondary: '#0070f3',
-  },
-}
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient())
   useEffect(() => {
@@ -51,7 +44,7 @@ export default function App({ Component, pageProps }) {
     return () => { clearInterval(interval) }
   }, []);
   return (
-    <ThemeProvider theme={themeStyle}>
+    <ThemSC>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Provider store={store} >
@@ -63,7 +56,7 @@ export default function App({ Component, pageProps }) {
           </Provider>
         </Hydrate>
       </QueryClientProvider>
-    </ThemeProvider>
+    </ThemSC>
 
 
 

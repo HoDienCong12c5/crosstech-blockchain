@@ -3,8 +3,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import styled from 'styled-components'
 const LazyLoadImageCustoms = styled(LazyLoadImage)`
-  height: 100%;
-  /* height: fit-content; */
+  width:100%;
+    height:100%;
 `
 const ImageLazy = ({ className = '', draggable = false, alt, src, width, height, effect = 'blur', style, ...props }) => {
   return (
