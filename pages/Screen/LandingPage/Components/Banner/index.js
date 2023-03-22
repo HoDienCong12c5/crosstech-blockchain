@@ -34,7 +34,7 @@ const BannerLP = () => {
           </ContainerLogo>
         </ContainerBanner>
 
-        <ContainerBanner span={6} isRight gap={30}>
+        <ContainerBanner span={6} isLeft gap={30} style={{paddingLeft:15}}>
           <ContainerIntroDuce>
             <IconIntroduce src={images.home.iconElement} />
             <Col style={{flex:1}} >

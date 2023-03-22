@@ -17,6 +17,15 @@ import {
   QueryClientProvider
 } from '@tanstack/react-query'
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
+
+
+const themeStyle = {
+  colors: {
+    primary: '#111',
+    secondary: '#0070f3',
+  },
+}
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient())
   useEffect(() => {
@@ -42,17 +51,20 @@ export default function App({ Component, pageProps }) {
     return () => { clearInterval(interval) }
   }, []);
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <Provider store={store} >
-          <ReduxConnectIntl>
-            <Container >
-              <Component {...pageProps} />
-            </Container>
-          </ReduxConnectIntl>
-        </Provider>
-      </Hydrate>
-    </QueryClientProvider>
+    <ThemeProvider theme={themeStyle}>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Provider store={store} >
+            <ReduxConnectIntl>
+              <Container >
+                <Component {...pageProps} />
+              </Container>
+            </ReduxConnectIntl>
+          </Provider>
+        </Hydrate>
+      </QueryClientProvider>
+    </ThemeProvider>
+
 
 
   )

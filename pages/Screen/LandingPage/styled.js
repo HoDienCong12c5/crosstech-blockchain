@@ -13,7 +13,6 @@ export const RowLPTop = styled(Row)`
 export const ContainerBanner = styled(Col)`
   display: flex;
   flex-flow: column;
-  /* gap:10px; */
   gap: ${(props) => props.gap ?? 10}px;
   padding-right: 10px;
   align-items: ${(props) =>
@@ -35,12 +34,12 @@ export const BtnBuyNow = styled(ButtonBasic)`
 `;
 export const ContainerLogo = styled.div`
   width: 100%;
-  height: max-content;
+  height:calc(100vh - 60px) !important;
   margin: auto;
 `;
 export const ImgLogo = styled(Img)`
   width: 95% !important;
-  height: auto !important;
+  max-height: 100% !important;
   img {
     border-radius: 50% !important;
   }
