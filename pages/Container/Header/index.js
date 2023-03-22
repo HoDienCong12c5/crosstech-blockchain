@@ -77,6 +77,12 @@ const Header = () => {
             >
               {message.mintNFT.mintNFT}
             </ButtonBasic>
+            <ButtonBasic
+              onClick={()=>router.push('/Screen/LandingPage','/landing-page')}
+              className={styles['btn-item-menu']}
+            >
+              Landing page
+            </ButtonBasic>
             {
               isSigned && (
                 <ButtonBasic

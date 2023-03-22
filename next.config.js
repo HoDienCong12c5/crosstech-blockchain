@@ -1,6 +1,6 @@
 
 /** @type {import('next').NextConfig} */
-// const withFonts = require( 'next-fonts' )
+const withFonts = require('next-fonts')
 const withPlugins = require('next-compose-plugins')
 const optimizedImages = require('next-optimized-images')
 const withAntdLess = require('next-plugin-antd-less')
@@ -21,9 +21,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  experimental: {
-    appDir: true,
-  },
+  // experimental: {
+  //   appDir: true,
+  // },
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
@@ -42,8 +42,8 @@ module.exports = withPlugins([
   [optimizedImages, {
     handleImages: ['jpeg', 'png', 'gif', 'svg', 'ico']
   }],
-  withAntdLess({modifyVars:{}})
-  // withFonts
+  withAntdLess({modifyVars:{}}),
+  withFonts
 ], nextConfig)
 
 
