@@ -3,6 +3,7 @@ import { convertDateFormat, detectImageUrl, ellipsisAddress, viewExternal } from
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import ImageLazy from '../ImageLazy';
 import { MediumText, NormalText } from '../TextSize';
 const ContainerItemNFT = styled.div`
     justify-content: center;
@@ -53,7 +54,11 @@ const ItemNFT = ({
   return (
     <ContainerItemNFT>
       <ContainerImgNFT onClick={onClick}>
-        <Img src={detectImageUrl(nft?.data?.image)} />
+        <ImageLazy
+          src={detectImageUrl(nft?.data?.image)}
+          alt={detectImageUrl(nft?.data?.image)}
+        />
+        {/* <Img src={detectImageUrl(nft?.data?.image)} /> */}
       </ContainerImgNFT>
 
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 3 }}>

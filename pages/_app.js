@@ -9,7 +9,7 @@ import '@/styles/styleBasic.scss';
 import ReduxService from '@/Utils/ReduxService';
 import { Suspense, useEffect } from 'react';
 import { Provider } from 'react-redux';
-import Container from './Container/index';
+import Container from './Container/index'
 import ReduxConnectIntl from '@/static/asset/lang'
 import {
   Hydrate,

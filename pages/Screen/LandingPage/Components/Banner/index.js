@@ -29,13 +29,11 @@ const BannerLP = (props) => {
 
         <ContainerBanner span={10}>
           <ContainerLogo>
-            <Suspense fallback={null} >
-              <ImageLazy
-                className={styles['img-logo-banner']}
-                src={images.landingPage.logo}
-                alt={images.landingPage.logo}
-              />
-            </Suspense>
+            <ImageLazy
+              className={styles['img-logo-banner']}
+              src={images.landingPage.logo}
+              alt={images.landingPage.logo}
+            />
 
           </ContainerLogo>
         </ContainerBanner>
@@ -96,9 +94,8 @@ const BannerLP = (props) => {
 
         <ContainerBanner style={{width:'100%'}} >
           <ContainerLogo>
-            <ImgLogo
+            <ImageLazy
               className={styles['img-logo-banner']}
-              fullSize
               src={images.landingPage.logo}
               alt={images.landingPage.logo}
             />
