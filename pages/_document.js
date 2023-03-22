@@ -1,6 +1,9 @@
+import { async } from '@firebase/util'
 import { Head, Html, Main, NextScript } from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
 
-export default function Document() {
+
+function Document() {
   return (
     <Html lang="en">
       <Head >
@@ -13,14 +16,14 @@ export default function Document() {
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-K7KRBM9');`
+          })(window,document,'script','dataLayer','GTM-WRGMC62');`
         }}/>
         {/* <!-- End Google Tag Manager --> */}
       </Head>
       <body>
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript dangerouslySetInnerHTML={{
-          __html:`<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7KRBM9"
+          __html:`<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRGMC62"
           height="0" width="0" style="display:none;visibility:hidden"></iframe>`
         }}/>
         {/* <!-- End Google Tag Manager (noscript) --> */}
@@ -30,3 +33,29 @@ export default function Document() {
     </Html>
   )
 }
+export const getInitialProps = async(ctx) =>{
+  const sheet = new ServerStyleSheet()
+  const originalRenderPage = ctx.renderPage
+
+  try {
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          sheet.collectStyles(<App {...props} />),
+      })
+
+    const initialProps = await Document.getInitialProps(ctx)
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ),
+    }
+  } finally {
+    sheet.seal()
+  }
+}
+export default Document

@@ -1,8 +1,5 @@
 
 /** @type {import('next').NextConfig} */
-
-
-
 // const withFonts = require( 'next-fonts' )
 const withPlugins = require('next-compose-plugins')
 const optimizedImages = require('next-optimized-images')
@@ -24,6 +21,14 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
+  experimental: {
+    appDir: true,
+  },
+  reactStrictMode: true,
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
   async rewrites() {
     return [
       {
@@ -37,22 +42,20 @@ module.exports = withPlugins([
   [optimizedImages, {
     handleImages: ['jpeg', 'png', 'gif', 'svg', 'ico']
   }],
+  withAntdLess({modifyVars:{}})
   // withFonts
 ], nextConfig)
+
 
 module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
-  }
-};
-module.exports = {
-  plugins: [
-    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
-  ],
-};
-module.exports = {
+  },
+  // plugins: [
+  //   ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+  // ],
   experimental: {
     forceSwcTransforms: true,
-  },
-}
+  }
+};
 module.exports = nextConfig

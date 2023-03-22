@@ -11,7 +11,7 @@ import { Suspense, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import Container from './Container/index';
 import ReduxConnectIntl from '@/static/asset/lang'
-
+import { ThemeProvider } from 'styled-components'
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     ReduxService.setBnbBalance()
@@ -46,6 +46,7 @@ export default function App({ Component, pageProps }) {
 
       </Suspense>
     </Provider>
+
   )
   // return <Component {...pageProps} />
 }
