@@ -1,13 +1,11 @@
 import ItemNFT from '@/Components/ItemNFT';
-import useGetNFT from '@/Hook/useGetNFT';
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Dropdown, Space } from 'antd';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Media from 'react-media';
 import Loading from '@/Components/Loading'
 import { ContainerHome, ContainerListNFTHome, ContentHome, ItemMenu, LeftHome, RightHome } from './styled';
 import SEO from '@/pages/Container/Header/seo';
+import useGetAllNFT from '@/Hook/useGetAllNFT';
 
 const menuHome = [
   {
@@ -32,9 +30,10 @@ const menuHome = [
 
 const HomeScreen = () => {
   const router = useRouter()
+  const {listAllNFT} = useGetAllNFT()
+
   const [itemSelected, setItemSelected] = useState('qa_qc')
-  const [listAllNFTs, setListAllNFTs] = useState([])
-  const { listNFTAll, loading } = useGetNFT()
+
   const onClickItemMenu = (key) => {
     setItemSelected(key)
     switch (key) {
@@ -46,11 +45,6 @@ const HomeScreen = () => {
       break;
     }
   }
-  useEffect(() => {
-    if (listNFTAll.length > 0) {
-      setListAllNFTs(listNFTAll)
-    }
-  }, [listNFTAll])
   const renderDesktop = () => {
     return (
       <ContentHome>
@@ -75,8 +69,8 @@ const HomeScreen = () => {
         <RightHome >
           <ContainerListNFTHome>
             {
-              listAllNFTs.length > 0 ? (
-                listAllNFTs.map((item) => {
+              listAllNFT?.length > 0 ? (
+                listAllNFT.map((item) => {
                   return (
                     <ItemNFT key={item}
                       nft={item}
@@ -99,8 +93,8 @@ const HomeScreen = () => {
     return (
       <ContainerListNFTHome>
         {
-          listAllNFTs.length > 0 ? (
-            listAllNFTs.map((item) => {
+          listAllNFT?.length > 0 ? (
+            listAllNFT.map((item) => {
               return (
                 <ItemNFT key={item}
                   nft={item}

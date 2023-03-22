@@ -1,10 +1,12 @@
 import ItemNFT from '@/Components/ItemNFT'
 import { MediumText, NormalText } from '@/Components/TextSize'
+import useGetMyNFT from '@/Hook/useGetMyNFT'
 import useUserData from '@/Hook/useUserData'
 import FirebaseService from '@/Services/FirebaseService'
 import { Row } from 'antd'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Media from 'react-media'
 import { ContainerInfor, ContainerMyProfile, RightMyProfile } from './styled'
 const menuHome = [
   {
@@ -29,16 +31,11 @@ const menuHome = [
 const MyProfile = () => {
   const router = useRouter()
   const { isSigned, userAddress } = useUserData()
-  const [listNFTs, setListNFTs] = useState([])
+  const {listMyNFT, loadingLitMyNFT} = useGetMyNFT()
+
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await FirebaseService.storeCrossTech.getDataByAddress(userAddress)
-      setListNFTs(data)
-    }
-    if (isSigned) {
-      userAddress && getData()
-    } else {
+    if (!isSigned) {
       router.push('/')
     }
   }, [isSigned, userAddress])
@@ -46,39 +43,59 @@ const MyProfile = () => {
   const onClickItemMenu = (key) => {
 
   }
+  const renderDesktop = () => {
+    return(
+      <>
+        <ContainerInfor className='mb-20'>
+          <MediumText>
+          Ho Dien Cong
+          </MediumText>
+          <Row justify={'center'} style={{ gap: 5 }}>
+          Address :
+            <NormalText>
+              {userAddress}
+            </NormalText>
+          </Row>
+        </ContainerInfor>
+        <ContainerMyProfile >
+          <RightMyProfile>
+            <div className="list-nft">
+              {
+                listMyNFT?.length > 0 && (
+                  listMyNFT?.map(nft => (
+                    <ItemNFT
+                      key={nft}
+                      nft={nft}
+                      onClick={() => {
+                        router.push(`/Screen/nft-detail/${nft?.hash}`)
+                      }}
+                    />
+                  ))
+
+                )
+              }
+            </div>
+          </RightMyProfile>
+        </ContainerMyProfile>
+      </>
+    )
+  }
+  const renderMobile = () => {
+    return <></>
+  }
+
+
   return (
     <div className="container-basic">
-      <ContainerInfor className='mb-20'>
-        <MediumText>
-          Ho Dien Cong
-        </MediumText>
-        <Row justify={'center'} style={{ gap: 5 }}>
-          Address :
-          <NormalText>
-            {userAddress}
-          </NormalText>
-        </Row>
-      </ContainerInfor>
-      <ContainerMyProfile >
-        <RightMyProfile>
-          <div className="list-nft">
-            {
-              listNFTs.length > 0 && (
-                listNFTs.map(nft => (
-                  <ItemNFT
-                    key={nft}
-                    nft={nft}
-                    onClick={() => {
-                      router.push(`/Screen/nft-detail/${nft?.hash}`)
-                    }}
-                  />
-                ))
+      <Media query='(min-width: 768px)'>
+        {(match) => {
+          if (match) {
+            return renderDesktop()
+          }
+          return renderMobile()
+        }}
 
-              )
-            }
-          </div>
-        </RightMyProfile>
-      </ContainerMyProfile>
+      </Media>
     </div>
   )
 }

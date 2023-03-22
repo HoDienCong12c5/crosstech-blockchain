@@ -1,11 +1,17 @@
 import Img, { images } from '@/common/images'
-import React from 'react'
+import React, { Suspense } from 'react'
 import styles from '../../LP.module.scss'
 import Media from 'react-media'
 import { BtnBuyNow, ContainerBanner, ContainerBannerMobileLP, ContainerIntroDuce, ContainerLogo, DesBannerLP, DesContentIntroduce, IconIntroduce, ImgLogo, RowLPTop, TitleBannerLP, TitleContentIntroduce } from '../../styled'
 import { Col } from 'antd'
+import ImageLazy from '@/Components/ImageLazy'
 
 const BannerLP = (props) => {
+  console.log('====================================');
+  console.log({
+    log:images.landingPage.logo
+  });
+  console.log('====================================');
   const renderDesktop = () => {
     return(
       <RowLPTop>
@@ -23,12 +29,14 @@ const BannerLP = (props) => {
 
         <ContainerBanner span={10}>
           <ContainerLogo>
-            <ImgLogo
-              className={styles['img-logo-banner']}
-              fullSize
-              src={images.landingPage.logo}
-              alt={images.landingPage.logo}
-            />
+            <Suspense fallback={null} >
+              <ImageLazy
+                className={styles['img-logo-banner']}
+                src={images.landingPage.logo}
+                alt={images.landingPage.logo}
+              />
+            </Suspense>
+
           </ContainerLogo>
         </ContainerBanner>
 
