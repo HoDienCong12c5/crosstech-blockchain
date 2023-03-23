@@ -17,7 +17,7 @@ import {
   QueryClientProvider
 } from '@tanstack/react-query'
 import React from 'react';
-import ThemSC from '@/Components/ThemsSC';
+import ThemeSC from '@/Components/ThemsSC';
 import 'antd/dist/reset.css';
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient())
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }) {
     return () => { clearInterval(interval) }
   }, []);
   return (
-    <ThemSC>
+    <ThemeSC>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Provider store={store} >
@@ -56,7 +56,7 @@ export default function App({ Component, pageProps }) {
           </Provider>
         </Hydrate>
       </QueryClientProvider>
-    </ThemSC>
+    </ThemeSC>
 
 
 

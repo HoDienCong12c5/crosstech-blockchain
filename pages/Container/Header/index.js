@@ -37,14 +37,14 @@ const Header = () => {
     Metamask.initialize()
   }
   const handleMyProfile = () => {
-    router.push('/Screen/MyProfile')
+    router.push('/MyProfile')
   }
   const sendToken = () => {
-    router.push('/Screen/MyProfile')
+    router.push('/MyProfile')
   }
   const minNFT = () => {
     if (isSigned) {
-      router.push('/Screen/MintNFT')
+      router.push('/MintNFT')
     } else {
       connectMeta()
     }
@@ -78,7 +78,7 @@ const Header = () => {
               {message.mintNFT.mintNFT}
             </ButtonBasic>
             <ButtonBasic
-              onClick={()=>router.push('/Screen/LandingPage')}
+              onClick={()=> router.push('/LandingPage')}
               className={styles['btn-item-menu']}
             >
               Landing page

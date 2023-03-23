@@ -77,6 +77,11 @@ export const REACT_QUERY = {
   GET_ALL_ORDER:'GET_ALL_ORDER',
   GET_ALL_CARD:'GET_ALL_CARD'
 }
+export const COOKIE = {
+  TOKEN_USER:'TOKEN_USER',
+  TOKEN_REFRESH:'TOKEN_USER',
+  TOKEN_ACCESS:'TOKEN_ACCESS'
+}
 
 export const LOCALE_DATA = {
   JA: 'ja',

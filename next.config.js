@@ -21,9 +21,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  // experimental: {
-  //   appDir: true,
-  // },
+  experimental: {
+    swcTraceProfiling: true,
+    appDir: true
+  },
   reactStrictMode: true,
   swcMinify: true,
   compiler: {

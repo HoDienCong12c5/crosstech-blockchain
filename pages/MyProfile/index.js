@@ -67,7 +67,7 @@ const MyProfile = () => {
                       key={nft}
                       nft={nft}
                       onClick={() => {
-                        router.push(`/Screen/nft-detail/${nft?.hash}`)
+                         router.push('/nft-detail/${nft?.hash}`)
                       }}
                     />
                   ))

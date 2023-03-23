@@ -1,12 +1,13 @@
 import ItemNFT from '@/Components/ItemNFT';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Media from 'react-media';
 import Loading from '@/Components/Loading'
 import { ContainerHome, ContainerListNFTHome, ContentHome, ItemMenu, LeftHome, RightHome } from './styled';
 import SEO from '@/pages/Container/Header/seo';
 import useGetAllNFT from '@/Hook/useGetAllNFT';
-
+// import jwt_decode from 'jwt-decode';
+var jwt = require('jsonwebtoken');
 const menuHome = [
   {
     key: 'qa_qc',
@@ -33,7 +34,13 @@ const HomeScreen = () => {
   const {listAllNFT} = useGetAllNFT()
 
   const [itemSelected, setItemSelected] = useState('qa_qc')
+  useEffect(() => {
+    var token = jwt.sign({ foo: 'bar' },'sw');
+    console.log('====================================');
+    console.log({token});
+    console.log('====================================');
 
+  }, [])
   const onClickItemMenu = (key) => {
     setItemSelected(key)
     switch (key) {
@@ -75,7 +82,7 @@ const HomeScreen = () => {
                     <ItemNFT key={item}
                       nft={item}
                       onClick={() => {
-                        router.push(`/Screen/nft-detail/${item?.hash}`)
+                        router.push(`/nft-detail/${item?.hash}`)
                       }}
                     />
                   )
@@ -99,7 +106,7 @@ const HomeScreen = () => {
                 <ItemNFT key={item}
                   nft={item}
                   onClick={() => {
-                    router.push(`/Screen/nft-detail/${item?.hash}`)
+                    router.push(`/nft-detail/${item?.hash}`)
                   }}
                 />
               )

@@ -281,7 +281,7 @@ class Web3Service{
       }]
       const web3 = this.createWeb3Provider()
       const chainId = await this.getNetwork()
-      const baseURI = `${URI_NFT_CHAIN}/${chainId}/${nonceUser}`
+      const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
 
       const contract = new web3.eth.Contract(minABI, contractAddress)
       const dataTx = this.callGetDataWeb3(contract, 'mint', [
