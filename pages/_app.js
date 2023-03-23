@@ -18,7 +18,7 @@ import {
 } from '@tanstack/react-query'
 import React from 'react';
 import ThemSC from '@/Components/ThemsSC';
-
+import 'antd/dist/reset.css';
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient())
   useEffect(() => {
