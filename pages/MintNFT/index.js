@@ -121,8 +121,7 @@ const MintNFT = () => {
       noneUser,
       callbackBeforeDone,
       callbackAfterDone,
-      // callbackRejected
-      ()=>{}
+      callbackRejected
     )
 
     if(txHash.startsWith('0x')){
@@ -145,7 +144,11 @@ const MintNFT = () => {
       // const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
       const path = 'QmYMNa5Bv4PUyYnSr84sw63S9AEmSN1Muf6UH7vVHYqrQz'
       console.log({ path });
-      await mintNFT(path)
+      try {
+        await mintNFT(path)
+      } catch (error) {
+
+      }
     }else{
       showModal({
         body:<ModalTx

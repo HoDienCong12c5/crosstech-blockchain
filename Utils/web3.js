@@ -277,50 +277,42 @@ class Web3Service{
       type: 'function',
     }]
     return new Promise(async (resolve, reject) => {
-      try {
-        const web3 = this.createWeb3Provider()
-        const chainId = await this.getNetwork()
-        const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
-        console.log('====================================');
-        console.log({baseURI});
-        console.log('====================================');
-        const contract = new web3.eth.Contract(minABI, contractAddress)
-        const dataTx = this.callGetDataWeb3(contract, 'mint', [
-          to,
-          nonceUser,
-          baseURI
-        ])
+      const web3 = this.createWeb3Provider()
+      const chainId = await this.getNetwork()
+      const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
+      console.log('====================================');
+      console.log({baseURI});
+      console.log('====================================');
+      const contract = new web3.eth.Contract(minABI, contractAddress)
+      const dataTx = this.callGetDataWeb3(contract, 'mint', [
+        to,
+        nonceUser,
+        baseURI
+      ])
 
-        const data = {
-          from: from,
-          to: contractAddress,
-          value: 0,
-          data:dataTx,
-          callBeforeFunc: callbackBeforeDone,
-          callbackFunc: callbackAfterDone,
-          isCallBackErr:true,
-          callbackErrFunc: callbackRejected
-        }
-        this.postBaseSendTxs(from, [data], true)
-          .then((res) => {
-            console.log('====================================');
-            console.log({res});
-            console.log('====================================');
-            resolve(res[0])
-          })
-          .catch((err) => {
-            callbackRejected(err)
-            console.log('error: ', err)
-            reject(err)
-          })
-      } catch (error) {
-        callbackRejected(error)
-        console.log('error: ', error)
-        reject(error)
+      const data = {
+        from: from,
+        to: contractAddress,
+        value: 0,
+        data:dataTx,
+        callBeforeFunc: callbackBeforeDone,
+        callbackFunc: callbackAfterDone,
+        // isCallBackErr:true,
+        callbackErrFunc: callbackRejected
       }
-
+      this.postBaseSendTxs(from, [data], true)
+        .then((res) => {
+          console.log('====================================');
+          console.log({res});
+          console.log('====================================');
+          resolve(res[0])
+        })
+        .catch((err) => {
+          callbackRejected(err)
+          console.log('error: ', err)
+          reject(err)
+        })
     })
-
   }
 
 }
