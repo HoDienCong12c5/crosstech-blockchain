@@ -39,6 +39,24 @@
     padding: 0 15px;
   }
 }
+.flex-basic {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  @media screen and (max-width: 768px) {
+    flex-direction:column;
+  }
+}
+.col-basic {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
 input#ratio {
   background: transparent;
@@ -139,3 +157,18 @@ input#ratio {
 // .base-content{
 //   min-height: calc(100vh - 100px) !important;
 // }
+.animation{
+  @for $second from 0 through 200 {
+    &_translate-#{$second} {
+      animation: translate #{$second}s ease-in-out alternate infinite;
+      @keyframes translate {
+        from{
+          left: -20%;
+        }
+        to{
+          left:-10%
+        }
+      }
+    }
+  }
+}

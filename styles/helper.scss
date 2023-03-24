@@ -354,6 +354,12 @@
   }
 }
 
+@for $pixel from 0 through 100 {
+  .gap-#{$pixel} {
+    gap: #{$pixel}px !important;
+  }
+}
+
 .disabled {
   opacity: 0.5;
 }

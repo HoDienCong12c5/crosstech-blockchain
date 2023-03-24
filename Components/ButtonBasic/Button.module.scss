@@ -1,3 +1,4 @@
+@import '~/styles/variable.scss';
 .style-bt-antd {
   .ant-btn {
     border-color: transparent !important;
@@ -153,4 +154,8 @@
     height: 50px;
     border: 1px solid #f6f2f2e7 !important;
   }
+}
+.second-btn{
+  background-color: red !important;
+  background: red !important;
 }

@@ -137,7 +137,8 @@ export const PAGE_SIGN = [
 export const BG_BTN = {
   bgMain:'#45cacd',
   bgClose:'#AFB0B1',
-  bgWarning:'#f67d91'
+  bgWarning:'#f67d91',
+  bgBlue1:'#e4e8e6'
 }
 export const CHAIN_ID_SUPPORT = {
   '5':'0x1',

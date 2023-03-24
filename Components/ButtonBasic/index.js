@@ -13,7 +13,7 @@ const ButtonBasic = ({
     <Button
       disabled={disabled}
       onClick={onClick}
-      className={`${styles['second-btn']} ${type === 1 && styles['second-btn']} ${isHover && styles['pri-btn-is-hover']}`}
+      className={`${styles['second-btn']}  ${type === 1 && styles['second-btn']} ${isHover && styles['pri-btn-is-hover']}`}
       // className={classNames(
       //   styles['style-bt-antd'],
       //   { styles['second-btn']:type === 1},
