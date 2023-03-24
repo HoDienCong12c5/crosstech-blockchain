@@ -141,8 +141,8 @@ const MintNFT = () => {
         />,
         modalConfig:modalConfig
       })
-      // const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
-      const path = 'QmYMNa5Bv4PUyYnSr84sw63S9AEmSN1Muf6UH7vVHYqrQz'
+      const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
+      // const path = 'QmYMNa5Bv4PUyYnSr84sw63S9AEmSN1Muf6UH7vVHYqrQz'
       console.log({ path });
       try {
         await mintNFT(path)
