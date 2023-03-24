@@ -1,12 +1,16 @@
 import { images } from '@/common/images'
 import { Col, Row } from 'antd'
-import React from 'react'
+import Aos from 'aos'
+import React, { useEffect } from 'react'
 import Media from 'react-media'
 import { BgOtherProduct, BtnBuyOtherProduct, ContainerOtherProduct, ImgOtherProduct, TileOtherProduct } from './styled'
 
 const OtherProduct = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2500 })
+  }, [])
   const renderDesktop = () => {
-    return <Row>
+    return <Row className='animation__transformTop-5'>
       <Col className='col-basic gap-15' span={7}>
         <ImgOtherProduct src={images.landingPage.logo} />
         <TileOtherProduct >
@@ -38,7 +42,7 @@ const OtherProduct = () => {
 
   }
   const renderMobile = () => {
-    return <div className='col-basic gap-40'>
+    return <div className='col-basic gap-40 animation__transformTopMobile-3'>
       <Col className='col-basic gap-15 w-full'>
         <ImgOtherProduct src={images.landingPage.logo} />
         <TileOtherProduct >
@@ -72,7 +76,7 @@ const OtherProduct = () => {
 
 
   return (
-    <ContainerOtherProduct >
+    <ContainerOtherProduct data-aos="fade-up" >
       <BgOtherProduct />
       <Media query='(min-width: 768px)'>
         {(match) => {

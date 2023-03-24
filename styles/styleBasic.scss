@@ -158,7 +158,7 @@ input#ratio {
 //   min-height: calc(100vh - 100px) !important;
 // }
 .animation{
-  @for $second from 0 through 200 {
+  @for $second from 0 through 10 {
     &_translate-#{$second} {
       animation: translate #{$second}s ease-in-out alternate infinite;
       @keyframes translate {
@@ -167,6 +167,28 @@ input#ratio {
         }
         to{
           left:-10%
+        }
+      }
+    }
+    &__transformTop-#{$second} {
+      animation: vibrateTop 2s ease-in infinite alternate;
+      @keyframes vibrateTop {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          transform: translateY(-15px);
+        }
+      }
+    }
+    &__transformTopMobile-#{$second} {
+      animation: vibrateBottom 2s ease-in infinite alternate;
+      @keyframes vibrateBottom {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          transform: translateY(-5px);
         }
       }
     }

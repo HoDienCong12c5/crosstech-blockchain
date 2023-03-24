@@ -19,6 +19,8 @@ import {
 import React from 'react';
 import ThemeSC from '@/Components/ThemsSC';
 import 'antd/dist/reset.css';
+import 'aos/dist/aos.css'
+
 import Web3Provider from './Container/Web3Provider';
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient())

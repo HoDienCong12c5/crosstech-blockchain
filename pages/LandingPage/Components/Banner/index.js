@@ -1,17 +1,19 @@
 import Img, { images } from '@/common/images'
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import styles from '../../LP.module.scss'
 import Media from 'react-media'
 import { BtnBuyNow, ContainerBanner, ContainerBannerMobileLP, ContainerIntroDuce, ContainerLogo, DesBannerLP, DesContentIntroduce, IconIntroduce, ImgLogo, RowLPTop, TitleBannerLP, TitleContentIntroduce } from '../../styled'
 import { Col } from 'antd'
 import ImageLazy from '@/Components/ImageLazy'
-
+import Aos from 'aos'
 const BannerLP = () => {
-
+  useEffect(() => {
+    Aos.init({ duration: 2500 })
+  }, [])
   const renderDesktop = () => {
     return(
       <RowLPTop>
-        <ContainerBanner span={8} isLeft gap={30}>
+        <ContainerBanner span={8} isLeft gap={30} data-aos="fade-right">
           <TitleBannerLP>
             MLem Coffee sắc hương tây nguyên
           </TitleBannerLP>
@@ -34,7 +36,7 @@ const BannerLP = () => {
           </ContainerLogo>
         </ContainerBanner>
 
-        <ContainerBanner span={6} isLeft gap={30} style={{paddingLeft:15}}>
+        <ContainerBanner data-aos="fade-left" span={6} isLeft gap={30} style={{paddingLeft:15}}>
           <ContainerIntroDuce>
             <IconIntroduce src={images.home.iconElement} />
             <Col style={{flex:1}} >
