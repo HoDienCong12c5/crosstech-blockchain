@@ -1,12 +1,14 @@
 import ImageLazy from '@/Components/ImageLazy';
 import { TitleText } from '@/Components/TextSize';
 import FirebaseService from '@/Services/FirebaseService';
-import { convertDateFormat, detectImageUrl, viewExternal } from '@/Utils/function';
+import { convertDateFormat, convertNumberToHex, detectImageUrl, viewExternal } from '@/Utils/function';
 import { Row } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { ContainerNFTDetail, LeftNFTContainerImg, LeftNFTDetail, RightNFTDetail, TextMedium } from './styled';
 import Loading from '@/Components/Loading'
+import { CHAIN_ID_SUPPORT } from '@/common/constant';
+import {convertUtfToHex} from '@/Utils/function'
 const NFTDetail = ({ hash }) => {
   const [nftDetail, setNftDetail] = useState(null)
   useEffect(() => {
@@ -18,7 +20,16 @@ const NFTDetail = ({ hash }) => {
     getData()
 
   }, [])
-
+  const openTabOther = (txHash,chainId)=>{
+    console.log('====================================');
+    console.log({txHash,chainId:convertNumberToHex(Number(chainId))});
+    console.log('====================================');
+    if(convertNumberToHex(Number(chainId)) === CHAIN_ID_SUPPORT[97]){
+      viewExternal(`https://testnet.bscscan.com/tx/${txHash}`)
+    }else{
+      viewExternal(`https://goerli.etherscan.io/tx/${txHash}`)
+    }
+  }
   const renderContent = (title, content, onClick = null, isHover = true) => {
     return (
       <Row style={{ gap: 5, flexFlow: 'row nowrap' }} >
@@ -72,6 +83,12 @@ const NFTDetail = ({ hash }) => {
                 }
                 {
                   renderContent(
+                    'Chain Id:',
+                    nftDetail.chainId
+                  )
+                }
+                {
+                  renderContent(
                     'Name student:',
                     nftDetail.data.nameStudent
                   )
@@ -86,7 +103,7 @@ const NFTDetail = ({ hash }) => {
                   renderContent(
                     'Hash Tx:',
                     nftDetail.hash,
-                    () => viewExternal(`https://testnet.bscscan.com/tx/${nftDetail.hash}`)
+                    () => openTabOther(nftDetail.hash, nftDetail.chainId)
                   )
                 }
                 {

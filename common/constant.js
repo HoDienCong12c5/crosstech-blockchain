@@ -134,6 +134,15 @@ export const dataFireBase = {
 export const PAGE_SIGN = [
   '/Screen/MyProfile',
 ]
+export const BG_BTN = {
+  bgMain:'#45cacd',
+  bgClose:'#AFB0B1',
+  bgWarning:'#f67d91'
+}
+export const CHAIN_ID_SUPPORT = {
+  '5':'0x1',
+  '97':'0x61'
+}
 
 export const URI_NFT = process.env.NEXT_PUBLIC_URI_NFT
 export const URI_NFT_CHAIN = process.env.NEXT_PUBLIC_URI_NFT_CHAIN

@@ -7,6 +7,7 @@ import useUserData from '@/Hook/useUserData'
 import Metamask from '@/Modal/Metamask'
 import { ellipsisAddress } from '@/Utils/function'
 import ReduxService from '@/Utils/ReduxService'
+import Web3Service from '@/Utils/web3'
 import { DownOutlined } from '@ant-design/icons'
 import { Col, Dropdown, Row, Space } from 'antd'
 import Link from 'next/link'
@@ -22,11 +23,7 @@ const Header = () => {
   const modal = useSelector(state => state.globalModal)
   const message = useSelector(state => state.locale.messages)
   useEffect(() => {
-    ReduxService.checkReset()
-  }, [])
-  useEffect(() => {
     if(!isSigned){
-      ReduxService.checkReset()
       if(PAGE_SIGN.includes(router.asPath)){
         ReduxService.resetUser()
       }
@@ -49,6 +46,7 @@ const Header = () => {
       connectMeta()
     }
   }
+
   const handleSignOut = async () => {
     ReduxService.resetUser()
   }
@@ -67,7 +65,12 @@ const Header = () => {
     return (
       <Row justify={'center'} align={'middle'} style={{height:'100%'}}>
         <Col span={4} style={{ textAlign: 'start' }}>
-          <Link href={'/'}>Logo</Link>
+          <Link href={'/'}>
+            <img
+              src={'https://skywalker.infura-ipfs.io/ipfs/QmfSbEq4qrQn53YydFj59Saiz9issKWFuxEJS4hDTCnNzh'}
+              style={{height:50}}
+            />
+          </Link>
         </Col>
         <Col span={16}>
           <Row align={'middle'}>

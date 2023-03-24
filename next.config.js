@@ -22,11 +22,11 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   experimental: {
-    swcTraceProfiling: true,
+    // swcTraceProfiling: true,
     appDir: true
   },
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   compiler: {
     styledComponents: true,
   },
@@ -56,7 +56,7 @@ module.exports = {
   //   ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   // ],
   experimental: {
-    forceSwcTransforms: true,
+    // forceSwcTransforms: true,
   }
 };
 module.exports = nextConfig

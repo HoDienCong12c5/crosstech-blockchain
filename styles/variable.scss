@@ -4,7 +4,15 @@
     => global.scss for define global scss class
     => any page you want to use these variabels
 **/
-
+$bg-button:(
+  "bg-main":#45cacd,
+  "bg-close":"#AFB0B1",
+  "bg-warning":"#f67d91"
+);
+$bg-container:(
+  "bg-main":#f2ece1,
+  "bg-white":white,
+);
 $bg-colors: (
   "bg-gray-2": #4F4F4F,
   "bg-gray-3": #828282,

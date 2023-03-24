@@ -5,8 +5,7 @@ import { isMobile } from 'react-device-detect';
 import Web3 from 'web3';
 import Observer from '@/Utils/Observer'
 import { removeDataLocal } from '@/Utils/function';
-import { OBSERVER_KEY } from '@/common/constant';
-const { ethereum } = typeof window !== 'undefined' ? window : {};
+import { CHAIN_ID_SUPPORT, OBSERVER_KEY } from '@/common/constant';
 let onboarding
 class Metamask {
   static async connect() {
@@ -32,12 +31,6 @@ class Metamask {
         if (accounts.length > 0) {
 
           this.onConnect(accounts)
-          window.ethereum.on('chainChanged', (chainId) => {
-            // Handle the new chain.
-            // Correctly handling chain changes can be complicated.
-            // We recommend reloading the page unless you have good reason not to.
-            window.location.reload();
-          });
           // subscribe to events
           this.subscribeToEvents()
 
@@ -52,37 +45,7 @@ class Metamask {
       console.log('initialize', error)
     }
   }
-  static changeAc = (acc)=>{
-    console.log('====================================');
-    console.log({acc});
-    console.log('====================================');
-  }
-  static subscribeToEvents() {
-    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-      window.ethereum.on('accountsChanged', this.changeAc())
-      window.ethereum.on('chainChanged', this.changeAc())
-      window.ethereum.on('networkChanged', this.changeAc())
-    }
-  }
-  static resetApp () {
-    console.log('====================================');
-    console.log('reset');
-    console.log('====================================');
-    // update redux state
-    ReduxService.resetUser()
-    // Observer.emit(OBSERVER_KEY.CHANGED_ACCOUNT)
-    removeDataLocal('wallet_connect_session')
-  }
 
-  static killSession = () => {
-    this.resetApp()
-    console.log('====================================');
-    console.log({onboarding});
-    console.log('====================================');
-    if (onboarding) {
-      // onboarding?.stopOnboarding()
-    }
-  }
   static async onConnect(accounts) {
     const address = accounts[0]
     const chainId = await window.ethereum.request({
@@ -100,6 +63,51 @@ class Metamask {
     }
 
   }
+
+
+  static changeChain = (chainId)=>{
+    if(chainId !== ReduxService.getMetamask().chainId){
+      window.location.reload()
+      ReduxService.resetUser()
+    }
+  }
+  static changeAccount = (account)=>{
+    if(account[0] !== ReduxService.getMetamask().address){
+      window.location.reload()
+      ReduxService.resetUser()
+    }
+  }
+
+  static subscribeToEvents() {
+    if (MetaMaskOnboarding.isMetaMaskInstalled()) {
+      window.ethereum.on('chainChanged', this.changeChain)
+      window.ethereum.on('accountsChanged', this.changeAccount)
+      // window.ethereum.on('networkChanged', this.changeMetamask)
+    }
+  }
+  static killSession = () => {
+    ReduxService.resetUser()
+    if (onboarding) {
+      onboarding?.stopOnboarding()
+    }
+  }
+
+  static async refreshMeta() {
+    const account = ReduxService.getMetamask().address
+    if(window.ethereum){
+      if(account){
+        await window.ethereum
+          .request({method: 'eth_accounts'})
+          .then(this.changeAccount)
+          .then(this.subscribeToEvents())
+        await window.ethereum
+          .request({method: 'eth_chainId'})
+          .then(this.changeChain)
+          .then(this.subscribeToEvents())
+      }
+    }
+  }
+
 
   static signPersonalMessage(address, message) {
     //

@@ -19,6 +19,10 @@ const ReduxService = {
   setMetamask: (metaMask) => {
     ReduxService.callDispatchAction(PageReduxAction.setMetamask(metaMask))
   },
+  getMetamask: () => {
+    const { metamaskRedux } = storeRedux.getState()
+    return metamaskRedux
+  },
   setConnectionMethod: async (method = KEY_PAGE.META_MASK) => {
     ReduxService.callDispatchAction(PageReduxAction.setConnectionMethod(method))
   },
@@ -30,6 +34,7 @@ const ReduxService = {
     ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ ...props, ...params, show: true }))
   },
   resetUser:async () => {
+    removeDataLocal('wallet_connect_session')
     Promise.all[
       removeDataLocal(KEY_PAGE.SET_METAMASK_INFO),
       ReduxService.setMetamask(initState.metamaskRedux),
@@ -37,26 +42,13 @@ const ReduxService = {
       ReduxService.setIsSign(false)
     ]
   },
-  checkReset:async () => {
+  getChainId: () => {
     const { metamaskRedux } = storeRedux.getState()
-    let accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts'
-    })
-    if(metamaskRedux?.address){
-      if(metamaskRedux?.address !== accounts[0]){
-        Promise.all[
-          removeDataLocal(KEY_PAGE.SET_METAMASK_INFO),
-          ReduxService.setMetamask(initState.metamaskRedux),
-          ReduxService.setConnectionMethod(null),
-          ReduxService.setIsSign(false)
-        ]
-
-      }
-    }
+    return metamaskRedux.chainId
   },
   closeModal: () => {
     ReduxService.callDispatchAction(PageReduxAction.setGlobalModal({ show: false }))
-  },
+  }
 
 }
 export default ReduxService;

@@ -35,14 +35,20 @@ class Web3Service{
   static async getNetwork () {
     return new Promise(async (resolve, reject) => {
       let web3 = this.createWeb3Provider()
-      web3.eth
-        .getChainId()
-        .then((network) => {
-          resolve(network)
-        })
-        .catch((error) => {
-          reject(error)
-        })
+
+      if(web3.eth.currentProvider){
+        web3.eth
+          .getChainId()
+          .then((network) => {
+            resolve(network)
+          })
+          .catch((error) => {
+            reject(error)
+          })
+      }else{
+        resolve(-1)
+      }
+
     })
   }
   static async enableMetaMask () {
@@ -255,62 +261,64 @@ class Web3Service{
     from,
     contractAddress,
     nonceUser,
-    chainId,
     callbackBeforeDone,
     callbackAfterDone,
     callbackRejected
   ){
-
-    console.log('====================================');
-    console.log({ to,
-      from,
-      contractAddress,
-      nonceUser,});
-    console.log('====================================');
+    const minABI = [{
+      inputs: [
+        { internalType: 'address', name: 'to', type: 'address' },
+        { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+        { internalType: 'string', name: 'uri', type: 'string' },
+      ],
+      name: 'mint',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    }]
     return new Promise(async (resolve, reject) => {
-      const minABI = [{
-        inputs: [
-          { internalType: 'address', name: 'to', type: 'address' },
-          { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
-          { internalType: 'string', name: 'uri', type: 'string' },
-        ],
-        name: 'mint',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
-      }]
-      const web3 = this.createWeb3Provider()
-      const chainId = await this.getNetwork()
-      const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
+      try {
+        const web3 = this.createWeb3Provider()
+        const chainId = await this.getNetwork()
+        const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
+        console.log('====================================');
+        console.log({baseURI});
+        console.log('====================================');
+        const contract = new web3.eth.Contract(minABI, contractAddress)
+        const dataTx = this.callGetDataWeb3(contract, 'mint', [
+          to,
+          nonceUser,
+          baseURI
+        ])
 
-      const contract = new web3.eth.Contract(minABI, contractAddress)
-      const dataTx = this.callGetDataWeb3(contract, 'mint', [
-        to,
-        nonceUser,
-        baseURI
-      ])
-
-      const data = {
-        from: from,
-        to: contractAddress,
-        value: 0,
-        data:dataTx,
-        callBeforeFunc: callbackBeforeDone,
-        callbackFunc: callbackAfterDone,
-        callbackErrFunc: callbackRejected
+        const data = {
+          from: from,
+          to: contractAddress,
+          value: 0,
+          data:dataTx,
+          callBeforeFunc: callbackBeforeDone,
+          callbackFunc: callbackAfterDone,
+          isCallBackErr:true,
+          callbackErrFunc: callbackRejected
+        }
+        this.postBaseSendTxs(from, [data], true)
+          .then((res) => {
+            console.log('====================================');
+            console.log({res});
+            console.log('====================================');
+            resolve(res[0])
+          })
+          .catch((err) => {
+            callbackRejected(err)
+            console.log('error: ', err)
+            reject(err)
+          })
+      } catch (error) {
+        callbackRejected(error)
+        console.log('error: ', error)
+        reject(error)
       }
-      this.postBaseSendTxs(from, [data], true)
-        .then((res) => {
-          console.log('====================================');
-          console.log({res});
-          console.log('====================================');
-          resolve(res[0])
-        })
-        .catch((err) => {
-          callbackRejected(err)
-          console.log('error: ', err)
-          reject(err)
-        })
+
     })
 
   }

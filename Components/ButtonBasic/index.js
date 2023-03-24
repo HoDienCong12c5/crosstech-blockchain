@@ -13,13 +13,13 @@ const ButtonBasic = ({
     <Button
       disabled={disabled}
       onClick={onClick}
-      //   styles={styles['style-bt-antd']}
-      className={classNames(
-        styles['style-bt-antd'],
-        {'second-btn':type === 1},
-        {'pri-btn-is-hover':isHover}
-      )}
-      {...props}s
+      className={`${styles['second-btn']} ${type === 1 && styles['second-btn']} ${isHover && styles['pri-btn-is-hover']}`}
+      // className={classNames(
+      //   styles['style-bt-antd'],
+      //   { styles['second-btn']:type === 1},
+      //   { styles['pri-btn-is-hover']:isHover}
+      // )}
+      {...props}
     >
       {children}
     </Button>

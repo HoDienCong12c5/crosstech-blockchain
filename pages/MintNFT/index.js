@@ -26,7 +26,7 @@ const listCoursers = [
 const MintNFT = () => {
   const [form] = Form.useForm()
   const { userAddress } = useUserData()
-  const {showModal} = useWorkModal()
+  const {showModal, hideModal} = useWorkModal()
   const {callbackRejected} = useCallBackReject()
   const message = useSelector(state => state.locale.messages)
 
@@ -59,7 +59,8 @@ const MintNFT = () => {
       }
     }
     getContract()
-  }, []);
+  }, [userAddress]);
+
   const checkAddress = (rule, address) => {
     if (!validateAddress(address) || address === userAddress) {
       return Promise.reject('error address')
@@ -73,8 +74,8 @@ const MintNFT = () => {
     const chainId = await Web3Service.getNetwork()
     let data = {
       time: Date.now(),
-      form: userAddress,
-      to: formData.addressStudent,
+      form: userAddress.toLowerCase(),
+      to: formData.addressStudent.toLowerCase(),
       data: JSON.stringify(dataTx),
       hash: hash,
       title: courser,
@@ -99,7 +100,7 @@ const MintNFT = () => {
       })
     }
     const callbackAfterDone = (hash)=>{
-
+      let styleModal = modalConfig
       styleModal.clickESCClose = true
       styleModal.showIconClose = true
       styleModal.clickOverClose = true
@@ -107,6 +108,7 @@ const MintNFT = () => {
         body:<ModalTx
           title={message.confirm.mintNFT.success}
           des={message.confirm.mintNFT.success_des}
+          onSubmit={hideModal}
         />,
         modalConfig:modalConfig
       })
@@ -119,7 +121,8 @@ const MintNFT = () => {
       noneUser,
       callbackBeforeDone,
       callbackAfterDone,
-      callbackRejected
+      // callbackRejected
+      ()=>{}
     )
 
     if(txHash.startsWith('0x')){
@@ -139,7 +142,8 @@ const MintNFT = () => {
         />,
         modalConfig:modalConfig
       })
-      const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
+      // const path = await IPFSService.uploadFile(nftPreview.pathIPFS)
+      const path = 'QmYMNa5Bv4PUyYnSr84sw63S9AEmSN1Muf6UH7vVHYqrQz'
       console.log({ path });
       await mintNFT(path)
     }else{
