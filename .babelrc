@@ -29,20 +29,20 @@
     ]
   ],
   "env": {
-    "development": {
-      "plugins": [
-        [
-          "babel-plugin-styled-components",
-          {
-            "displayName": true
-          }
-        ]
-      ]
-    },
-    "production": {
-      "plugins": [
-        "transform-remove-console"
-      ]
-    }
+    // "development": {
+    //   "plugins": [
+    //     [
+    //       "babel-plugin-styled-components",
+    //       {
+    //         "displayName": true
+    //       }
+    //     ]
+    //   ]
+    // },
+    // "production": {
+    //   "plugins": [
+    //     "transform-remove-console"
+    //   ]
+    // }
   }
 }
