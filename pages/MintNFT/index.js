@@ -1,4 +1,4 @@
-import { GlobalModal, modalConfig } from '@/common/constant'
+import { URI_NFT_CHAIN, modalConfig } from '@/common/constant'
 import ButtonBasic from '@/Components/ButtonBasic'
 import MyInput from '@/Components/MyInput'
 import useUserData from '@/Hook/useUserData'
@@ -59,6 +59,9 @@ const MintNFT = () => {
       }
     }
     getContract()
+    console.log('====================================');
+    console.log({URI_NFT_CHAIN});
+    console.log('====================================');
   }, [userAddress]);
 
   const checkAddress = (rule, address) => {

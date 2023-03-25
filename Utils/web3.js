@@ -279,7 +279,7 @@ class Web3Service{
     return new Promise(async (resolve, reject) => {
       const web3 = this.createWeb3Provider()
       const chainId = await this.getNetwork()
-      const baseURI = `${URI_NFT}/${chainId}/${nonceUser}`
+      const baseURI = `${URI_NFT_CHAIN}/${chainId}/${nonceUser}`
       console.log('====================================');
       console.log({baseURI});
       console.log('====================================');
