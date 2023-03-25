@@ -38,7 +38,7 @@ const BannerLP = () => {
 
         <ContainerBanner data-aos="fade-left" span={6} isLeft gap={30} style={{paddingLeft:15}}>
           <ContainerIntroDuce>
-            <IconIntroduce src={images.home.iconElement} />
+            <IconIntroduce src={images.home.iconElement} alt={images.home.iconElement} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Nguồn gốc
@@ -49,7 +49,7 @@ const BannerLP = () => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce >
-            <IconIntroduce src={images.home.iconOrigin} />
+            <IconIntroduce src={images.home.iconOrigin} alt={images.home.iconOrigin}/>
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Địa chỉ
@@ -60,7 +60,7 @@ const BannerLP = () => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce>
-            <IconIntroduce src={images.home.iconSmell} />
+            <IconIntroduce src={images.home.iconSmell} alt={images.home.iconSmell} />
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Hương vị
@@ -102,7 +102,7 @@ const BannerLP = () => {
 
         <ContainerBanner isRight gap={30}>
           <ContainerIntroDuce>
-            <IconIntroduce src={images.home.iconElement} />
+            <IconIntroduce src={images.home.iconElement} alt={images.home.iconElement}/>
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Nguồn gốc
@@ -113,7 +113,7 @@ const BannerLP = () => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce >
-            <IconIntroduce src={images.home.iconOrigin} />
+            <IconIntroduce src={images.home.iconOrigin} alt={images.home.iconOrigin}/>
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Địa chỉ
@@ -124,7 +124,7 @@ const BannerLP = () => {
             </Col>
           </ContainerIntroDuce>
           <ContainerIntroDuce>
-            <IconIntroduce src={images.home.iconSmell} />
+            <IconIntroduce src={images.home.iconSmell} alt={images.home.iconSmell}/>
             <Col style={{flex:1}} >
               <TitleContentIntroduce>
                   Hương vị

@@ -11,7 +11,7 @@ const ImageLazy = ({ className = '', draggable = false, alt, src, width, height,
     <LazyLoadImageCustoms
       className={className}
       draggable={draggable}
-      alt={alt}
+      alt={src}
       src={src} // use normal <img> attributes as props
       width={width}
       effect={effect}

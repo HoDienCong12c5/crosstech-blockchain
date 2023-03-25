@@ -61,6 +61,7 @@ const MintNFT = () => {
     getContract()
     console.log('====================================');
     console.log({URI_NFT_CHAIN});
+    console.log({URI_NFT_CHAIN});
     console.log('====================================');
   }, [userAddress]);
 

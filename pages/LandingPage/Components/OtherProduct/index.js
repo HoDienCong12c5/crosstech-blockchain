@@ -12,7 +12,7 @@ const OtherProduct = () => {
   const renderDesktop = () => {
     return <Row className='animation__transformTop-5'>
       <Col className='col-basic gap-15' span={7}>
-        <ImgOtherProduct src={images.landingPage.logo} />
+        <ImgOtherProduct src={images.landingPage.logo} alt={images.landingPage.logo}/>
         <TileOtherProduct >
         120.000 VND
         </TileOtherProduct>
@@ -21,7 +21,7 @@ const OtherProduct = () => {
         </BtnBuyOtherProduct>
       </Col>
       <Col className='col-basic gap-15' span={7} offset={1}>
-        <ImgOtherProduct src={images.landingPage.product2} />
+        <ImgOtherProduct src={images.landingPage.product2} alt={images.landingPage.product2}/>
         <TileOtherProduct >
         120.000 VND
         </TileOtherProduct>
@@ -30,7 +30,7 @@ const OtherProduct = () => {
         </BtnBuyOtherProduct>
       </Col>
       <Col className='col-basic gap-15' span={7} offset={1}>
-        <ImgOtherProduct src={images.landingPage.logo} />
+        <ImgOtherProduct src={images.landingPage.logo} alt={images.landingPage.logo}/>
         <TileOtherProduct >
         120.000 VND
         </TileOtherProduct>
